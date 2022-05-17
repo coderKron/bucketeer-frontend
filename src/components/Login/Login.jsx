@@ -1,6 +1,10 @@
 import {
   Box,
   Icon,
+  InputGroup,
+  InputRightElement,
+  FormHelperText,
+  Image,
   Button,
   Checkbox,
   Container,
@@ -16,17 +20,23 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import * as React from 'react';
-
+import { Link } from 'react-router-dom';
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { OAuthButtonGroup } from './OauthButtonGroup';
-import { PasswordField } from './PasswordField';
 import { GiGrimReaper } from 'react-icons/gi';
 
 const Login = () => {
+  const [showPassword, setShowPassword] = React.useState(false);
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const icon = useColorModeValue('gray.600', 'gray.600');
 
   const handleEmail = e => {
     setEmail(e.target.value);
+  };
+
+  const handlePassword = e => {
+    setPassword(e.target.value);
   };
   return (
     <Container
@@ -40,7 +50,6 @@ const Login = () => {
         sm: '8',
       }}
     >
-      <Icon as={GiGrimReaper}></Icon>
       <Stack spacing="8">
         <Stack spacing="6">
           <Stack
@@ -61,7 +70,7 @@ const Login = () => {
             <HStack spacing="1" justify="center">
               <Text color="muted">Don't have an account?</Text>
               <Button variant="link" colorScheme="blue">
-                Sign up
+                <Link to="/signup">Sign up</Link>
               </Button>
             </HStack>
           </Stack>
@@ -99,7 +108,34 @@ const Login = () => {
                   type="email"
                 />
               </FormControl>
-              <PasswordField password={password} setPassword={setPassword} />
+              <FormControl isRequired>
+                <FormLabel htmlFor="password">Password</FormLabel>
+                <InputGroup>
+                  <Input
+                    id="password"
+                    value={password}
+                    type={showPassword ? 'text' : 'password'}
+                    onChange={handlePassword}
+                  />
+                  <InputRightElement h={'full'}>
+                    <Button
+                      variant={'primary'}
+                      onClick={() => {
+                        setShowPassword(showPassword => !showPassword);
+                      }}
+                    >
+                      {showPassword ? (
+                        <ViewIcon color={icon} />
+                      ) : (
+                        <ViewOffIcon color={icon} />
+                      )}
+                    </Button>
+                  </InputRightElement>
+                </InputGroup>
+                <FormHelperText color="muted">
+                  At least 8 characters long
+                </FormHelperText>
+              </FormControl>
             </Stack>
             <HStack justify="space-between">
               <Checkbox defaultChecked>Remember me</Checkbox>
@@ -108,13 +144,7 @@ const Login = () => {
               </Button>
             </HStack>
             <Stack spacing="6">
-              <Button
-                _active={{ boxShadow: 'lg' }}
-                _hover={{ boxShadow: 'md' }}
-                variant="primary"
-              >
-                Sign in
-              </Button>
+              <Button variant="primary">Sign in</Button>
               <HStack>
                 <Divider />
                 <Text fontSize="sm" whiteSpace="nowrap" color="muted">

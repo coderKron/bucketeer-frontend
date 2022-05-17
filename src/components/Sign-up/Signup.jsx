@@ -21,14 +21,15 @@ import { GoogleIcon } from './ProviderIcons';
 import { GitHubIcon } from './ProviderIcons';
 import { FaPlaneDeparture } from 'react-icons/fa';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+import { Link } from 'react-router-dom';
 
 const Signup = () => {
   const [showPassword, setShowPassword] = React.useState(false);
-  const [username, setUsername] = React.useState('');
+  const [firstname, setFirstname] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [email, setEmail] = React.useState('');
 
-  const handleUsername = e => setUsername(e.target.value);
+  const handleFirstname = e => setFirstname(e.target.value);
   const handleEmail = e => setEmail(e.target.value);
   const handlePassword = e => setPassword(e.target.value);
 
@@ -60,11 +61,11 @@ const Signup = () => {
           <Box as={'form'}>
             <Stack spacing="5">
               <FormControl isRequired>
-                <FormLabel htmlFor="name">Username</FormLabel>
+                <FormLabel htmlFor="name">First name</FormLabel>
                 <Input
-                  onChange={handleUsername}
+                  onChange={handleFirstname}
                   id="name"
-                  value={username}
+                  value={firstname}
                   type="text"
                 />
               </FormControl>
@@ -107,12 +108,7 @@ const Signup = () => {
               </FormControl>
             </Stack>
             <Stack spacing="4">
-              <Button
-                type="submit"
-                variant="primary"
-                _active={{ boxShadow: 'lg' }}
-                _hover={{ boxShadow: 'md' }}
-              >
+              <Button type="submit" variant="primary">
                 Create account
               </Button>
               <Button
@@ -137,7 +133,7 @@ const Signup = () => {
             Already have an account?
           </Text>
           <Button variant="link" colorScheme="blue" size="sm">
-            Log in
+            <Link to="/login">Log in</Link>
           </Button>
         </HStack>
       </Stack>
