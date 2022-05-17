@@ -28,10 +28,12 @@ const Signup = () => {
   const [firstname, setFirstname] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [email, setEmail] = React.useState('');
+  const [lastname, setLastname] = React.useState('');
 
   const handleFirstname = e => setFirstname(e.target.value);
   const handleEmail = e => setEmail(e.target.value);
   const handlePassword = e => setPassword(e.target.value);
+  const handleLastname = e => setLastname(e.target.value);
 
   const icon = useColorModeValue('gray.600', 'gray.600');
   return (
@@ -61,21 +63,30 @@ const Signup = () => {
           <Box as={'form'}>
             <Stack spacing="5">
               <FormControl isRequired>
-                <FormLabel htmlFor="name">First name</FormLabel>
-                <Input
-                  onChange={handleFirstname}
-                  id="name"
-                  value={firstname}
-                  type="text"
-                />
-              </FormControl>
-              <FormControl isRequired>
                 <FormLabel htmlFor="email">Email</FormLabel>
                 <Input
                   onChange={handleEmail}
                   id="email"
                   value={email}
                   type="email"
+                />
+              </FormControl>
+              <FormControl isRequired>
+                <FormLabel htmlFor="firstname">First name</FormLabel>
+                <Input
+                  onChange={handleFirstname}
+                  id="firstname"
+                  value={firstname}
+                  type="text"
+                />
+              </FormControl>
+              <FormControl isRequired>
+                <FormLabel htmlFor="lastname">Last name</FormLabel>
+                <Input
+                  onChange={handleLastname}
+                  id="lastname"
+                  value={lastname}
+                  type="text"
                 />
               </FormControl>
               <FormControl isRequired>
