@@ -26,6 +26,10 @@ export const PasswordField = React.forwardRef((props, ref) => {
     }
   };
 
+  const handleChange = e => {
+    props.setPassword(e.target.value);
+  };
+
   return (
     <FormControl>
       <FormLabel htmlFor="password">Password</FormLabel>
@@ -41,6 +45,8 @@ export const PasswordField = React.forwardRef((props, ref) => {
         <Input
           id="password"
           ref={mergeRef}
+          onChange={handleChange}
+          value={props.password}
           name="password"
           type={isOpen ? 'text' : 'password'}
           autoComplete="current-password"

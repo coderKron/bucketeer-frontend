@@ -1,5 +1,5 @@
 import { Button, ButtonGroup, VisuallyHidden } from '@chakra-ui/react';
-import { GitHubIcon, GoogleIcon, TwitterIcon } from './ProviderIcons';
+import { GitHubIcon, GoogleIcon } from './ProviderIcons';
 const providers = [
   {
     name: 'Google',
