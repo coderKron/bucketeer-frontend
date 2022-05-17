@@ -5,15 +5,17 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
-
+import { AuthProviderWrapper } from './context/auth.context';
 const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container);
 
 root.render(
   <StrictMode>
     <BrowserRouter>
-      <ColorModeScript />
-      <App />
+      <AuthProviderWrapper>
+        <ColorModeScript />
+        <App />
+      </AuthProviderWrapper>
     </BrowserRouter>
   </StrictMode>
 );
