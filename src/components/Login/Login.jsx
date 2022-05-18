@@ -1,10 +1,8 @@
 import {
   Box,
-  Icon,
   InputGroup,
   InputRightElement,
   FormHelperText,
-  Image,
   Button,
   Checkbox,
   Container,
@@ -23,13 +21,14 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { OAuthButtonGroup } from './OauthButtonGroup';
-import { GiGrimReaper } from 'react-icons/gi';
+import { useLogin } from '../../hooks/useLogin';
 
 const Login = () => {
   const [showPassword, setShowPassword] = React.useState(false);
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const icon = useColorModeValue('gray.600', 'gray.600');
+  const { error, loading, login } = useLogin();
 
   const handleEmail = e => {
     setEmail(e.target.value);
@@ -38,6 +37,16 @@ const Login = () => {
   const handlePassword = e => {
     setPassword(e.target.value);
   };
+
+  const handleLogin = e => {
+    e.preventDefault();
+    const userDetails = {
+      email,
+      password,
+    };
+    login(userDetails);
+  };
+
   return (
     <Container
       maxW="lg"
@@ -144,7 +153,9 @@ const Login = () => {
               </Button>
             </HStack>
             <Stack spacing="6">
-              <Button variant="primary">Sign in</Button>
+              <Button onClick={handleLogin} variant="primary">
+                Sign in
+              </Button>
               <HStack>
                 <Divider />
                 <Text fontSize="sm" whiteSpace="nowrap" color="muted">

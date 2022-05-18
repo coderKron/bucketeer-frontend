@@ -22,6 +22,9 @@ import { GitHubIcon } from './ProviderIcons';
 import { FaPlaneDeparture } from 'react-icons/fa';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../context/auth.context';
+
+import { useSignup } from '../../hooks/useSignup';
 
 const Signup = () => {
   const [showPassword, setShowPassword] = React.useState(false);
@@ -29,6 +32,8 @@ const Signup = () => {
   const [password, setPassword] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [lastname, setLastname] = React.useState('');
+  const { isLoggedIn, isLoading, user } = React.useContext(AuthContext);
+  const { error, loading, signup } = useSignup();
 
   const handleFirstname = e => setFirstname(e.target.value);
   const handleEmail = e => setEmail(e.target.value);
@@ -36,6 +41,19 @@ const Signup = () => {
   const handleLastname = e => setLastname(e.target.value);
 
   const icon = useColorModeValue('gray.600', 'gray.600');
+
+  const handleSignup = e => {
+    e.preventDefault();
+    const userInformation = {
+      firstname: firstname,
+      lastname: lastname,
+      password: password,
+      email: email,
+    };
+    console.log(userInformation);
+    signup(userInformation);
+  };
+
   return (
     <Container
       maxW="md"
@@ -119,7 +137,7 @@ const Signup = () => {
               </FormControl>
             </Stack>
             <Stack spacing="4">
-              <Button type="submit" variant="primary">
+              <Button onClick={handleSignup} variant="primary">
                 Create account
               </Button>
               <Button

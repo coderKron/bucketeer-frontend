@@ -1,0 +1,28 @@
+import axios from 'axios';
+import { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/auth.context';
+
+export const useSignup = () => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const navigate = useNavigate();
+  const { storeToken, authenticateUser } = useContext(AuthContext);
+
+  const signup = userInformation => {
+    setLoading(true);
+    axios
+      .post(`${process.env.REACT_APP_URL}/auth/signup`, userInformation)
+      .then(response => {
+        setLoading(false);
+        storeToken(response.data.authToken);
+        authenticateUser();
+        navigate('/login');
+      })
+      .catch(error => {
+        setError(true);
+        setLoading(false);
+      });
+  };
+  return { error, loading, signup };
+};

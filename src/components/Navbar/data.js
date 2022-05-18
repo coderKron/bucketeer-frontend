@@ -6,45 +6,35 @@ import {
   FiRepeat,
   FiShield,
 } from 'react-icons/fi';
+import { GiHighKick } from 'react-icons/gi';
+import { BsBucket } from 'react-icons/bs';
+import { FaUserFriends } from 'react-icons/fa';
 
 export const items = [
   {
-    title: 'Analytics',
+    title: 'Friends',
+    description: 'Have a look at what your friends have created!',
+    href: '#',
+    icon: FaUserFriends,
+  },
+  {
+    title: 'Kicks',
+    description: 'Create, edit, delete and add kicks to your inventory.',
+    href: '#',
+    icon: GiHighKick,
+  },
+  {
+    title: 'Buckets',
     description:
-      'Danish lollipop marzipan dragée gingerbread tart wafer sweet.',
+      "Have a look at all your buckets! They're listed so that you can search through them quick.",
     href: '#',
-    icon: FiBarChart,
+    icon: BsBucket,
   },
   {
-    title: 'Automations',
-    description: 'Macaroon tiramisu tart bonbon apple pie jujubes brownie.',
-    href: '#',
-    icon: FiRepeat,
-  },
-  {
-    title: 'Engagement',
-    description: 'hupa chups donut caramels chocolate cake toffee.',
-    href: '#',
-    icon: FiMousePointer,
-  },
-  {
-    title: 'Integrations',
+    title: 'Travel Blog',
     description:
-      'Dragée jujubes brownie pastry biscuit croissant wafer halva apple.',
-    href: '#',
-    icon: FiGrid,
-  },
-  {
-    title: 'Reports',
-    description: 'Candy oat cake caramels shortbread gummies.',
+      "After you've visited your bucket kicks you can mark them as visited. To which you can write a cool story in them!",
     href: '#',
     icon: FiFileText,
-  },
-  {
-    title: 'Security',
-    description:
-      'Bear claw topping toffee tiramisu cake fruitcake marzipan icing.',
-    href: '#',
-    icon: FiShield,
   },
 ];
