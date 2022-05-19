@@ -9,6 +9,7 @@ import { Route, Routes } from 'react-router-dom';
 import { AuthContext } from './context/auth.context';
 import Homepage from './components/Homepage/Homepage';
 import Footer from './components/Footer/Footer';
+import IsPrivate from './components/IsPrivate';
 
 function App() {
   const { isLoggedIn, isLoading, user } = useContext(AuthContext);
@@ -18,16 +19,17 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Homepage />} />
-          {!isLoggedIn ? (
-            <>
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />{' '}
-            </>
-          ) : (
-            <>
-              <Route path="/profile" element={<Profile />} />
-            </>
-          )}
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />{' '}
+          <Route
+            path="/profile/:profileId"
+            element={
+              <IsPrivate>
+                {' '}
+                <Profile />
+              </IsPrivate>
+            }
+          />
         </Routes>
         <Grid>
           <ColorModeSwitcher justifySelf="flex-end" />

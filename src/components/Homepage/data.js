@@ -16,7 +16,7 @@ export const posts = [
     id: '2',
     title: 'Safari in Africa',
     excerpt:
-      'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+      'Ride on the highway of the great nature roads. Enjoy the mighty sight of wild life conquoring the battlefield of nature created heaven.',
     image: '/images/safara.jpeg',
     category: 'Traveling',
     publishedAt: 'November 30, 2022',

@@ -20,7 +20,22 @@ const HandleColor = () => {
 const Profile = () => {
   const { isLoggedIn, isLoading, user } = React.useContext(AuthContext);
   const navigate = useNavigate();
+  const [userName, setUserName] = React.useState(null);
 
+  const [email, setEmail] = React.useState(null);
+  const [profilePicture, setProfilePicture] = React.useState(null);
+  const [way, setWay] = React.useState(null);
+  const [tagline, setTagline] = React.useState(null);
+
+  React.useEffect(() => {
+    if (user) {
+      setEmail(user.email);
+      setUserName(user.userName);
+      setProfilePicture(user.setProfilePicture);
+      setWay(user.way);
+      setTagline(user.tagline);
+    }
+  });
   return (
     <>
       {isLoggedIn ? (
@@ -29,8 +44,8 @@ const Profile = () => {
           <CardWithAvatar
             maxW="xl"
             avatarProps={{
-              src: 'https://images.unsplash.com/photo-1485178575877-1a13bf489dfe?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDV8fHdvbWFufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
-              name: 'Esther Felix',
+              src: `${profilePicture}`,
+              name: `${userName}`,
             }}
             action={
               <Button size="sm" leftIcon={<HiPencilAlt />}>
@@ -40,16 +55,9 @@ const Profile = () => {
           >
             <CardContent>
               <Heading size="lg" fontWeight="extrabold" letterSpacing="tight">
-                Esther Felix
+                {user.userName}
               </Heading>
-              <Text color={HandleColor}>
-                Frontend Developer &amp; UI Designer
-              </Text>
-              <UserInfo
-                location="Memphis, USA"
-                website="esther.com"
-                memberSince="Joined Sept. 2019"
-              />
+              <Text color={HandleColor}>{tagline}</Text>
             </CardContent>
           </CardWithAvatar>
         </Box>

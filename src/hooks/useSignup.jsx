@@ -6,6 +6,7 @@ import { AuthContext } from '../context/auth.context';
 export const useSignup = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
   const navigate = useNavigate();
   const { storeToken, authenticateUser } = useContext(AuthContext);
 
@@ -20,9 +21,12 @@ export const useSignup = () => {
         navigate('/login');
       })
       .catch(error => {
+        const errorDescription = error.response.data.message;
+        console.log('error creating user:', errorDescription, error);
+        setErrorMessage(errorDescription);
         setError(true);
         setLoading(false);
       });
   };
-  return { error, loading, signup };
+  return { error, errorMessage, loading, signup };
 };

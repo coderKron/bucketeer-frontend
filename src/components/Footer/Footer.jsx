@@ -25,7 +25,7 @@ const Footer = () => {
   return (
     <Box
       maxW={'100%'}
-      backgroundColor={mode('white', 'gray.900')}
+      backgroundColor={mode('white', 'gray.800')}
       bg="bg-accent"
       color={mode('black', 'white')}
     >

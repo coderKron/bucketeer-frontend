@@ -5,6 +5,7 @@ import { AuthContext } from '../context/auth.context';
 
 export const useLogin = () => {
   const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -21,10 +22,12 @@ export const useLogin = () => {
         navigate('/');
       })
       .catch(() => {
+        const errorDescription = error.response.data.message;
         setLoading(false);
+        setErrorMessage(errorDescription);
         setError(true);
       });
   };
 
-  return { error, loading, login };
+  return { error, errorMessage, loading, login };
 };

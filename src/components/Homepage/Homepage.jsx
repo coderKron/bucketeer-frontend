@@ -196,18 +196,18 @@ function Homepage() {
           </Box>
         </Box>
       </Box>
-      <Box bg="bg-surface">
+      <Box backgroundColor={mode('white', 'gray.900')} bg="bg-surface">
         <Container maxWidth={'100%'} py={{ base: '4', md: '8' }}>
           <HStack>
             <Divider />
             <Text fontSize="lg" fontWeight="medium" whiteSpace="nowrap">
-              "Become who you are ment to be"
+              <i> "Become who you're ment to be"</i>
             </Text>
             <Divider />
           </HStack>
         </Container>
       </Box>
-      <Box backgroundColor={mode('#ff6767', 'grey.800')} bg="bg-surface">
+      <Box backgroundColor={mode('#ff6767', 'gray.900')} bg="bg-surface">
         <Container
           maxWidth={'100%'}
           py={{

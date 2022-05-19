@@ -12,9 +12,6 @@ import {
   useColorModeValue,
   MenuList,
   Flex,
-  Image,
-  Icon,
-  Center,
   useColorMode,
 } from '@chakra-ui/react';
 import * as React from 'react';
@@ -90,7 +87,7 @@ const Navbar = () => {
                     </ButtonGroup>
                     <HStack spacing="3">
                       <Button color="white" variant="ghost">
-                        <Link to="/:profileId">Profile</Link>
+                        <Link to={`/profile/${user?._id}`}>Profile</Link>
                       </Button>
                       <Button
                         onClick={logOutUser}
