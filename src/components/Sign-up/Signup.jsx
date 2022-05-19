@@ -12,6 +12,7 @@ import {
   Text,
   useBreakpointValue,
   Box,
+  Image,
   InputGroup,
   InputRightElement,
   useColorModeValue,
@@ -23,30 +24,28 @@ import { FaPlaneDeparture } from 'react-icons/fa';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/auth.context';
-
+import { useColorMode } from '@chakra-ui/react';
 import { useSignup } from '../../hooks/useSignup';
 
 const Signup = () => {
   const [showPassword, setShowPassword] = React.useState(false);
-  const [firstname, setFirstname] = React.useState('');
+  const [userName, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [email, setEmail] = React.useState('');
-  const [lastname, setLastname] = React.useState('');
+  const { colorMode, toggleColorMode } = useColorMode();
   const { isLoggedIn, isLoading, user } = React.useContext(AuthContext);
   const { error, loading, signup } = useSignup();
 
-  const handleFirstname = e => setFirstname(e.target.value);
+  const handleUserName = e => setUsername(e.target.value);
   const handleEmail = e => setEmail(e.target.value);
   const handlePassword = e => setPassword(e.target.value);
-  const handleLastname = e => setLastname(e.target.value);
 
   const icon = useColorModeValue('gray.600', 'gray.600');
 
   const handleSignup = e => {
     e.preventDefault();
     const userInformation = {
-      firstname: firstname,
-      lastname: lastname,
+      userName: userName,
       password: password,
       email: email,
     };
@@ -64,7 +63,21 @@ const Signup = () => {
     >
       <Stack spacing="8">
         <Stack spacing="6" align="center">
-          <Icon as={FaPlaneDeparture} />
+          <HStack justify={'center'}>
+            {colorMode === 'light' ? (
+              <Image
+                borderRadius={'20%'}
+                width={'150px'}
+                src="./images/Daylight.png"
+              />
+            ) : (
+              <Image
+                borderRadius={'20%'}
+                width={'150px'}
+                src="./images/Darkness.png"
+              />
+            )}
+          </HStack>
           <Stack spacing="3" textAlign="center">
             <Heading
               size={useBreakpointValue({
@@ -92,18 +105,9 @@ const Signup = () => {
               <FormControl isRequired>
                 <FormLabel htmlFor="firstname">First name</FormLabel>
                 <Input
-                  onChange={handleFirstname}
+                  onChange={handleUserName}
                   id="firstname"
-                  value={firstname}
-                  type="text"
-                />
-              </FormControl>
-              <FormControl isRequired>
-                <FormLabel htmlFor="lastname">Last name</FormLabel>
-                <Input
-                  onChange={handleLastname}
-                  id="lastname"
-                  value={lastname}
+                  value={userName}
                   type="text"
                 />
               </FormControl>

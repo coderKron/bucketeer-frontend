@@ -14,6 +14,7 @@ import {
   Input,
   Stack,
   Text,
+  Image,
   useBreakpointValue,
   useColorModeValue,
 } from '@chakra-ui/react';
@@ -22,6 +23,7 @@ import { Link } from 'react-router-dom';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { OAuthButtonGroup } from './OauthButtonGroup';
 import { useLogin } from '../../hooks/useLogin';
+import { useColorMode } from '@chakra-ui/react';
 
 const Login = () => {
   const [showPassword, setShowPassword] = React.useState(false);
@@ -29,7 +31,7 @@ const Login = () => {
   const [password, setPassword] = React.useState('');
   const icon = useColorModeValue('gray.600', 'gray.600');
   const { error, loading, login } = useLogin();
-
+  const { colorMode, toggleColorMode } = useColorMode();
   const handleEmail = e => {
     setEmail(e.target.value);
   };
@@ -68,6 +70,21 @@ const Login = () => {
             }}
             textAlign="center"
           >
+            <HStack justify={'center'}>
+              {colorMode === 'light' ? (
+                <Image
+                  borderRadius={'20%'}
+                  width={'150px'}
+                  src="./images/Daylight.png"
+                />
+              ) : (
+                <Image
+                  borderRadius={'20%'}
+                  width={'150px'}
+                  src="./images/Darkness.png"
+                />
+              )}
+            </HStack>
             <Heading
               size={useBreakpointValue({
                 base: 'xs',
