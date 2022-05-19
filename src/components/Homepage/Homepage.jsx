@@ -177,17 +177,20 @@ function Homepage() {
               }}
             >
               <Testimonial
-                image="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80"
+                image="/images/team-picture-ruben.jpeg"
                 name="Ruben Poelen"
                 role="CFE, Bucketeer"
               >
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
+                The greatest feat anyone can achieve is total, independent
+                freedom. No strings except for your loved ones. Going into this
+                amazing project I felt that a lot of people had forgetten the
+                beauties of the world and were merely focussed on achieving
+                their "work goals". So with my friend Louise we made a platform
+                where people can share their amazing journeys and experiences,
+                so you can one day try them yourself.
               </Testimonial>
               <Testimonial
-                image="https://images.unsplash.com/photo-1589729482945-ca6f3a235f7a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80"
+                image="/images/team-picture-louise.jpeg"
                 name="Louise Gabrielle"
                 role="CBE, Bucketeer"
               >
