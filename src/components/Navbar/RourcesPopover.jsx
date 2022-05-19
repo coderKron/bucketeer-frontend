@@ -29,7 +29,7 @@ export const ResourcesPopover = () => (
             variant="link"
             rightIcon={<PopoverIcon isOpen={isOpen} />}
           >
-            Resources
+            Paths
           </Button>
         </PopoverTrigger>
         <PopoverContent

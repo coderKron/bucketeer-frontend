@@ -9,6 +9,15 @@ import {
   Stack,
   useColorMode,
   useColorModeValue as mode,
+  Divider,
+  Text,
+  HStack,
+  Flex,
+  Icon,
+  Avatar,
+  Button,
+  Image,
+  useBreakpointValue,
 } from '@chakra-ui/react';
 import { CTAButton } from './CTAButton';
 import { Feature } from './Feature';
@@ -18,30 +27,15 @@ import { GiHighKick } from 'react-icons/gi';
 import { BsBucket } from 'react-icons/bs';
 import { FaUserFriends } from 'react-icons/fa';
 import { FiFileText } from 'react-icons/fi';
+import { posts } from './data';
 
 function Homepage() {
   const { colorMode, toggleColorMode } = useColorMode();
-
+  const isMobile = useBreakpointValue({
+    base: true,
+    md: false,
+  });
   const backgroundColorBig = () => {
-    if (colorMode === 'light') {
-      return 'white';
-    } else {
-    }
-  };
-  const backgroundColorText = () => {
-    if (colorMode === 'light') {
-      return 'gray';
-    } else {
-      return 'white';
-    }
-  };
-  const backgroundColorIcons = () => {
-    if (colorMode === 'light') {
-      return '#ff6767';
-    } else {
-    }
-  };
-  const backgroundColorButtons = () => {
     if (colorMode === 'light') {
       return 'white';
     } else {
@@ -201,6 +195,135 @@ function Homepage() {
             </SimpleGrid>
           </Box>
         </Box>
+      </Box>
+      <Box bg="bg-surface">
+        <Container maxWidth={'100%'} py={{ base: '4', md: '8' }}>
+          <HStack>
+            <Divider />
+            <Text fontSize="lg" fontWeight="medium" whiteSpace="nowrap">
+              "Become who you are ment to be"
+            </Text>
+            <Divider />
+          </HStack>
+        </Container>
+      </Box>
+      <Box backgroundColor={mode('#ff6767', 'grey.800')} bg="bg-surface">
+        <Container
+          maxWidth={'100%'}
+          py={{
+            base: '16',
+            md: '24',
+          }}
+        >
+          <Stack
+            spacing={{
+              base: '12',
+              md: '16',
+            }}
+          >
+            <Stack direction="row" justify="space-between">
+              <Stack
+                spacing={{
+                  base: '4',
+                  md: '5',
+                }}
+              >
+                <Stack spacing="3">
+                  <Text
+                    color="accent"
+                    fontWeight="semibold"
+                    fontSize={{
+                      base: 'sm',
+                      md: 'md',
+                    }}
+                  >
+                    Kicks
+                  </Text>
+                  <Heading
+                    size={useBreakpointValue({
+                      base: 'sm',
+                      md: 'md',
+                    })}
+                  >
+                    Our top 3 Kicks of the day
+                  </Heading>
+                </Stack>
+                <Text
+                  color="muted"
+                  fontSize={{
+                    base: 'lg',
+                    md: 'xl',
+                  }}
+                >
+                  Inspire yourself with a glimpse of experiences that can be
+                  yours one day.
+                </Text>
+              </Stack>
+              {!isMobile && (
+                <Button variant="primary" size="lg">
+                  Show all
+                </Button>
+              )}
+            </Stack>
+            <SimpleGrid
+              columns={{
+                base: 1,
+                md: 2,
+                lg: 3,
+              }}
+              gap={{
+                base: '12',
+                lg: '8',
+              }}
+            >
+              {posts.map(post => (
+                <Link
+                  to="/"
+                  key={post.id}
+                  _hover={{
+                    textDecor: 'none',
+                  }}
+                  role="group"
+                >
+                  <Stack spacing="8">
+                    <Box overflow="hidden">
+                      <Image
+                        src={post.image}
+                        alt={post.title}
+                        width="full"
+                        height="15rem"
+                        objectFit="cover"
+                        transition="all 0.2s"
+                        _groupHover={{
+                          transform: 'scale(1.05)',
+                        }}
+                      />
+                    </Box>
+                    <Stack spacing="3">
+                      <Text fontSize="sm" fontWeight="semibold" color="accent">
+                        {post.category}
+                      </Text>
+                      <Heading size="xs">{post.title}</Heading>
+                      <Text color="muted">{post.excerpt}</Text>
+                    </Stack>
+                    <HStack>
+                      <Avatar src={post.author.avatarUrl} boxSize="10" />
+                      <Box fontSize="sm">
+                        <Text fontWeight="medium">{post.author.name}</Text>
+                        <Text color="muted">{post.publishedAt}</Text>
+                      </Box>
+                    </HStack>
+                  </Stack>
+                </Link>
+              ))}
+            </SimpleGrid>
+            {isMobile && (
+              <Button variant="primary" size="lg">
+                Show all
+              </Button>
+            )}
+          </Stack>
+        </Container>
       </Box>
     </>
   );

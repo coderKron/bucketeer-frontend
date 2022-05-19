@@ -8,6 +8,7 @@ import Profile from './components/Profile/Profile';
 import { Route, Routes } from 'react-router-dom';
 import { AuthContext } from './context/auth.context';
 import Homepage from './components/Homepage/Homepage';
+import Footer from './components/Footer/Footer';
 
 function App() {
   const { isLoggedIn, isLoading, user } = useContext(AuthContext);
@@ -32,6 +33,7 @@ function App() {
           <ColorModeSwitcher justifySelf="flex-end" />
         </Grid>
       </Flex>
+      <Footer />
     </ChakraProvider>
   );
 }

@@ -82,7 +82,7 @@ const Navbar = () => {
                   <Flex justify={'space-between'} flex="1">
                     <ButtonGroup variant="link" spacing="8">
                       <Button color="white">Buckets</Button>
-                      <Button color="white">About</Button>
+                      <Button color="white">Our story</Button>
                       <ResourcesPopover />
                       <Button color="white" variant="link">
                         something
@@ -106,7 +106,7 @@ const Navbar = () => {
                   <HStack justify={'space-between'} spacing="8" flex="1">
                     <ButtonGroup variant="link" spacing="8">
                       <Button color="white">The Journey</Button>
-                      <Button color="white">About us</Button>
+                      <Button color="white">Our story</Button>
                       <ResourcesPopover />
                       <Button color="white" variant="link">
                         Team
