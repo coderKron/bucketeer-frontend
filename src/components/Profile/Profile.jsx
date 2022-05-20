@@ -11,7 +11,7 @@ import { CardContent } from './CardContent';
 import { CardWithAvatar } from './CardWithAvatar';
 import { UserInfo } from './UserInfo';
 import { AuthContext } from '../../context/auth.context';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const HandleColor = () => {
   return useColorModeValue('gray.600', 'gray.400');
@@ -40,7 +40,12 @@ const Profile = () => {
     <>
       {isLoggedIn ? (
         <Box as="section" pt="20" pb="12" position="relative">
-          <Box position="absolute" inset="0" height="32" bg="blue.600" />
+          <Box
+            position="absolute"
+            inset="0"
+            height="32"
+            backgroundImage={'/images/Experience-Freedom.png'}
+          />
           <CardWithAvatar
             maxW="xl"
             avatarProps={{
@@ -48,9 +53,12 @@ const Profile = () => {
               name: `${userName}`,
             }}
             action={
-              <Button size="sm" leftIcon={<HiPencilAlt />}>
-                Edit
-              </Button>
+              <Link to={`/user/${user._id}/edit`}>
+                {' '}
+                <Button size="sm" leftIcon={<HiPencilAlt />}>
+                  Edit
+                </Button>
+              </Link>
             }
           >
             <CardContent>

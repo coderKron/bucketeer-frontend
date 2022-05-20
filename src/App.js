@@ -12,7 +12,7 @@ import Footer from './components/Footer/Footer';
 import IsPrivate from './components/IsPrivate';
 import Bucket from './components/BucketList/Bucket';
 import CreateBucket from './components/CreateBuckets/CreateBucket';
-import BucketDetails from './components/BucketList/BucketDetails';
+import BucketSingular from './components/BucketDetails/BucketSingular';
 
 function App() {
   const { isLoggedIn, isLoading, user } = useContext(AuthContext);
@@ -50,10 +50,10 @@ function App() {
             }
           />
           <Route
-            path="/bucket/:id"
+            path="/bucket/:bucketId"
             element={
               <IsPrivate>
-                <BucketDetails />
+                <BucketSingular />
               </IsPrivate>
             }
           />

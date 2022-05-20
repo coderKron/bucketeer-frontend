@@ -19,20 +19,34 @@ import {
   AlertIcon,
   AlertTitle,
 } from '@chakra-ui/react';
-import { useCreateBucket } from '../../hooks/useCreateNewBucket';
+import { useCreateBucket } from '../../../src/hooks/useCreateBucket';
 
 function CreateBucket() {
+  const [previewSource, setPreviewSource] = useState('');
   const [picture, setPicture] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const { error, errorMessage, loading, createNewBucket } = useCreateBucket;
+  const { error, errorMessage, loading, createNewBucket } = useCreateBucket();
+
+  const handleFileInputChange = e => {
+    const file = e.target.files[0];
+    previewFile(file);
+  };
+  const previewFile = file => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setPreviewSource(reader.result);
+    };
+  };
+
   const handleSubmit = e => {
     e.preventDefault();
-    createNewBucket({
-      name: title,
-      description,
-      pictures: picture,
-    });
+    if (!previewSource) return;
+    console.log(JSON.stringify(previewSource));
+    createNewBucket(
+      JSON.stringify({ data: previewSource, name: title, description })
+    );
   };
 
   return (
@@ -127,13 +141,18 @@ function CreateBucket() {
                   <Input
                     required={true}
                     id="picture"
-                    type={'file'}
                     value={picture}
-                    onChange={e => {
-                      setPicture(e.target.files[0]);
-                    }}
+                    type={'file'}
+                    onChange={handleFileInputChange}
                   />
                 </Stack>
+                {previewSource && (
+                  <Image
+                    src={previewSource}
+                    alt="chosenpicture"
+                    style={{ maxHeight: '50px' }}
+                  />
+                )}
               </Stack>
             </FormControl>
 

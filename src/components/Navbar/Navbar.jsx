@@ -75,9 +75,11 @@ const Navbar = () => {
                       <ResourcesPopover />
                     </ButtonGroup>
                     <HStack spacing="3">
-                      <Button color="white" variant="ghost">
-                        <Link to={`/profile/${user?._id}`}>Profile</Link>
-                      </Button>
+                      <Link to={`/profile/${user?._id}`}>
+                        <Button color="white" variant="ghost">
+                          Profile
+                        </Button>
+                      </Link>
                       <Button
                         onClick={logOutUser}
                         variant="ghost"
@@ -98,9 +100,11 @@ const Navbar = () => {
                       <Button color="white" variant="ghost">
                         <Link to="/login">Login</Link>
                       </Button>
-                      <Button variant="ghost" color="white">
-                        <Link to="/signup">Sign up</Link>
-                      </Button>
+                      <Link to="/signup">
+                        <Button variant="ghost" color="white">
+                          Sign up
+                        </Button>
+                      </Link>
                     </ButtonGroup>
                   </HStack>
                 )}

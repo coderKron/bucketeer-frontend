@@ -10,11 +10,11 @@ export const useCreateBucket = () => {
   const navigate = useNavigate();
   const { getToken } = useContext(AuthContext);
 
-  const createNewBucket = bucketDetails => {
+  const createNewBucket = bucketInformation => {
     const storedToken = getToken();
     setLoading(true);
     axios
-      .post(`${process.env.REACT_APP_URL}/api/bucket`, bucketDetails, {
+      .post(`${process.env.REACT_APP_URL}/api/bucket`, bucketInformation, {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then(() => {
