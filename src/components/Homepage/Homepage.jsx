@@ -207,7 +207,7 @@ function Homepage() {
           </HStack>
         </Container>
       </Box>
-      <Box backgroundColor={mode('#ff6767', 'gray.900')} bg="bg-surface">
+      <Box backgroundColor={mode('orange.300', 'gray.900')} bg="bg-surface">
         <Container
           maxWidth={'100%'}
           py={{

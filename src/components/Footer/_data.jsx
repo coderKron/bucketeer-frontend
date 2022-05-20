@@ -10,16 +10,9 @@ export const links = [
         label: 'Our story',
         href: '#',
       },
-      {
-        label: 'Our team',
-        href: '#',
-      },
+
       {
         label: 'The Journey',
-        href: '#',
-      },
-      {
-        label: 'FAQs',
         href: '#',
       },
     ],
@@ -35,10 +28,7 @@ export const links = [
         label: 'Kicks',
         href: '#',
       },
-      {
-        label: 'Use Cases',
-        href: '#',
-      },
+
       {
         label: 'Users',
         href: '#',
@@ -55,14 +45,6 @@ export const links = [
       },
       {
         label: 'Privacy Policy',
-        href: '#',
-      },
-      {
-        label: 'Offer terms',
-        href: '#',
-      },
-      {
-        label: 'License',
         href: '#',
       },
     ],

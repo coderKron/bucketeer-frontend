@@ -23,8 +23,8 @@ export const useLogin = () => {
       })
       .catch(() => {
         const errorDescription = error.response.data.message;
-        setLoading(false);
         setErrorMessage(errorDescription);
+        setLoading(false);
         setError(true);
       });
   };

@@ -9,7 +9,7 @@ import {
   MenuItem,
   IconButton,
   useBreakpointValue,
-  useColorModeValue,
+  useColorModeValue as mode,
   MenuList,
   Flex,
   useColorMode,
@@ -27,15 +27,7 @@ const Navbar = () => {
     base: false,
     lg: true,
   });
-  const { colorMode, toggleColorMode } = useColorMode();
-
-  const backgroundColorFunc = () => {
-    if (colorMode === 'light') {
-      return '#ff1616';
-    } else {
-      return 'black';
-    }
-  };
+  const { colorMode } = useColorMode();
 
   const { isLoggedIn, isLoading, logOutUser, user } =
     React.useContext(AuthContext);
@@ -44,14 +36,14 @@ const Navbar = () => {
     <Box
       minH={'auto'}
       maxH="80px"
-      backgroundColor={backgroundColorFunc}
+      backgroundColor={mode('orange.400')}
       as="section"
       width="100%"
     >
       <Box
         as="nav"
         bg="bg-surface"
-        boxShadow={useColorModeValue('sm', 'sm-dark')}
+        boxShadow={mode('sm', 'sm-dark')}
         width="100%"
         maxH={'80px'}
       >
@@ -78,12 +70,9 @@ const Navbar = () => {
                 {isLoggedIn && !isLoading && (
                   <Flex justify={'space-between'} flex="1">
                     <ButtonGroup variant="link" spacing="8">
-                      <Button color="white">Buckets</Button>
+                      <Button color="white">The Journey</Button>
                       <Button color="white">Our story</Button>
                       <ResourcesPopover />
-                      <Button color="white" variant="link">
-                        something
-                      </Button>
                     </ButtonGroup>
                     <HStack spacing="3">
                       <Button color="white" variant="ghost">
@@ -104,10 +93,6 @@ const Navbar = () => {
                     <ButtonGroup variant="link" spacing="8">
                       <Button color="white">The Journey</Button>
                       <Button color="white">Our story</Button>
-                      <ResourcesPopover />
-                      <Button color="white" variant="link">
-                        Team
-                      </Button>
                     </ButtonGroup>
                     <ButtonGroup spacing="3">
                       <Button color="white" variant="ghost">

@@ -16,7 +16,6 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import { links } from './_data';
-import LightLogo from '../Logos/LightLogo';
 import DarkLogo from '../Logos/DarkLogo';
 
 const Footer = () => {
@@ -25,7 +24,7 @@ const Footer = () => {
   return (
     <Box
       maxW={'100%'}
-      backgroundColor={mode('white', 'gray.800')}
+      backgroundColor={mode('gray.100', 'gray.800')}
       bg="bg-accent"
       color={mode('black', 'white')}
     >

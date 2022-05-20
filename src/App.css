@@ -1,3 +1,7 @@
 .App video {
   width: 100%;
 }
+
+.Paths:hover {
+  text-decoration: underline;
+}

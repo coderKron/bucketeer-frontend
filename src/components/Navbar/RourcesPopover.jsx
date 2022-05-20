@@ -1,7 +1,6 @@
 import {
   Button,
   Icon,
-  Link,
   Popover,
   PopoverContent,
   PopoverTrigger,
@@ -12,6 +11,8 @@ import {
 import * as React from 'react';
 import { items } from './data';
 import { PopoverIcon } from './PopoverIcon';
+import { Link } from 'react-router-dom';
+import '../../App.css';
 
 export const ResourcesPopover = () => (
   <Popover
@@ -48,7 +49,12 @@ export const ResourcesPopover = () => (
             rowGap="2"
           >
             {items.map((item, id) => (
-              <Link variant="menu" href={item.href} key={id}>
+              <Link
+                className="Paths"
+                variant="menu"
+                to={`/${item.href}`}
+                key={id}
+              >
                 <Stack spacing="4" direction="row" p="3">
                   <Icon as={item.icon} boxSize="6" color="accent" />
                   <Stack spacing="1">
