@@ -4,9 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
 
 export const useSignup = () => {
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { storeToken, authenticateUser } = useContext(AuthContext);
 
