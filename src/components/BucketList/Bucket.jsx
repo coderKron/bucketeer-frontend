@@ -100,16 +100,15 @@ const Buckets = () => {
                     color={mode('black', 'black')}
                   >
                     <Link
-                      key={post._id}
                       _hover={{
                         textDecor: 'none',
                       }}
                       role="group"
                     >
-                      <Stack spacing="8">
+                      <Stack key={post._id} spacing="8">
                         <Box overflow="hidden">
                           <Image
-                            src={post.pictures}
+                            src={post.picture}
                             alt={post.name}
                             width="full"
                             height="15rem"
@@ -200,7 +199,7 @@ const Buckets = () => {
                           colorScheme={mode('white', 'black')}
                           variant={'solid'}
                         >
-                          <NavLink to="/">Details</NavLink>
+                          <NavLink to="/bucket/create">Details</NavLink>
                         </Button>
                       </Stack>
                     </Stack>
@@ -250,7 +249,7 @@ const Buckets = () => {
                           colorScheme={mode('white', 'black')}
                           variant={'solid'}
                         >
-                          <NavLink to="/">Details</NavLink>
+                          <NavLink to="/bucket/create">Details</NavLink>
                         </Button>
                       </Stack>
                     </Stack>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import {
   Box,
   Button,
@@ -19,34 +19,47 @@ import {
   AlertIcon,
   AlertTitle,
 } from '@chakra-ui/react';
-import { useCreateBucket } from '../../../src/hooks/useCreateBucket';
+import { useCreateBucket } from '../../hooks/useCreateBucket';
+import axios from 'axios';
+import { AuthContext } from '../../context/auth.context';
 
 function CreateBucket() {
-  const [previewSource, setPreviewSource] = useState('');
+  const [isUploading, setIsUploading] = useState(false);
+
   const [picture, setPicture] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const { error, errorMessage, loading, createNewBucket } = useCreateBucket();
+  const { getToken } = useContext(AuthContext);
+  const storedToken = getToken();
 
   const handleFileInputChange = e => {
-    const file = e.target.files[0];
-    previewFile(file);
-  };
-  const previewFile = file => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setPreviewSource(reader.result);
-    };
+    setIsUploading(true);
+    const imageData = new FormData();
+    imageData.append('picture', e.target.files[0]);
+
+    axios
+      .post(`${process.env.REACT_APP_URL}/api/upload`, imageData, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
+      .then(res => {
+        console.log(res);
+        setPicture(res.data.secure_url);
+        setIsUploading(false);
+      })
+      .catch(error => console.log(error));
   };
 
   const handleSubmit = e => {
-    e.preventDefault();
-    if (!previewSource) return;
-    console.log(JSON.stringify(previewSource));
-    createNewBucket(
-      JSON.stringify({ data: previewSource, name: title, description })
-    );
+    const bucketData = {
+      name: title,
+      description,
+      picture,
+    };
+    createNewBucket(bucketData);
+    setTitle('');
+    setDescription('');
+    setPicture('');
   };
 
   return (
@@ -139,20 +152,15 @@ function CreateBucket() {
                   }}
                 >
                   <Input
-                    required={true}
+                    required
                     id="picture"
-                    value={picture}
-                    type={'file'}
-                    onChange={handleFileInputChange}
+                    type="file"
+                    defaultValue={picture}
+                    onChange={e => {
+                      handleFileInputChange(e);
+                    }}
                   />
                 </Stack>
-                {previewSource && (
-                  <Image
-                    src={previewSource}
-                    alt="chosenpicture"
-                    style={{ maxHeight: '50px' }}
-                  />
-                )}
               </Stack>
             </FormControl>
 

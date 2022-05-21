@@ -3,37 +3,36 @@ import { AuthContext } from '../context/auth.context';
 import { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
-export default function useGetBucketDetails() {
+export function useGetBucketDetails() {
   const [bucket, setBucket] = useState({});
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const { bucketId } = useParams();
-  const { getToken } = useContext(AuthContext);
+  const { getToken, isLoggedIn } = useContext(AuthContext);
   const navigate = useNavigate();
-  const storedToken = getToken();
-
   useEffect(() => {
+    console.log(bucketId);
+    const storedToken = getToken();
     setLoading(true);
-    axios.get(
-      (`${process.env.REACT_APP_URL}/bucket/${bucketId}`,
-      {
+    axios
+      .get(`${process.env.REACT_APP_URL}/api/bucket/${bucketId}`, {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
-        .then(response => {
-          setLoading(false);
-          setBucket(response.data);
-        })
-        .error(error => {
-          const errorDescription = error.response.data.message;
-          setErrorMessage(errorDescription);
-          setLoading(false);
-          setError(false);
-        })
-    );
-  }, [getToken, bucketId, storedToken]);
+      .then(response => {
+        setLoading(false);
+        setBucket(response.data);
+      })
+      .error(error => {
+        const errorDescription = error.response.data.message;
+        setErrorMessage(errorDescription);
+        setLoading(false);
+        setError(false);
+      });
+  }, [getToken, bucketId, isLoggedIn]);
 
   const deleteBucket = () => {
+    const storedToken = getToken();
     axios
       .delete(`${process.env.REACT_APP_URL}/bucket/delete/${bucketId}`, {
         headers: { Authorization: `Bearer ${storedToken}` },

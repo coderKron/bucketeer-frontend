@@ -1,4 +1,5 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useContext, useState } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import {
   Box,
@@ -11,28 +12,54 @@ import {
   useColorModeValue as mode,
   SimpleGrid,
 } from '@chakra-ui/react';
-import useGetBucketDetails from '../../hooks/useGetBucketDetails';
+import { AuthContext } from '../../context/auth.context';
+
 import Loading from '../Loading';
 import Error from '../Error';
 import { KickCard } from './KickCard';
 import { KickGrid } from './KickGrid';
 
 export default function BucketSingular() {
-  const { bucket, error, errorMessage, loading } = useGetBucketDetails;
-  const { bucketId } = useParams;
+  const [bucket, setBucket] = useState({});
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [loading, setLoading] = useState(false);
+  const { bucketId } = useParams();
+  const { getToken, isLoggedIn } = useContext(AuthContext);
+
+  useEffect(() => {
+    console.log(bucketId);
+    const storedToken = getToken();
+    setLoading(true);
+    axios
+      .get(`${process.env.REACT_APP_URL}/api/bucket/${bucketId}`, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
+      .then(response => {
+        setLoading(false);
+        setBucket(response.data);
+      })
+      .catch(error => {
+        const errorDescription = error.response.data.message;
+        setErrorMessage(errorDescription);
+        setLoading(false);
+        setError(false);
+      });
+  }, [getToken, bucketId, isLoggedIn]);
+
   return (
     <>
       {loading ? (
         <Loading />
       ) : error ? (
         <Error />
-      ) : (
+      ) : bucket ? (
         <>
           <Image
             src="/images/Experience-Freedom.png"
             alt="experience freedom"
           />
-          <Box bg={'bg-surface'} color={module('black')}>
+          <Box bg={'bg-surface'} color={mode('black')}>
             <Container
               justifyContent={'center'}
               maxWidth={'100%'}
@@ -48,7 +75,6 @@ export default function BucketSingular() {
                   md: '16',
                 }}
               >
-                <Image src={`${bucket.pictures}`} />
                 <Stack
                   justifyContent={'center'}
                   alignItems="center"
@@ -74,10 +100,10 @@ export default function BucketSingular() {
                       <Stack spacing="8">
                         <Box overflow="hidden">
                           <Image
-                            src={bucket.pictures}
+                            src={bucket.picture}
                             alt={bucket.name}
                             width="full"
-                            height="15rem"
+                            height="30rem"
                             objectFit="cover"
                             transition="all 0.2s"
                             _groupHover={{
@@ -117,6 +143,8 @@ export default function BucketSingular() {
             </Container>
           </Box>
         </>
+      ) : (
+        <Error />
       )}
     </>
   );
