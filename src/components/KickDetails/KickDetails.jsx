@@ -12,33 +12,37 @@ import {
   Container,
   useColorModeValue as mode,
   SimpleGrid,
+  FormControl,
+  Select,
 } from '@chakra-ui/react';
 import { AuthContext } from '../../context/auth.context';
+import { useGetBuckets } from '../../hooks/useGetBuckets';
+import { useAddKickToBucket } from '../../hooks/useAddKickToBucket';
 
 import Loading from '../Loading';
 import Error from '../Error';
-import { KickCard } from './KickCard';
-import { KickGrid } from './KickGrid';
 
-export default function BucketSingular() {
-  const [bucket, setBucket] = useState({});
+export default function Kickdetails() {
+  const [kick, setKick] = useState({});
   const [error, setError] = useState(false);
+  const [bucketId, setBucketId] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
-  const { bucketId } = useParams();
+  const { kickId } = useParams();
   const { getToken, isLoggedIn } = useContext(AuthContext);
+  const { buckets } = useGetBuckets();
+  const { addKickToBucket } = useAddKickToBucket();
 
   useEffect(() => {
-    console.log(bucketId);
     const storedToken = getToken();
     setLoading(true);
     axios
-      .get(`${process.env.REACT_APP_URL}/api/bucket/${bucketId}`, {
+      .get(`${process.env.REACT_APP_URL}/api/kick/${kickId}`, {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then(response => {
         setLoading(false);
-        setBucket(response.data);
+        setKick(response.data);
       })
       .catch(error => {
         const errorDescription = error.response.data.message;
@@ -46,7 +50,17 @@ export default function BucketSingular() {
         setLoading(false);
         setError(false);
       });
-  }, [getToken, bucketId, isLoggedIn]);
+  }, [getToken, kickId, isLoggedIn]);
+
+  const handleAddKick = e => {
+    e.preventDefault();
+
+    addKickToBucket({
+      bucketId: bucketId,
+      kickId: kickId,
+    });
+    setBucketId('');
+  };
 
   return (
     <>
@@ -54,12 +68,9 @@ export default function BucketSingular() {
         <Loading />
       ) : error ? (
         <Error />
-      ) : bucket ? (
+      ) : kick ? (
         <>
-          <Image
-            src="/images/Experience-Freedom.png"
-            alt="experience freedom"
-          />
+          <Image src="/images/experience-kicks.png" alt="experience kicks" />
           <Box bg={'bg-surface'} color={mode('black')}>
             <Container
               justifyContent={'center'}
@@ -82,24 +93,24 @@ export default function BucketSingular() {
                   direction={'column'}
                   justify={'space-between'}
                 >
-                  <NavLink to={'/buckets'}>
-                    <Button variant={'solid'}>Back to Buckets</Button>
-                  </NavLink>
+                  <Button as={NavLink} to={'/kicks'} variant={'solid'}>
+                    Back to Kicks
+                  </Button>
                 </Stack>
                 <SimpleGrid>
                   <Box
                     minH="36"
-                    backgroundColor={mode('orange.200', 'teal.800')}
+                    backgroundColor={mode('orange.200', 'white')}
                     padding={'15px'}
                     boxShadow={mode('sm', 'sm-dark')}
                     borderRadius="lg"
-                    color={mode('black', 'white')}
+                    color={mode('black', 'black')}
                   >
                     <Stack spacing="8">
                       <Box overflow="hidden">
                         <Image
-                          src={bucket.picture}
-                          alt={bucket.name}
+                          src={kick.picture}
+                          alt={kick.name}
                           width="full"
                           height="25rem"
                           objectFit="cover"
@@ -115,45 +126,56 @@ export default function BucketSingular() {
                         spacing="3"
                       >
                         <Stack spacing="3">
-                          <Heading size="xs">{bucket.name}</Heading>
-                          <Text color="muted">{bucket.description}</Text>
+                          <Heading size="xs">{kick.name}</Heading>
+                          <Text color="muted">{kick.description}</Text>
                         </Stack>
                       </Stack>
                       <Stack
                         justifyContent={'center'}
                         alignItems="center"
-                        direction={'column'}
                         justify={'space-between'}
+                        flexDirection={'row'}
+                        spacing="9"
                       >
-                        <NavLink to={'/kicks'}>
-                          <Button
-                            backgroundColor={mode('orange.700', 'gray.800')}
-                            color={mode('white', 'white')}
-                            variant={'solid'}
-                          >
-                            Add Kicks
-                          </Button>
-                        </NavLink>
+                        <Box
+                          flexDirection={'row'}
+                          justifyContent="space-around"
+                          alignItems={'center'}
+                          display="flex"
+                          spacing="8"
+                        >
+                          {buckets.length && (
+                            <>
+                              <FormControl>
+                                <Select
+                                  onChange={e => {
+                                    setBucketId(e.target.value);
+                                  }}
+                                  placeholder="Select Bucket"
+                                >
+                                  {buckets.length &&
+                                    buckets.map(singleBucket => {
+                                      return (
+                                        <option value={singleBucket._id}>
+                                          {singleBucket.name}
+                                        </option>
+                                      );
+                                    })}
+                                </Select>
+                              </FormControl>
+                              <Button
+                                backgroundColor={mode('gray.700', 'orange.600')}
+                                color={mode('white', 'white')}
+                                variant={'solid'}
+                                type="submit"
+                                onClick={handleAddKick}
+                              >
+                                Add
+                              </Button>
+                            </>
+                          )}
+                        </Box>
                       </Stack>
-                      <Box
-                        maxW="7xl"
-                        mx="auto"
-                        px={{ base: '4', md: '8', lg: '12' }}
-                        py={{ base: '6', md: '8', lg: '12' }}
-                      >
-                        <KickGrid>
-                          {bucket.kicks?.map(kick => {
-                            console.log(kick);
-                            return (
-                              <KickCard
-                                key={kick._id}
-                                kick={kick}
-                                bucketId={bucketId}
-                              />
-                            );
-                          })}
-                        </KickGrid>
-                      </Box>
                     </Stack>
                   </Box>
                 </SimpleGrid>

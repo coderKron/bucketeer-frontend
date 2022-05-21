@@ -18,6 +18,7 @@ import {
   AlertDescription,
   AlertIcon,
   AlertTitle,
+  Select,
 } from '@chakra-ui/react';
 import { useGetBuckets } from '../../hooks/useGetBuckets';
 import { useCreateKick } from '../../hooks/useCreateKick';

@@ -105,7 +105,7 @@ const KicksList = () => {
                   >
                     <Link
                       as={NavLink}
-                      to={`/kick/${post._id}`}
+                      to={`/kicks/${post._id}`}
                       _hover={{
                         textDecor: 'none',
                       }}

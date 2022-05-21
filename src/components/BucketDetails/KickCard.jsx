@@ -14,16 +14,22 @@ import {
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 import * as React from 'react';
-import { useGetBucketKicks } from '../../hooks/useGetBucketKicks';
+
+import { useUpdateKicksFromBucket } from '../../hooks/useUpdateKicksFromBucket';
 
 import { FavouriteButton } from './FavouriteButton';
 
 export const KickCard = props => {
-  const { findBucketKick, kicks } = useGetBucketKicks();
-  const { kick, rootProps } = props;
+  const { kick, bucketId, rootProps } = props;
   const { name, _id, pictures, category, description, createdBy } = kick;
+  const { updateKicksFromBucket } = useUpdateKicksFromBucket();
   console.log(kick);
+  const handleDeleteFromBucket = e => {
+    e.preventDefault();
+    console.log(bucketId);
 
+    updateKicksFromBucket({ bucketId, kickId: _id });
+  };
   return (
     <Stack
       spacing={useBreakpointValue({
@@ -55,16 +61,16 @@ export const KickCard = props => {
       <Stack>
         <Stack spacing="1">
           <Text
-            fontWeight="medium"
-            color={useColorModeValue('gray.700', 'gray.400')}
+            fontWeight="bold"
+            color={useColorModeValue('gray.700', 'gray.300')}
           >
             {name}
           </Text>
           <Text
             fontWeight={'medium'}
-            color={useColorModeValue('black', 'purple')}
+            color={useColorModeValue('black', 'white')}
           >
-            {createdBy}
+            {description}
           </Text>
         </Stack>
         <HStack>
@@ -77,15 +83,17 @@ export const KickCard = props => {
         <Button
           as={NavLink}
           to={`/kicks/${_id}`}
-          colorScheme="blue"
+          backgroundColor={useColorModeValue('orange.600', 'gray.800')}
+          color={useColorModeValue('white', 'white')}
           isFullWidth
         >
           Go to Kick
         </Button>
         <Link
+          onClick={handleDeleteFromBucket}
           textDecoration="underline"
           fontWeight="medium"
-          color={useColorModeValue('gray.600', 'gray.400')}
+          color={useColorModeValue('gray.600', 'white')}
         >
           Delete Kick from Bucket
         </Link>

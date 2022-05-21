@@ -15,6 +15,7 @@ import CreateBucket from './components/CreateBuckets/CreateBucket';
 import BucketSingular from './components/BucketDetails/BucketSingular';
 import KicksList from './components/KicksList/KicksList';
 import CreateKicks from './components/CreateKicks/CreateKicks';
+import Kickdetails from './components/KickDetails/KickDetails';
 
 function App() {
   const { isLoggedIn, isLoading, user } = useContext(AuthContext);
@@ -72,6 +73,14 @@ function App() {
             element={
               <IsPrivate>
                 <CreateKicks />
+              </IsPrivate>
+            }
+          />
+          <Route
+            path="/kicks/:kickId"
+            element={
+              <IsPrivate>
+                <Kickdetails />
               </IsPrivate>
             }
           />
