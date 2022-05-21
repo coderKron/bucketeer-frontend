@@ -5,6 +5,7 @@ import {
   Box,
   Heading,
   Link,
+  Button,
   Image,
   Text,
   Stack,
@@ -62,7 +63,7 @@ export default function BucketSingular() {
           <Box bg={'bg-surface'} color={mode('black')}>
             <Container
               justifyContent={'center'}
-              maxWidth={'100%'}
+              maxWidth={'90%'}
               py={{
                 base: '16',
                 md: '24',
@@ -80,7 +81,11 @@ export default function BucketSingular() {
                   alignItems="center"
                   direction={'column'}
                   justify={'space-between'}
-                ></Stack>
+                >
+                  <NavLink to={'/buckets'}>
+                    <Button variant={'solid'}>Back to Buckets</Button>
+                  </NavLink>
+                </Stack>
                 <SimpleGrid>
                   <Box
                     minH="36"
@@ -90,53 +95,60 @@ export default function BucketSingular() {
                     borderRadius="lg"
                     color={mode('black', 'black')}
                   >
-                    <Link
-                      key={bucket._id}
-                      _hover={{
-                        textDecor: 'none',
-                      }}
-                      role="group"
-                    >
-                      <Stack spacing="8">
-                        <Box overflow="hidden">
-                          <Image
-                            src={bucket.picture}
-                            alt={bucket.name}
-                            width="full"
-                            height="30rem"
-                            objectFit="cover"
-                            transition="all 0.2s"
-                            _groupHover={{
-                              transform: 'scale(1.05)',
-                            }}
-                          />
-                        </Box>
-                        <Stack
-                          justifyContent={'space-around'}
-                          flexDirection={'row'}
-                          spacing="3"
-                        >
-                          <Stack spacing="3">
-                            <Heading size="xs">{bucket.name}</Heading>
-                            <Text color="muted">{bucket.description}</Text>
-                          </Stack>
+                    <Stack spacing="8">
+                      <Box overflow="hidden">
+                        <Image
+                          src={bucket.picture}
+                          alt={bucket.name}
+                          width="full"
+                          height="25rem"
+                          objectFit="cover"
+                          transition="all 0.2s"
+                          _groupHover={{
+                            transform: 'scale(1.05)',
+                          }}
+                        />
+                      </Box>
+                      <Stack
+                        justifyContent={'space-around'}
+                        flexDirection={'row'}
+                        spacing="3"
+                      >
+                        <Stack spacing="3">
+                          <Heading size="xs">{bucket.name}</Heading>
+                          <Text color="muted">{bucket.description}</Text>
                         </Stack>
-                        {bucket.kicks?.map(kick => {
-                          return (
-                            <Box
-                              maxW="7xl"
-                              mx="auto"
-                              px={{ base: '4', md: '8', lg: '12' }}
-                              py={{ base: '6', md: '8', lg: '12' }}
-                            >
-                              <KickGrid>
-                                <KickCard key={bucket._id} kick={bucket.kick} />
-                              </KickGrid>
-                            </Box>
-                          );
-                        })}
                       </Stack>
-                    </Link>
+                      <Stack
+                        justifyContent={'center'}
+                        alignItems="center"
+                        direction={'column'}
+                        justify={'space-between'}
+                      >
+                        <NavLink to={'/kicks'}>
+                          <Button
+                            backgroundColor={mode('orange.300', 'gray.600')}
+                            color={mode('white', 'white')}
+                            variant={'solid'}
+                          >
+                            Add Kicks
+                          </Button>
+                        </NavLink>
+                      </Stack>
+                      <Box
+                        maxW="7xl"
+                        mx="auto"
+                        px={{ base: '4', md: '8', lg: '12' }}
+                        py={{ base: '6', md: '8', lg: '12' }}
+                      >
+                        <KickGrid>
+                          {bucket.kicks?.map(kick => {
+                            console.log(kick);
+                            return <KickCard key={kick._id} kick={kick} />;
+                          })}
+                        </KickGrid>
+                      </Box>
+                    </Stack>
                   </Box>
                 </SimpleGrid>
               </Stack>

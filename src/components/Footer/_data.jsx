@@ -8,12 +8,12 @@ export const links = [
       },
       {
         label: 'Our story',
-        href: '#',
+        href: '/story',
       },
 
       {
         label: 'The Journey',
-        href: '#',
+        href: '/journey',
       },
     ],
   },
@@ -22,16 +22,16 @@ export const links = [
     links: [
       {
         label: 'Buckets',
-        href: '#',
+        href: '/buckets',
       },
       {
         label: 'Kicks',
-        href: '#',
+        href: '/kicks',
       },
 
       {
         label: 'Users',
-        href: '#',
+        href: '/',
       },
     ],
   },

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import videoBucketeer from '../../videos/adventure.mp4';
 import '../../App.css';
 import {
@@ -19,10 +19,11 @@ import {
   Image,
   useBreakpointValue,
 } from '@chakra-ui/react';
+import { AuthContext } from '../../context/auth.context';
 import { CTAButton } from './CTAButton';
 import { Feature } from './Feature';
 import { Testimonial } from './Testimonial';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { GiHighKick } from 'react-icons/gi';
 import { BsBucket } from 'react-icons/bs';
 import { FaUserFriends } from 'react-icons/fa';
@@ -30,6 +31,7 @@ import { FiFileText } from 'react-icons/fi';
 import { posts } from './data';
 
 function Homepage() {
+  const { getToken, isLoggedIn } = useContext(AuthContext);
   const { colorMode, toggleColorMode } = useColorMode();
   const isMobile = useBreakpointValue({
     base: true,
@@ -94,14 +96,29 @@ function Homepage() {
                 Bucketeer: a "way" to find experiences that will bring joy and
                 happiness
               </Heading>
-              <CTAButton
-                w={{
-                  base: 'full',
-                  md: 'auto',
-                }}
-              >
-                <Link to="/signup">Sign up here</Link>
-              </CTAButton>
+              {!isLoggedIn ? (
+                <CTAButton
+                  as={NavLink}
+                  to={'/signup'}
+                  w={{
+                    base: 'full',
+                    md: 'auto',
+                  }}
+                >
+                  Sign up here
+                </CTAButton>
+              ) : (
+                <CTAButton
+                  as={NavLink}
+                  to={'/buckets'}
+                  w={{
+                    base: 'full',
+                    md: 'auto',
+                  }}
+                >
+                  Go to Buckets
+                </CTAButton>
+              )}
             </Stack>
             <SimpleGrid
               columns={{

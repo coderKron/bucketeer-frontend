@@ -13,7 +13,7 @@ import {
   useColorModeValue as mode,
 } from '@chakra-ui/react';
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import { links } from './_data';
 import DarkLogo from '../Logos/DarkLogo';
@@ -92,9 +92,9 @@ const Footer = () => {
                   {group.links.map((link, idx) => (
                     <Button
                       key={idx}
-                      as="a"
+                      as={NavLink}
+                      to={link.href}
                       variant="link-on-accent"
-                      href={link.href}
                     >
                       {link.label}
                     </Button>

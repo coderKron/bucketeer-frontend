@@ -11,13 +11,19 @@ import {
   useBreakpointValue,
   useColorModeValue,
 } from '@chakra-ui/react';
+import axios from 'axios';
+import { NavLink } from 'react-router-dom';
 import * as React from 'react';
+import { useGetBucketKicks } from '../../hooks/useGetBucketKicks';
 
 import { FavouriteButton } from './FavouriteButton';
 
 export const KickCard = props => {
+  const { findBucketKick, kicks } = useGetBucketKicks();
   const { kick, rootProps } = props;
-  const { name, pictures, category, description, createdBy } = kick;
+  const { name, _id, pictures, category, description, createdBy } = kick;
+  console.log(kick);
+
   return (
     <Stack
       spacing={useBreakpointValue({
@@ -68,7 +74,12 @@ export const KickCard = props => {
         </HStack>
       </Stack>
       <Stack align="center">
-        <Button colorScheme="blue" isFullWidth>
+        <Button
+          as={NavLink}
+          to={`/kicks/${_id}`}
+          colorScheme="blue"
+          isFullWidth
+        >
           Go to Kick
         </Button>
         <Link
