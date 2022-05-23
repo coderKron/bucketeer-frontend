@@ -19,12 +19,22 @@ import {
   AlertIcon,
   AlertTitle,
   Select,
+  SkeletonText,
 } from '@chakra-ui/react';
+import {
+  GoogleMap,
+  Marker,
+  useJsApiLoader,
+  InfoWindow,
+} from '@react-google-maps/api';
 import { useGetBuckets } from '../../hooks/useGetBuckets';
 import { useCreateKick } from '../../hooks/useCreateKick';
 import axios from 'axios';
 import { AuthContext } from '../../context/auth.context';
 import { RadioCard, RadioCardGroup } from './RadioCardGroup';
+const libraries = ['places'];
+const mapContainerStyle = { width: '100px', height: '100%' };
+const center = { lat: 48.8584, lng: 2.2945 };
 
 function CreateKicks() {
   const [isUploading, setIsUploading] = useState(false);
@@ -41,8 +51,19 @@ function CreateKicks() {
   const storedToken = getToken();
   const [lat, setLat] = useState('');
   const [long, setLong] = useState('');
-  const [errorLocationMessage, setErrorLocationMessage] = useState('');
+  const [map, setMap] = useState(/** @type google.maps.Map */ (null));
+  // const [center, setCenter] = useState({ lat: 48.8584, lng: 2.2945 });
 
+  const { isLoaded, loadError } = useJsApiLoader({
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    libraries,
+  });
+  if (loadError) {
+    return 'Error loading map';
+  }
+  if (!isLoaded) {
+    return <SkeletonText />;
+  }
   const getLocation = (city, country) => {
     let url = `https://maps.googleapis.com/maps/api/geocode/json?address=+${city},+${country}&key=${process.env.REACT_APP_googleKey}`;
     axios
@@ -50,10 +71,12 @@ function CreateKicks() {
       .then(res => {
         setLat(res[0].geometry.location.lat);
         setLong(res[0].geometry.location.lng);
+        // setCenter({
+        //   lat: res[0].geometry.location.lat,
+        //   lng: res[0].geometry.location.lng,
+        // });
       })
-      .catch(locationError => {
-        setErrorLocationMessage(locationError.response.data.message);
-      });
+      .catch(locationError => {});
   };
 
   const handleFileInputChange = e => {
@@ -88,6 +111,7 @@ function CreateKicks() {
     setCategory('');
     setSelectedBuckets('');
     setPicture('');
+    // setCenter({ lat: 27.9881, long: 86.925 });
     setLong('');
     setLat('');
   };
@@ -168,6 +192,7 @@ function CreateKicks() {
                 <FormLabel variant={'inline'}>Location</FormLabel>
                 <Input
                   isRequired
+                  type={'text'}
                   placeholder="City"
                   onChange={e => {
                     setCity(e.target.value);
@@ -176,6 +201,7 @@ function CreateKicks() {
                 />
                 <Input
                   isRequired
+                  type={'text'}
                   placeholder="Country"
                   onChange={e => {
                     setCountry(e.target.value);
@@ -190,6 +216,25 @@ function CreateKicks() {
                   Check
                 </Button>
               </Stack>
+              <Flex alignItems="center" h="30vh" w="100%">
+                <Box h="100%" w="100%">
+                  {/* Google Map Box */}
+                  <GoogleMap
+                    position={center}
+                    zoom={15}
+                    mapContainerStyle={mapContainerStyle}
+                    options={{
+                      zoomControl: true,
+                      streetViewControl: false,
+                      mapTypeControl: true,
+                      fullscreenControl: false,
+                    }}
+                    onLoad={map => setMap(map)}
+                  >
+                    <Marker position={center} />
+                  </GoogleMap>
+                </Box>
+              </Flex>
             </FormControl>
             <RadioCardGroup defaultValue="one" spacing="3">
               {buckets.map(option => (
