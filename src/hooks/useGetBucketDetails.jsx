@@ -21,6 +21,7 @@ export function useGetBucketDetails() {
       .then(response => {
         setLoading(false);
         setBucket(response.data);
+        console.log(bucket);
       })
       .catch(error => {
         const errorDescription = error.response.data.message;

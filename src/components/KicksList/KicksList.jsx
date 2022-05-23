@@ -17,17 +17,21 @@ import {
   AlertTitle,
   useBreakpointValue,
 } from '@chakra-ui/react';
+import { AuthContext } from '../../context/auth.context';
 import * as React from 'react';
+import { useContext } from 'react';
 import { useGetKicks } from '../../hooks/useGetKicks';
 import Loading from '../Loading';
 import { NavLink } from 'react-router-dom';
 import Error from '../Error';
 const KicksList = () => {
   const { kicks, loading, error, errorMessage } = useGetKicks();
+  const { user } = useContext(AuthContext);
   const isMobile = useBreakpointValue({
     base: true,
     md: false,
   });
+
   return (
     <>
       <Image src="/images/experience-kicks.png" alt="experience kicks" />
@@ -58,21 +62,30 @@ const KicksList = () => {
               justify="space-between"
             >
               <Heading>All Kicks</Heading>
-
-              <Button
-                as={NavLink}
-                to={'/kicks/create'}
-                variant={'solid'}
-                backgroundColor={mode('orange.200')}
-              >
-                Create new Kick
-              </Button>
+              <Stack direction={'row'}>
+                <Button
+                  as={NavLink}
+                  to={'/kicks/create'}
+                  variant={'solid'}
+                  backgroundColor={mode('orange.500', 'blue.600')}
+                >
+                  Create new Kick
+                </Button>
+                <Button
+                  as={NavLink}
+                  to={'/buckets'}
+                  variant={'solid'}
+                  backgroundColor={mode('orange.500', 'blue.600')}
+                >
+                  Go to Buckets
+                </Button>
+              </Stack>
             </Stack>
             <SimpleGrid
               padding={'5px'}
               justifyContent={'center'}
               columns={{
-                base: 4,
+                base: 1,
                 md: 3,
                 lg: 4,
               }}
@@ -141,6 +154,15 @@ const KicksList = () => {
                             <Heading size="xs">{post.name}</Heading>
                             <Text color="muted">{post.description}</Text>
                           </Stack>
+                          {`${user._id}` === `${post.createdBy}` && (
+                            <Button
+                              backgroundColor={mode('orange.700', 'blue.600')}
+                              as={NavLink}
+                              to={`/kicks/${post._id}/edit`}
+                            >
+                              Edit Kick
+                            </Button>
+                          )}
                         </Stack>
                       </Stack>
                     </Link>

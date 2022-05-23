@@ -18,6 +18,7 @@ import {
   AlertDescription,
   AlertIcon,
   AlertTitle,
+  useBreakpointValue,
   Select,
   SkeletonText,
 } from '@chakra-ui/react';
@@ -46,7 +47,7 @@ function CreateKicks() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
-  const [selectedBuckets, setSelectedBuckets] = useState('');
+  const [selectedBuckets, setSelectedBuckets] = useState(null);
   const { buckets } = useGetBuckets();
   const { error, errorMessage, loading, createNewKick } = useCreateKick();
   const { getToken } = useContext(AuthContext);
@@ -122,7 +123,7 @@ function CreateKicks() {
       {error && (
         <Alert textAlign={'center'} justifyContent={'center'} status="error">
           <AlertIcon />
-          <AlertTitle>Could not Create Bucket:</AlertTitle>
+          <AlertTitle>Could not Create Kick:</AlertTitle>
           <AlertDescription>{errorMessage}</AlertDescription>
         </Alert>
       )}
@@ -132,7 +133,7 @@ function CreateKicks() {
           base: '6',
           md: '8',
         }}
-        maxW={'40%'}
+        maxW={checkForMobile}
       >
         <Stack spacing="5">
           <Stack
@@ -249,7 +250,7 @@ function CreateKicks() {
                   <GoogleMap
                     center={{ lat: coordinates.lat, lng: coordinates.lng }}
                     zoom={15}
-                    mapContainerStyle={mapContainerStyle}
+                    mapContainerStyle={{ width: '100%', height: '100%' }}
                     options={{
                       zoomControl: true,
                       streetViewControl: false,
