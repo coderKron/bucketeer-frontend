@@ -23,23 +23,25 @@ import {
 } from '@chakra-ui/react';
 import {
   GoogleMap,
+  useLoadScript,
   Marker,
   useJsApiLoader,
-  InfoWindow,
 } from '@react-google-maps/api';
 import { useGetBuckets } from '../../hooks/useGetBuckets';
 import { useCreateKick } from '../../hooks/useCreateKick';
 import axios from 'axios';
 import { AuthContext } from '../../context/auth.context';
 import { RadioCard, RadioCardGroup } from './RadioCardGroup';
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+} from 'react-places-autocomplete';
+
 const libraries = ['places'];
 const mapContainerStyle = { width: '100%', height: '100%' };
-const center = { lat: 48.8584, lng: 2.2945 };
 
 function CreateKicks() {
   const [isUploading, setIsUploading] = useState(false);
-  const [city, setCity] = useState('');
-  const [country, setCountry] = useState('');
   const [picture, setPicture] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -53,34 +55,21 @@ function CreateKicks() {
   const [long, setLong] = useState('');
   const [map, setMap] = useState(/** @type google.maps.Map */ (null));
   // const [center, setCenter] = useState({ lat: 48.8584, lng: 2.2945 });
-
-  const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY
+  const [address, setAddress] = useState('');
+  const [coordinates, setCoordinates] = useState({ lat: 27.9881, lng: 86.925 });
+  const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
   const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: apiKey,
     libraries,
   });
+
   if (loadError) {
     return 'Error loading map';
   }
   if (!isLoaded) {
     return <SkeletonText />;
   }
-  // const getLocation = (city, country) => {
-  //   let url = `https://maps.googleapis.com/maps/api/geocode/json?address=+${city},+${country}&key=AIzaSyCFYudIGB2OCkjgzyuKgSY7mmnfJX9Euws`;
-  //   axios
-  //     .get(url)
-  //     .then(res => {
-        
-  //       setLat(res[0].geometry.location.lat);
-  //       setLong(res[0].geometry.location.lng);
-  //       // setCenter({
-  //       //   lat: res[0].geometry.location.lat,
-  //       //   lng: res[0].geometry.location.lng,
-  //       // });
-  //     })
-  //     .catch(locationError => {});
-  // };
 
   const handleFileInputChange = e => {
     setIsUploading(true);
@@ -96,6 +85,13 @@ function CreateKicks() {
         setIsUploading(false);
       })
       .catch(error => console.log(error));
+  };
+
+  const handleSelect = async value => {
+    const results = await geocodeByAddress(value);
+    const latLng = await getLatLng(results[0]);
+    setAddress(value);
+    setCoordinates(latLng);
   };
 
   const handleSubmit = e => {
@@ -118,6 +114,8 @@ function CreateKicks() {
     setLong('');
     setLat('');
   };
+
+ 
 
   return (
     <>
@@ -192,38 +190,64 @@ function CreateKicks() {
                 }}
                 justify="space-between"
               >
-                <FormLabel variant={'inline'}>Location</FormLabel>
-                <Input
-                  isRequired
-                  type={'text'}
-                  placeholder="City"
-                  onChange={e => {
-                    setCity(e.target.value);
-                  }}
-                  maxW={{ md: '2xl' }}
-                />
-                <Input
-                  isRequired
-                  type={'text'}
-                  placeholder="Country"
-                  onChange={e => {
-                    setCountry(e.target.value);
-                  }}
-                  maxW={{ md: '2xl' }}
-                />
-                <Button
-                  px={'50px'}
-                  // onClick={getLocation(city, country)}
-                  variant={'solid'}
+                <FormLabel variant={'inline'}>Location </FormLabel>
+
+                <PlacesAutocomplete
+                  value={address}
+                  onChange={setAddress}
+                  onSelect={handleSelect}
                 >
-                  Check
-                </Button>
+                  {({
+                    getInputProps,
+                    suggestions,
+                    getSuggestionItemProps,
+                    loading,
+                  }) => (
+                    <div>
+                      <input
+                        {...getInputProps({ placeholder: 'Type Location' })}
+                      />
+
+                      <div>
+                        {loading ? <div>Loading...</div> : null}
+
+                        {suggestions.map((suggestion, i) => {
+                          const style = {
+                            backgroundColor: suggestion.active
+                              ? '#41b6e6'
+                              : '#fff',
+                          };
+
+                          return (
+                            <div
+                              {...getSuggestionItemProps(suggestion, { style })}
+                              key={i}
+                            >
+                              {suggestion.description}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+                </PlacesAutocomplete>
+                {/* <Input
+                  isRequired
+                  type={'text'}
+                  placeholder="Location"
+                  onChange={e => {
+                    // setCity(e.target.value);
+                  }}
+                  maxW={{ md: '2xl' }}
+                  
+                /> */}
               </Stack>
+
               <Flex alignItems="center" h="30vh" w="100%">
                 <Box h="100%" w="100%">
                   {/* Google Map Box */}
                   <GoogleMap
-                    center={center}
+                    center={{ lat: coordinates.lat, lng: coordinates.lng }}
                     zoom={15}
                     mapContainerStyle={mapContainerStyle}
                     options={{
@@ -234,7 +258,9 @@ function CreateKicks() {
                     }}
                     onLoad={map => setMap(map)}
                   >
-                    <Marker position={center} />
+                    <Marker
+                      position={{ lat: coordinates.lat, lng: coordinates.lng }}
+                    />
                   </GoogleMap>
                 </Box>
               </Flex>
