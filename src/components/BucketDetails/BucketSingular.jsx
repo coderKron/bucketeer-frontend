@@ -151,14 +151,25 @@ export default function BucketSingular() {
                             );
                           })}
                         </KickGrid>
-                        <Button
-                          onClick={deleteBucket}
-                          backgroundColor={mode('red.500', 'gray.800')}
-                          color={mode('white', 'white')}
-                          variant={'solid'}
-                        >
-                          Delete Bucket
-                        </Button>
+                        <Stack marginTop={'30px'} direction={'row'}>
+                          <Button
+                            onClick={deleteBucket}
+                            backgroundColor={mode('red.500', 'gray.800')}
+                            color={mode('white', 'white')}
+                            variant={'solid'}
+                          >
+                            Delete Bucket
+                          </Button>
+                          <Button
+                            as={NavLink}
+                            to={`/buckets/${bucket._id}/edit`}
+                            backgroundColor={mode('red.500', 'gray.800')}
+                            color={mode('white', 'white')}
+                            variant={'solid'}
+                          >
+                            Edit Bucket
+                          </Button>
+                        </Stack>
                       </Box>
                     </Stack>
                   </Box>

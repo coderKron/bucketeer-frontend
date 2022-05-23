@@ -16,6 +16,9 @@ import BucketSingular from './components/BucketDetails/BucketSingular';
 import KicksList from './components/KicksList/KicksList';
 import CreateKicks from './components/CreateKicks/CreateKicks';
 import Kickdetails from './components/KickDetails/KickDetails';
+import EditBucket from './components/EditBucket/EditBucket';
+import EditKick from './components/EditKick/EditKick';
+import EditProfile from './components/EditProfile/EditProfile';
 
 function App() {
   const { isLoggedIn, isLoading, user } = useContext(AuthContext);
@@ -28,7 +31,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />{' '}
           <Route
-            path="/profile/:profileId"
+            path="/profile/:userId"
             element={
               <IsPrivate>
                 {' '}
@@ -45,7 +48,7 @@ function App() {
             }
           />
           <Route
-            path="/bucket/create"
+            path="/buckets/create"
             element={
               <IsPrivate>
                 <CreateBucket />
@@ -53,7 +56,7 @@ function App() {
             }
           />
           <Route
-            path="/bucket/:bucketId"
+            path="/buckets/:bucketId"
             element={
               <IsPrivate>
                 <BucketSingular />
@@ -81,6 +84,30 @@ function App() {
             element={
               <IsPrivate>
                 <Kickdetails />
+              </IsPrivate>
+            }
+          />
+          <Route
+            path="/buckets/:bucketId/edit"
+            element={
+              <IsPrivate>
+                <EditBucket />
+              </IsPrivate>
+            }
+          />
+          <Route
+            path="/kicks/:kickId/edit"
+            element={
+              <IsPrivate>
+                <EditKick />
+              </IsPrivate>
+            }
+          />
+          <Route
+            path="/user/:userId/edit"
+            element={
+              <IsPrivate>
+                <EditProfile />
               </IsPrivate>
             }
           />

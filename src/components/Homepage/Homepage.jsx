@@ -205,12 +205,14 @@ function Homepage() {
                 name="Louise Gabrielle"
                 role="CBE, Bucketeer"
               >
-                Life is a journey, not a destination. Amongst the wonders and chaos of life 
-                it is so important to have a sense of freedom, a sense of adventure and a direction.
-                So many of us get so stuck in the work, sleep, eat, repeat routine, we forget the importance of 
-                our journeys, dreams and experiences. Combining our idea's Ruben and I have created a platform 
-                where people can share their dreams, journeys, experience and goals. I hope that you have many. 
-                Smile and laugh as much as you can. 
+                Life is a journey, not a destination. Amongst the wonders and
+                chaos of life it is so important to have a sense of freedom, a
+                sense of adventure and a direction. So many of us get so stuck
+                in the work, sleep, eat, repeat routine, we forget the
+                importance of our journeys, dreams and experiences. Combining
+                our idea's Ruben and I have created a platform where people can
+                share their dreams, journeys, experience and goals. I hope that
+                you have many. Smile and laugh as much as you can.
               </Testimonial>
             </SimpleGrid>
           </Box>
@@ -280,7 +282,13 @@ function Homepage() {
                 </Text>
               </Stack>
               {!isMobile && (
-                <Button variant="primary" size="lg">
+                <Button
+                  backgroundColor={mode('orange.700', 'blue.600')}
+                  as={NavLink}
+                  to="/kicks"
+                  variant="primary"
+                  size="lg"
+                >
                   Show all
                 </Button>
               )}
@@ -338,7 +346,13 @@ function Homepage() {
               ))}
             </SimpleGrid>
             {isMobile && (
-              <Button variant="primary" size="lg">
+              <Button
+                backgroundColor={mode('orange.700', 'blue.600')}
+                as={NavLink}
+                to="/kicks"
+                variant="primary"
+                size="lg"
+              >
                 Show all
               </Button>
             )}

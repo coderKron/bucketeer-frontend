@@ -30,6 +30,7 @@ export const useAddKickToBucket = () => {
           status: 'success',
           isCloseable: 'true',
         });
+        navigate('/kicks');
       })
       .catch(() => {
         const errorDescription = error.response.data.message;

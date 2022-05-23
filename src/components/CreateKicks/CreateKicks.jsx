@@ -18,6 +18,7 @@ import {
   AlertDescription,
   AlertIcon,
   AlertTitle,
+  useBreakpointValue,
   Select,
   SkeletonText,
 } from '@chakra-ui/react';
@@ -44,7 +45,7 @@ function CreateKicks() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
-  const [selectedBuckets, setSelectedBuckets] = useState('');
+  const [selectedBuckets, setSelectedBuckets] = useState(null);
   const { buckets } = useGetBuckets();
   const { error, errorMessage, loading, createNewKick } = useCreateKick();
   const { getToken } = useContext(AuthContext);
@@ -53,6 +54,10 @@ function CreateKicks() {
   const [long, setLong] = useState('');
   const [map, setMap] = useState(/** @type google.maps.Map */ (null));
   // const [center, setCenter] = useState({ lat: 48.8584, lng: 2.2945 });
+  const isDesktop = useBreakpointValue({
+    base: false,
+    lg: true,
+  });
 
   const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
@@ -118,13 +123,19 @@ function CreateKicks() {
     setLong('');
     setLat('');
   };
-
+  const checkForMobile = () => {
+    if (isDesktop) {
+      return '40%';
+    } else {
+      return '100%';
+    }
+  };
   return (
     <>
       {error && (
         <Alert textAlign={'center'} justifyContent={'center'} status="error">
           <AlertIcon />
-          <AlertTitle>Could not Create Bucket:</AlertTitle>
+          <AlertTitle>Could not Create Kick:</AlertTitle>
           <AlertDescription>{errorMessage}</AlertDescription>
         </Alert>
       )}
@@ -134,7 +145,7 @@ function CreateKicks() {
           base: '6',
           md: '8',
         }}
-        maxW={'40%'}
+        maxW={checkForMobile}
       >
         <Stack spacing="5">
           <Stack

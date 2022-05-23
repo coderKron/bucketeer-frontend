@@ -11,14 +11,16 @@ import { CardContent } from './CardContent';
 import { CardWithAvatar } from './CardWithAvatar';
 import { UserInfo } from './UserInfo';
 import { AuthContext } from '../../context/auth.context';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
 
 const HandleColor = () => {
   return useColorModeValue('gray.600', 'gray.400');
 };
 
 const Profile = () => {
-  const { isLoggedIn, isLoading, user } = React.useContext(AuthContext);
+  const { isLoggedIn, getToken, isLoading, user } =
+    React.useContext(AuthContext);
   const navigate = useNavigate();
   const [userName, setUserName] = React.useState(null);
 
@@ -26,15 +28,24 @@ const Profile = () => {
   const [profilePicture, setProfilePicture] = React.useState(null);
   const [way, setWay] = React.useState(null);
   const [tagline, setTagline] = React.useState(null);
+  const { userId } = useParams();
 
   React.useEffect(() => {
-    if (user) {
-      setEmail(user.email);
-      setUserName(user.userName);
-      setProfilePicture(user.setProfilePicture);
-      setWay(user.way);
-      setTagline(user.tagline);
-    }
+    const storedToken = getToken();
+    axios
+      .get(`${process.env.REACT_APP_URL}/api/user/${userId}`, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
+      .then(response => {
+        setEmail(response.data.email);
+        setUserName(response.data.userName);
+        setTagline(response.data.tagline);
+        setWay(response.data.way);
+        setProfilePicture(response.data.profilePicture);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   });
   return (
     <>
@@ -44,7 +55,7 @@ const Profile = () => {
             position="absolute"
             inset="0"
             height="32"
-            backgroundImage={'/images/Experience-Freedom.png'}
+            backgroundImage={'/images/profile-banner.png'}
           />
           <CardWithAvatar
             maxW="xl"
@@ -63,8 +74,9 @@ const Profile = () => {
           >
             <CardContent>
               <Heading size="lg" fontWeight="extrabold" letterSpacing="tight">
-                {user.userName}
+                {userName}
               </Heading>
+              <Text>Way: {way}</Text>
               <Text color={HandleColor}>{tagline}</Text>
             </CardContent>
           </CardWithAvatar>

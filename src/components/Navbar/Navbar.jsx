@@ -36,7 +36,7 @@ const Navbar = () => {
     <Box
       minH={'auto'}
       maxH="80px"
-      backgroundColor={mode('orange.400')}
+      backgroundColor={mode('orange.400', 'blue.900')}
       as="section"
       width="100%"
     >
@@ -75,11 +75,15 @@ const Navbar = () => {
                       <ResourcesPopover />
                     </ButtonGroup>
                     <HStack spacing="3">
-                      <Link to={`/profile/${user?._id}`}>
-                        <Button color="white" variant="ghost">
-                          Profile
-                        </Button>
-                      </Link>
+                      <Button
+                        as={NavLink}
+                        to={`/profile/${user?._id}`}
+                        color="white"
+                        variant="ghost"
+                      >
+                        Profile
+                      </Button>
+
                       <Button
                         onClick={logOutUser}
                         variant="ghost"
@@ -123,25 +127,36 @@ const Navbar = () => {
                 <MenuButton as={IconButton} icon={<FiMenu />} />
                 {isLoggedIn && !isLoading && (
                   <MenuList>
-                    <MenuItem>Home</MenuItem>
+                    <MenuItem as={NavLink} to="/">
+                      Home
+                    </MenuItem>
                     <MenuItem>The Journey</MenuItem>
-                    <MenuItem>About us</MenuItem>
-                    <MenuItem>Team</MenuItem>
-                    <MenuItem>Profile</MenuItem>
+                    <MenuItem>Our story</MenuItem>
+                    <MenuItem as={NavLink} to="/buckets">
+                      Buckets
+                    </MenuItem>
+                    <MenuItem as={NavLink} to="/kicks">
+                      Kicks
+                    </MenuItem>
+                    <MenuItem as={NavLink} to={`/profile/${user._id}`}>
+                      Profile
+                    </MenuItem>
                     <MenuItem onClick={logOutUser}>Log out</MenuItem>
                   </MenuList>
                 )}
                 {!isLoggedIn && !isLoading && (
                   <MenuList>
-                    <MenuItem>Home</MenuItem>
-                    <MenuItem>The Journey</MenuItem>
-                    <MenuItem>About us</MenuItem>
-                    <MenuItem>Team</MenuItem>
-                    <MenuItem>
-                      <Link to="/login">Login</Link>
+                    <MenuItem as={NavLink} to="/">
+                      Home
                     </MenuItem>
-                    <MenuItem>
-                      <Link to="/signup">Sign up</Link>
+                    <MenuItem>The Journey</MenuItem>
+                    <MenuItem>Our story</MenuItem>
+
+                    <MenuItem as={NavLink} to="/login">
+                      Login
+                    </MenuItem>
+                    <MenuItem as={NavLink} to="/signup">
+                      Sign up
                     </MenuItem>
                   </MenuList>
                 )}

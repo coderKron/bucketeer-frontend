@@ -60,11 +60,24 @@ const Buckets = () => {
               justify="space-between"
             >
               <Heading>Your Buckets</Heading>
-              <NavLink to="/bucket/create">
-                <Button variant={'solid'} backgroundColor={mode('orange.200')}>
+              <Stack direction={'row'}>
+                <Button
+                  as={NavLink}
+                  to="/buckets/create"
+                  variant={'solid'}
+                  backgroundColor={mode('orange.500', 'blue.600')}
+                >
                   Create new Bucket
                 </Button>
-              </NavLink>
+                <Button
+                  backgroundColor={mode('orange.500', 'blue.600')}
+                  as={NavLink}
+                  to="/kicks"
+                  variant="solid"
+                >
+                  Go to Kicks
+                </Button>
+              </Stack>
             </Stack>
             <SimpleGrid
               padding={'5px'}
@@ -104,13 +117,13 @@ const Buckets = () => {
                   >
                     <Link
                       as={NavLink}
-                      to={`/bucket/${post._id}`}
+                      to={`/buckets/${post._id}`}
                       _hover={{
                         textDecor: 'none',
                       }}
                       role="group"
                     >
-                      <Stack key={post._id} spacing="8">
+                      <Stack spacing="8">
                         <Box overflow="hidden">
                           <Image
                             src={post.picture}
@@ -139,7 +152,11 @@ const Buckets = () => {
                             <Text fontWeight={'semibold'}>Kicks</Text>
                             <UnorderedList>
                               {post.kicks?.map(kick => {
-                                return <ListItem>{kick.name}</ListItem>;
+                                return (
+                                  <ListItem key={kick._id}>
+                                    {kick.name}
+                                  </ListItem>
+                                );
                               })}
                             </UnorderedList>
                           </Stack>

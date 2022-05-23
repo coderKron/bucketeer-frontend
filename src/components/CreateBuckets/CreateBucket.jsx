@@ -7,6 +7,7 @@ import {
   Flex,
   FormControl,
   FormHelperText,
+  useColorModeValue as mode,
   FormLabel,
   Input,
   Stack,
@@ -19,6 +20,7 @@ import {
   AlertIcon,
   AlertTitle,
 } from '@chakra-ui/react';
+import { NavLink } from 'react-router-dom';
 import { useCreateBucket } from '../../hooks/useCreateBucket';
 import axios from 'axios';
 import { AuthContext } from '../../context/auth.context';
@@ -195,10 +197,22 @@ function CreateBucket() {
                 />
               </Stack>
             </FormControl>
-
-            <Flex direction="row-reverse">
-              <Button onClick={handleSubmit} type="submit" variant="primary">
+            <Flex justifyContent={'space-around'} direction="row-reverse">
+              <Button
+                backgroundColor={mode('green.500')}
+                onClick={handleSubmit}
+                type="submit"
+                variant="solid"
+              >
                 Save
+              </Button>
+              <Button
+                backgroundColor={mode('orange.500')}
+                as={NavLink}
+                to="/buckets"
+                variant="solid"
+              >
+                Go Back
               </Button>
             </Flex>
           </Stack>
