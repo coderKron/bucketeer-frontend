@@ -201,13 +201,16 @@ function Homepage() {
                 so you can one day try them yourself.
               </Testimonial>
               <Testimonial
-                image="/images/team-picture-louise.jpeg"
+                image="/images/team-picture-louise2.jpg"
                 name="Louise Gabrielle"
                 role="CBE, Bucketeer"
               >
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco.
+                Life is a journey, not a destination. Amongst the wonders and chaos of life 
+                it is so important to have a sense of freedom, a sense of adventure and a direction.
+                So many of us get so stuck in the work, sleep, eat, repeat routine, we forget the importance of 
+                our journeys, dreams and experiences. Combining our idea's Ruben and I have created a platform 
+                where people can share their dreams, journeys, experience and goals. I hope that you have many. 
+                Smile and laugh as much as you can. 
               </Testimonial>
             </SimpleGrid>
           </Box>
