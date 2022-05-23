@@ -28,7 +28,8 @@ import { RadioCard, RadioCardGroup } from './RadioCardGroup';
 
 function CreateKicks() {
   const [isUploading, setIsUploading] = useState(false);
-
+  const [city, setCity] = useState('');
+  const [country, setCountry] = useState('');
   const [picture, setPicture] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -38,6 +39,22 @@ function CreateKicks() {
   const { error, errorMessage, loading, createNewKick } = useCreateKick();
   const { getToken } = useContext(AuthContext);
   const storedToken = getToken();
+  const [lat, setLat] = useState('');
+  const [long, setLong] = useState('');
+  const [errorLocationMessage, setErrorLocationMessage] = useState('');
+
+  const getLocation = (city, country) => {
+    let url = `https://maps.googleapis.com/maps/api/geocode/json?address=+${city},+${country}&key=${process.env.REACT_APP_googleKey}`;
+    axios
+      .get(url)
+      .then(res => {
+        setLat(res[0].geometry.location.lat);
+        setLong(res[0].geometry.location.lng);
+      })
+      .catch(locationError => {
+        setErrorLocationMessage(locationError.response.data.message);
+      });
+  };
 
   const handleFileInputChange = e => {
     setIsUploading(true);
@@ -62,6 +79,7 @@ function CreateKicks() {
       picture,
       category,
       buckets: selectedBuckets,
+      location: [lat, long],
     };
     createNewKick(kickData);
 
@@ -70,6 +88,8 @@ function CreateKicks() {
     setCategory('');
     setSelectedBuckets('');
     setPicture('');
+    setLong('');
+    setLat('');
   };
 
   return (
@@ -84,9 +104,10 @@ function CreateKicks() {
       <Image src="/images/experience-kicks.png" alt="experience kicks" />
       <Container
         py={{
-          base: '4',
+          base: '6',
           md: '8',
         }}
+        maxW={'40%'}
       >
         <Stack spacing="5">
           <Stack
@@ -122,15 +143,52 @@ function CreateKicks() {
               >
                 <FormLabel variant="inline">Title</FormLabel>
                 <Input
-                  value={title}
                   onChange={e => {
                     setTitle(e.target.value);
                   }}
                   maxW={{
                     md: '3xl',
                   }}
-                  defaultValue="Walking in Amazones"
+                  placeholder={'Walking in the Amazones'}
                 />
+              </Stack>
+            </FormControl>
+            <FormControl>
+              <Stack
+                direction={{
+                  base: 'column',
+                  md: 'row',
+                }}
+                spacing={{
+                  base: '1.5',
+                  md: '8',
+                }}
+                justify="space-between"
+              >
+                <FormLabel variant={'inline'}>Location</FormLabel>
+                <Input
+                  isRequired
+                  placeholder="City"
+                  onChange={e => {
+                    setCity(e.target.value);
+                  }}
+                  maxW={{ md: '2xl' }}
+                />
+                <Input
+                  isRequired
+                  placeholder="Country"
+                  onChange={e => {
+                    setCountry(e.target.value);
+                  }}
+                  maxW={{ md: '2xl' }}
+                />
+                <Button
+                  px={'50px'}
+                  onClick={getLocation(city, country)}
+                  variant={'solid'}
+                >
+                  Check
+                </Button>
               </Stack>
             </FormControl>
             <RadioCardGroup defaultValue="one" spacing="3">

@@ -22,7 +22,7 @@ export function useGetBucketDetails() {
         setLoading(false);
         setBucket(response.data);
       })
-      .error(error => {
+      .catch(error => {
         const errorDescription = error.response.data.message;
         setErrorMessage(errorDescription);
         setLoading(false);
@@ -33,11 +33,15 @@ export function useGetBucketDetails() {
   const deleteBucket = () => {
     const storedToken = getToken();
     axios
-      .delete(`${process.env.REACT_APP_URL}/bucket/delete/${bucketId}`, {
+      .delete(`${process.env.REACT_APP_URL}/api/bucket/${bucketId}`, {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then(response => {
         navigate('/buckets');
+      })
+      .catch(error => {
+        const errorDescription = error.response.data.message;
+        setErrorMessage(errorDescription);
       });
   };
 

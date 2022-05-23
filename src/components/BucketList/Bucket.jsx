@@ -13,7 +13,9 @@ import {
   Text,
   Alert,
   AlertIcon,
+  ListItem,
   AlertDescription,
+  UnorderedList,
   AlertTitle,
   useBreakpointValue,
 } from '@chakra-ui/react';
@@ -101,6 +103,8 @@ const Buckets = () => {
                     key={post._id}
                   >
                     <Link
+                      as={NavLink}
+                      to={`/bucket/${post._id}`}
                       _hover={{
                         textDecor: 'none',
                       }}
@@ -125,27 +129,20 @@ const Buckets = () => {
                           flexDirection={'row'}
                           spacing="3"
                         >
-                          <Stack spacing="3">
-                            <Text
-                              fontSize="sm"
-                              fontWeight="semibold"
-                              color="accent"
-                            >
-                              {post.category}
+                          <Stack maxW={'80%'} spacing="3">
+                            <Heading size="medium">{post.name}</Heading>
+                            <Text maxW={'80%'} color="muted">
+                              {post.description}
                             </Text>
-                            <Heading size="xs">{post.name}</Heading>
-                            <Text color="muted">{post.description}</Text>
                           </Stack>
-                          <Button
-                            backgroundColor={mode('black', 'gray.700')}
-                            color={mode('white', 'white')}
-                            colorScheme={mode('white', 'black')}
-                            variant={'solid'}
-                          >
-                            <NavLink to={`/bucket/${post._id}`}>
-                              Details
-                            </NavLink>
-                          </Button>
+                          <Stack>
+                            <Text fontWeight={'semibold'}>Kicks</Text>
+                            <UnorderedList>
+                              {post.kicks?.map(kick => {
+                                return <ListItem>{kick.name}</ListItem>;
+                              })}
+                            </UnorderedList>
+                          </Stack>
                         </Stack>
                       </Stack>
                     </Link>

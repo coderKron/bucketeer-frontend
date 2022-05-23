@@ -14,6 +14,7 @@ import {
   SimpleGrid,
 } from '@chakra-ui/react';
 import { AuthContext } from '../../context/auth.context';
+import { useGetBucketDetails } from '../../hooks/useGetBucketDetails';
 
 import Loading from '../Loading';
 import Error from '../Error';
@@ -21,31 +22,29 @@ import { KickCard } from './KickCard';
 import { KickGrid } from './KickGrid';
 
 export default function BucketSingular() {
-  const [bucket, setBucket] = useState({});
-  const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
-  const [loading, setLoading] = useState(false);
   const { bucketId } = useParams();
   const { getToken, isLoggedIn } = useContext(AuthContext);
+  const { bucket, error, errorMessage, loading, deleteBucket } =
+    useGetBucketDetails();
 
-  useEffect(() => {
-    const storedToken = getToken();
-    setLoading(true);
-    axios
-      .get(`${process.env.REACT_APP_URL}/api/bucket/${bucketId}`, {
-        headers: { Authorization: `Bearer ${storedToken}` },
-      })
-      .then(response => {
-        setLoading(false);
-        setBucket(response.data);
-      })
-      .catch(error => {
-        const errorDescription = error.response.data.message;
-        setErrorMessage(errorDescription);
-        setLoading(false);
-        setError(false);
-      });
-  }, [getToken, bucketId, isLoggedIn]);
+  // useEffect(() => {
+  //   const storedToken = getToken();
+  //   setLoading(true);
+  //   axios
+  //     .get(`${process.env.REACT_APP_URL}/api/bucket/${bucketId}`, {
+  //       headers: { Authorization: `Bearer ${storedToken}` },
+  //     })
+  //     .then(response => {
+  //       setLoading(false);
+  //       setBucket(response.data);
+  //     })
+  //     .catch(error => {
+  //       const errorDescription = error.response.data.message;
+  //       setErrorMessage(errorDescription);
+  //       setLoading(false);
+  //       setError(false);
+  //     });
+  // }, [getToken, bucketId, isLoggedIn]);
 
   return (
     <>
@@ -108,6 +107,7 @@ export default function BucketSingular() {
                           }}
                         />
                       </Box>
+
                       <Stack
                         justifyContent={'space-around'}
                         flexDirection={'row'}
@@ -151,6 +151,14 @@ export default function BucketSingular() {
                             );
                           })}
                         </KickGrid>
+                        <Button
+                          onClick={deleteBucket}
+                          backgroundColor={mode('red.500', 'gray.800')}
+                          color={mode('white', 'white')}
+                          variant={'solid'}
+                        >
+                          Delete Bucket
+                        </Button>
                       </Box>
                     </Stack>
                   </Box>
