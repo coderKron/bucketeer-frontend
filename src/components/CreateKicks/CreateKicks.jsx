@@ -24,7 +24,7 @@ import {
 import {
   GoogleMap,
   Marker,
-  useLoadScript,
+  useJsApiLoader,
   InfoWindow,
 } from '@react-google-maps/api';
 import { useGetBuckets } from '../../hooks/useGetBuckets';
@@ -33,7 +33,7 @@ import axios from 'axios';
 import { AuthContext } from '../../context/auth.context';
 import { RadioCard, RadioCardGroup } from './RadioCardGroup';
 const libraries = ['places'];
-
+const mapContainerStyle = { width: '100%', height: '100%' };
 const center = { lat: 48.8584, lng: 2.2945 };
 
 function CreateKicks() {
@@ -54,8 +54,10 @@ function CreateKicks() {
   const [map, setMap] = useState(/** @type google.maps.Map */ (null));
   // const [center, setCenter] = useState({ lat: 48.8584, lng: 2.2945 });
 
-  const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+  const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+
+  const { isLoaded, loadError } = useJsApiLoader({
+    googleMapsApiKey: apiKey,
     libraries,
   });
   if (loadError) {
@@ -64,20 +66,21 @@ function CreateKicks() {
   if (!isLoaded) {
     return <SkeletonText />;
   }
-  const getLocation = (city, country) => {
-    let url = `https://maps.googleapis.com/maps/api/geocode/json?address=+${city},+${country}&key=${process.env.REACT_APP_googleKey}`;
-    axios
-      .get(url)
-      .then(res => {
-        setLat(res[0].geometry.location.lat);
-        setLong(res[0].geometry.location.lng);
-        // setCenter({
-        //   lat: res[0].geometry.location.lat,
-        //   lng: res[0].geometry.location.lng,
-        // });
-      })
-      .catch(locationError => {});
-  };
+  // const getLocation = (city, country) => {
+  //   let url = `https://maps.googleapis.com/maps/api/geocode/json?address=+${city},+${country}&key=AIzaSyCFYudIGB2OCkjgzyuKgSY7mmnfJX9Euws`;
+  //   axios
+  //     .get(url)
+  //     .then(res => {
+
+  //       setLat(res[0].geometry.location.lat);
+  //       setLong(res[0].geometry.location.lng);
+  //       // setCenter({
+  //       //   lat: res[0].geometry.location.lat,
+  //       //   lng: res[0].geometry.location.lng,
+  //       // });
+  //     })
+  //     .catch(locationError => {});
+  // };
 
   const handleFileInputChange = e => {
     setIsUploading(true);
@@ -210,7 +213,7 @@ function CreateKicks() {
                 />
                 <Button
                   px={'50px'}
-                  onClick={getLocation(city, country)}
+                  // onClick={getLocation(city, country)}
                   variant={'solid'}
                 >
                   Check
@@ -220,7 +223,7 @@ function CreateKicks() {
                 <Box h="100%" w="100%">
                   {/* Google Map Box */}
                   <GoogleMap
-                    position={center}
+                    center={center}
                     zoom={15}
                     mapContainerStyle={{ width: '100%', height: '100%' }}
                     options={{
