@@ -24,7 +24,7 @@ import {
 import {
   GoogleMap,
   Marker,
-  useJsApiLoader,
+  useLoadScript,
   InfoWindow,
 } from '@react-google-maps/api';
 import { useGetBuckets } from '../../hooks/useGetBuckets';
@@ -33,7 +33,7 @@ import axios from 'axios';
 import { AuthContext } from '../../context/auth.context';
 import { RadioCard, RadioCardGroup } from './RadioCardGroup';
 const libraries = ['places'];
-const mapContainerStyle = { width: '100px', height: '100%' };
+
 const center = { lat: 48.8584, lng: 2.2945 };
 
 function CreateKicks() {
@@ -54,7 +54,7 @@ function CreateKicks() {
   const [map, setMap] = useState(/** @type google.maps.Map */ (null));
   // const [center, setCenter] = useState({ lat: 48.8584, lng: 2.2945 });
 
-  const { isLoaded, loadError } = useJsApiLoader({
+  const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
   });
@@ -222,7 +222,7 @@ function CreateKicks() {
                   <GoogleMap
                     position={center}
                     zoom={15}
-                    mapContainerStyle={mapContainerStyle}
+                    mapContainerStyle={{ width: '100%', height: '100%' }}
                     options={{
                       zoomControl: true,
                       streetViewControl: false,
