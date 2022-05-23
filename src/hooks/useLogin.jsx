@@ -21,7 +21,7 @@ export const useLogin = () => {
         authenticateUser();
         navigate('/');
       })
-      .catch(() => {
+      .catch(error => {
         const errorDescription = error.response.data.message;
         setErrorMessage(errorDescription);
         setLoading(false);
