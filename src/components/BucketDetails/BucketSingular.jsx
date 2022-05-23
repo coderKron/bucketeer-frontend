@@ -29,7 +29,6 @@ export default function BucketSingular() {
   const { getToken, isLoggedIn } = useContext(AuthContext);
 
   useEffect(() => {
-    console.log(bucketId);
     const storedToken = getToken();
     setLoading(true);
     axios
@@ -143,7 +142,6 @@ export default function BucketSingular() {
                       >
                         <KickGrid>
                           {bucket.kicks?.map(kick => {
-                            console.log(kick);
                             return (
                               <KickCard
                                 key={kick._id}

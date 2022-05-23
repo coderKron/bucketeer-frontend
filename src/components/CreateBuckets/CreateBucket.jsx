@@ -43,7 +43,6 @@ function CreateBucket() {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then(res => {
-        console.log(res);
         setPicture(res.data.secure_url);
         setIsUploading(false);
       })

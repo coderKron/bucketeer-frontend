@@ -57,7 +57,7 @@ const Signup = () => {
       email: email,
       tagline: tagline,
     };
-    console.log(userInformation);
+
     signup(userInformation);
   };
 

@@ -13,8 +13,6 @@ export const useAddKickToBucket = () => {
   const { getToken } = useContext(AuthContext);
 
   const addKickToBucket = bucketInformation => {
-    const bucketId = bucketInformation.bucketId;
-    console.log(bucketId);
     const storedToken = getToken();
     setLoading(true);
     axios

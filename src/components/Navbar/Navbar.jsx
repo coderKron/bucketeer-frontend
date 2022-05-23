@@ -17,7 +17,7 @@ import {
 import * as React from 'react';
 import { FiMenu } from 'react-icons/fi';
 import { ResourcesPopover } from './RourcesPopover';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../../context/auth.context';
 import DarkLogo from '../Logos/DarkLogo';
 import LightLogo from '../Logos/LightLogo';
@@ -97,14 +97,23 @@ const Navbar = () => {
                       <Button color="white">Our story</Button>
                     </ButtonGroup>
                     <ButtonGroup spacing="3">
-                      <Button color="white" variant="ghost">
-                        <Link to="/login">Login</Link>
+                      <Button
+                        as={NavLink}
+                        to="/login"
+                        color="white"
+                        variant="ghost"
+                      >
+                        Login
                       </Button>
-                      <Link to="/signup">
-                        <Button variant="ghost" color="white">
-                          Sign up
-                        </Button>
-                      </Link>
+
+                      <Button
+                        as={NavLink}
+                        to="/signup"
+                        variant="ghost"
+                        color="white"
+                      >
+                        Sign up
+                      </Button>
                     </ButtonGroup>
                   </HStack>
                 )}

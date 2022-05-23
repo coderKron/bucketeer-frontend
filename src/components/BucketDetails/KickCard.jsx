@@ -23,10 +23,9 @@ export const KickCard = props => {
   const { kick, bucketId, rootProps } = props;
   const { name, _id, pictures, category, description, createdBy } = kick;
   const { updateKicksFromBucket } = useUpdateKicksFromBucket();
-  console.log(kick);
+
   const handleDeleteFromBucket = e => {
     e.preventDefault();
-    console.log(bucketId);
 
     updateKicksFromBucket({ bucketId, kickId: _id });
   };
@@ -85,7 +84,6 @@ export const KickCard = props => {
           to={`/kicks/${_id}`}
           backgroundColor={useColorModeValue('orange.600', 'gray.800')}
           color={useColorModeValue('white', 'white')}
-          isFullWidth
         >
           Go to Kick
         </Button>

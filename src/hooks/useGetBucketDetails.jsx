@@ -12,7 +12,6 @@ export function useGetBucketDetails() {
   const { getToken, isLoggedIn } = useContext(AuthContext);
   const navigate = useNavigate();
   useEffect(() => {
-    console.log(bucketId);
     const storedToken = getToken();
     setLoading(true);
     axios

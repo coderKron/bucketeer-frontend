@@ -98,6 +98,7 @@ const Buckets = () => {
                     boxShadow={mode('sm', 'sm-dark')}
                     borderRadius="lg"
                     color={mode('black', 'black')}
+                    key={post._id}
                   >
                     <Link
                       _hover={{

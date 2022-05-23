@@ -49,7 +49,6 @@ function CreateKicks() {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then(res => {
-        console.log(res);
         setPicture(res.data.secure_url);
         setIsUploading(false);
       })
@@ -204,7 +203,7 @@ function CreateKicks() {
                   }}
                 >
                   <Input
-                    required
+                    required={true}
                     id="picture"
                     type="file"
                     defaultValue={picture}

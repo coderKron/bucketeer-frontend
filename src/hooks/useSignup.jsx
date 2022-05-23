@@ -22,7 +22,7 @@ export const useSignup = () => {
       })
       .catch(error => {
         const errorDescription = error.response.data.message;
-        console.log('error creating user:', errorDescription, error);
+
         setErrorMessage(errorDescription);
         setError(true);
         setLoading(false);
