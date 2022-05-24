@@ -1,3 +1,4 @@
+import * as React from 'react';
 import {
   Avatar,
   Box,
@@ -18,13 +19,12 @@ import {
   useBreakpointValue,
 } from '@chakra-ui/react';
 import { AuthContext } from '../../context/auth.context';
-import * as React from 'react';
-
 import { useContext } from 'react';
 import { useGetKicks } from '../../hooks/useGetKicks';
-import Loading from '../Loading';
 import { NavLink } from 'react-router-dom';
+import Loading from '../Loading';
 import Error from '../Error';
+
 const KicksList = () => {
   const { kicks, loading, error, errorMessage } = useGetKicks();
   const { user } = useContext(AuthContext);

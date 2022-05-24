@@ -65,12 +65,12 @@ const Buckets = () => {
                   as={NavLink}
                   to="/buckets/create"
                   variant={'solid'}
-                  backgroundColor={mode('orange.500', 'blue.600')}
+                  backgroundColor={mode('orange.400', 'blue.600')}
                 >
                   Create new Bucket
                 </Button>
                 <Button
-                  backgroundColor={mode('orange.500', 'blue.600')}
+                  backgroundColor={mode('orange.400', 'blue.600')}
                   as={NavLink}
                   to="/kicks"
                   variant="solid"
@@ -108,7 +108,7 @@ const Buckets = () => {
                 buckets.map(post => (
                   <Box
                     minH="36"
-                    backgroundColor={mode('orange.200', 'teal.700')}
+                    backgroundColor={mode('orange.100', 'teal.700')}
                     padding={'15px'}
                     boxShadow={mode('sm', 'sm-dark')}
                     borderRadius="lg"

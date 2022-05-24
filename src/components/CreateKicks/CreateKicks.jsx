@@ -267,6 +267,7 @@ function CreateKicks() {
               </Flex>
             </FormControl>
             <Select defaultValue="one" spacing="3">
+              <option value={'select Bucket'}>Select your Bucket</option>
               {buckets.map(option => (
                 <option
                   key={option._id}

@@ -5,9 +5,9 @@ import { FaUserFriends } from 'react-icons/fa';
 
 export const items = [
   {
-    title: 'Friends',
-    description: 'Have a look at what your friends have created!',
-    href: 'friends',
+    title: 'Travelers',
+    description: 'Have a look at what other Travelers have created!',
+    href: 'travelers',
     icon: FaUserFriends,
   },
   {

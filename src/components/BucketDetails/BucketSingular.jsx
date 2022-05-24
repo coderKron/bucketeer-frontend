@@ -27,25 +27,6 @@ export default function BucketSingular() {
   const { bucket, error, errorMessage, loading, deleteBucket } =
     useGetBucketDetails();
 
-  // useEffect(() => {
-  //   const storedToken = getToken();
-  //   setLoading(true);
-  //   axios
-  //     .get(`${process.env.REACT_APP_URL}/api/bucket/${bucketId}`, {
-  //       headers: { Authorization: `Bearer ${storedToken}` },
-  //     })
-  //     .then(response => {
-  //       setLoading(false);
-  //       setBucket(response.data);
-  //     })
-  //     .catch(error => {
-  //       const errorDescription = error.response.data.message;
-  //       setErrorMessage(errorDescription);
-  //       setLoading(false);
-  //       setError(false);
-  //     });
-  // }, [getToken, bucketId, isLoggedIn]);
-
   return (
     <>
       {loading ? (
@@ -87,7 +68,7 @@ export default function BucketSingular() {
                 <SimpleGrid>
                   <Box
                     minH="36"
-                    backgroundColor={mode('orange.200', 'teal.800')}
+                    backgroundColor={mode('orange.100', 'teal.800')}
                     padding={'15px'}
                     boxShadow={mode('sm', 'sm-dark')}
                     borderRadius="lg"

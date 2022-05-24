@@ -123,14 +123,14 @@ export default function EditKick() {
                   direction={'column'}
                   justify={'space-between'}
                 >
-                  <NavLink to={'/kicks'}>
-                    <Button variant={'solid'}>Back to Kicks</Button>
-                  </NavLink>
+                  <Button as={NavLink} to="/kicks" variant={'solid'}>
+                    Back to Kicks
+                  </Button>
                 </Stack>
                 <SimpleGrid>
                   <Box
                     minH="36"
-                    backgroundColor={mode('orange.200', 'teal.800')}
+                    backgroundColor={mode('orange.50', 'teal.800')}
                     padding={'15px'}
                     boxShadow={mode('sm', 'sm-dark')}
                     borderRadius="lg"

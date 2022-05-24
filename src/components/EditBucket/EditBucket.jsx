@@ -130,7 +130,7 @@ export default function EditBucket() {
                 <SimpleGrid>
                   <Box
                     minH="36"
-                    backgroundColor={mode('orange.200', 'teal.800')}
+                    backgroundColor={mode('orange.50', 'teal.700')}
                     padding={'15px'}
                     boxShadow={mode('sm', 'sm-dark')}
                     borderRadius="lg"
