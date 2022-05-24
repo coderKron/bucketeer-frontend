@@ -77,7 +77,7 @@ export default function Kickdetails() {
           <Box bg={'bg-surface'} color={mode('black')}>
             <Container
               justifyContent={'center'}
-              maxWidth={'90%'}
+              maxWidth={'70%'}
               py={{
                 base: '16',
                 md: '24',
@@ -119,7 +119,7 @@ export default function Kickdetails() {
                     <Stack spacing="8">
                       <Box overflow="hidden">
                         <Image
-                          src={kick.picture}
+                          src={kick.pictures}
                           alt={kick.name}
                           width="full"
                           height="25rem"
