@@ -40,6 +40,7 @@ function CreateKicks() {
   const [isUploading, setIsUploading] = useState(false);
   const [pictures, setPictures] = useState(null);
   const [title, setTitle] = useState('');
+  const [continent, setContinent] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
   const [selectedBuckets, setSelectedBuckets] = useState(null);
@@ -100,6 +101,7 @@ function CreateKicks() {
       name: title,
       description,
       pictures,
+      continent,
       category,
       buckets: selectedBuckets,
       location: { coordinates },
@@ -178,6 +180,82 @@ function CreateKicks() {
                 />
               </Stack>
             </FormControl>
+            <Select spacing="3">
+              <option value={'select Bucket'}>Continent where Kick is</option>
+
+              <option
+                key={'Europe'}
+                onClick={e => {
+                  setContinent('Europe');
+                }}
+                value={'Europe'}
+              >
+                Europe
+              </option>
+              <option
+                key={'Asia'}
+                onClick={e => {
+                  setContinent('Asia');
+                }}
+                value={'Asia'}
+              >
+                Asia
+              </option>
+              <option
+                key={'North-America'}
+                onClick={e => {
+                  setContinent('North-America');
+                }}
+                value={'North-America'}
+              >
+                North-America
+              </option>
+              <option
+                key={'South-America'}
+                onClick={e => {
+                  setContinent('South-America');
+                }}
+                value={'South-America'}
+              >
+                South-America
+              </option>
+              <option
+                key={'Middle-East'}
+                onClick={e => {
+                  setContinent('Middle-East');
+                }}
+                value={'Middle-East'}
+              >
+                Middle-East
+              </option>
+              <option
+                key={'Africa'}
+                onClick={e => {
+                  setContinent('Africa');
+                }}
+                value={'Africa'}
+              >
+                Africa
+              </option>
+              <option
+                key={'Australia'}
+                onClick={e => {
+                  setContinent('Australia');
+                }}
+                value={'Australia'}
+              >
+                Australia
+              </option>
+              <option
+                key={'Antarctica'}
+                onClick={e => {
+                  setContinent('Antarctica');
+                }}
+                value={'Antarctica'}
+              >
+                Antarctica
+              </option>
+            </Select>
             <FormControl>
               <Stack
                 direction={{
