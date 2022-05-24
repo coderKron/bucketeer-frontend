@@ -19,6 +19,7 @@ import Kickdetails from './components/KickDetails/KickDetails';
 import EditBucket from './components/EditBucket/EditBucket';
 import EditKick from './components/EditKick/EditKick';
 import EditProfile from './components/EditProfile/EditProfile';
+import OurStory from './components/OurStory/OurStory';
 
 function App() {
   const { isLoggedIn, isLoading, user } = useContext(AuthContext);
@@ -29,12 +30,11 @@ function App() {
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />{' '}
+          <Route path="/signup" element={<Signup />} />
           <Route
             path="/profile/:userId"
             element={
               <IsPrivate>
-                {' '}
                 <Profile />
               </IsPrivate>
             }
@@ -108,6 +108,14 @@ function App() {
             element={
               <IsPrivate>
                 <EditProfile />
+              </IsPrivate>
+            }
+          />
+          <Route
+            path="/story"
+            element={
+              <IsPrivate>
+                <OurStory />
               </IsPrivate>
             }
           />

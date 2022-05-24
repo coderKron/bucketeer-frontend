@@ -71,7 +71,9 @@ const Navbar = () => {
                   <Flex justify={'space-between'} flex="1">
                     <ButtonGroup variant="link" spacing="8">
                       <Button color="white">The Journey</Button>
-                      <Button color="white">Our story</Button>
+                      <Button as={NavLink} to="/story" color="white">
+                        Our story
+                      </Button>
                       <ResourcesPopover />
                     </ButtonGroup>
                     <HStack spacing="3">

@@ -104,7 +104,7 @@ function CreateKicks() {
       continent,
       category,
       buckets: selectedBuckets,
-      location: { coordinates },
+      location: coordinates,
       country: address,
     };
     console.log(kickData);
