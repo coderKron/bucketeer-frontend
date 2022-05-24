@@ -66,7 +66,7 @@ export default function EditBucket() {
   const handleFileInputChange = e => {
     setIsUploading(true);
     const imageData = new FormData();
-    imageData.append('picture', e.target.files[0]);
+    imageData.append('pictures', e.target.files[0]);
 
     axios
       .post(`${process.env.REACT_APP_URL}/api/upload`, imageData, {

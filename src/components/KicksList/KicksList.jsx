@@ -159,6 +159,7 @@ const KicksList = () => {
                           {`${user._id}` === `${post.createdBy}` && (
                             <Button
                               backgroundColor={mode('orange.700', 'blue.600')}
+                              px={'15px'}
                               as={NavLink}
                               to={`/kicks/${post._id}/edit`}
                             >
