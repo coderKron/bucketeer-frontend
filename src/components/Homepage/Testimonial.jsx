@@ -13,8 +13,8 @@ export const Testimonial = props => {
     <Box
       as="blockquote"
       rounded="2xl"
-      bg={mode('gray.700', 'white')}
-      color={mode('white', 'gray.800')}
+      bg={mode('orange.700', 'teal.800')}
+      color={mode('white', 'white')}
       shadow="lg"
       px="10"
       py="8"
@@ -34,6 +34,7 @@ export const Testimonial = props => {
         />
         <Box marginStart="5">
           <Text
+            color={mode('white', 'white')}
             as="cite"
             fontStyle="normal"
             fontSize="md"
@@ -43,7 +44,7 @@ export const Testimonial = props => {
           </Text>
           <Text
             mt="1"
-            color={mode('gray.400', 'gray.600')}
+            color={mode('white', 'white')}
             textTransform="uppercase"
             fontSize="xs"
             fontWeight="semibold"
@@ -53,7 +54,7 @@ export const Testimonial = props => {
           </Text>
         </Box>
       </Flex>
-      <Text color={mode('gray.400', 'gray.600')}>{children}</Text>
+      <Text color={mode('gray.100', 'white')}>{children}</Text>
     </Box>
   );
 };

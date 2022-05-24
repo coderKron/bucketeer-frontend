@@ -12,8 +12,6 @@ import {
   Divider,
   Text,
   HStack,
-  Flex,
-  Icon,
   Avatar,
   Button,
   Image,
@@ -31,8 +29,8 @@ import { FiFileText } from 'react-icons/fi';
 import { posts } from './data';
 
 function Homepage() {
-  const { getToken, isLoggedIn } = useContext(AuthContext);
-  const { colorMode, toggleColorMode } = useColorMode();
+  const { isLoggedIn } = useContext(AuthContext);
+  const { colorMode } = useColorMode();
   const isMobile = useBreakpointValue({
     base: true,
     md: false,

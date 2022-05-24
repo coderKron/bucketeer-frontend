@@ -28,7 +28,7 @@ import { AuthContext } from '../../context/auth.context';
 function CreateBucket() {
   const [isUploading, setIsUploading] = useState(false);
 
-  const [picture, setPicture] = useState('');
+  const [picture, setPicture] = useState(null);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const { error, errorMessage, loading, createNewBucket } = useCreateBucket();
@@ -38,7 +38,7 @@ function CreateBucket() {
   const handleFileInputChange = e => {
     setIsUploading(true);
     const imageData = new FormData();
-    imageData.append('picture', e.target.files[0]);
+    imageData.append('pictures', e.target.files[0]);
 
     axios
       .post(`${process.env.REACT_APP_URL}/api/upload`, imageData, {
@@ -60,7 +60,7 @@ function CreateBucket() {
     createNewBucket(bucketData);
     setTitle('');
     setDescription('');
-    setPicture('');
+    setPicture(null);
   };
 
   return (
@@ -154,7 +154,7 @@ function CreateBucket() {
                 >
                   <Input
                     required
-                    id="picture"
+                    id="pictures"
                     type="file"
                     defaultValue={picture}
                     onChange={e => {

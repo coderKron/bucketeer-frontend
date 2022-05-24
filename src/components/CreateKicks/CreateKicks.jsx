@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   Box,
   Button,
@@ -22,12 +22,7 @@ import {
   Select,
   SkeletonText,
 } from '@chakra-ui/react';
-import {
-  GoogleMap,
-  useLoadScript,
-  Marker,
-  useJsApiLoader,
-} from '@react-google-maps/api';
+import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api';
 import { useGetBuckets } from '../../hooks/useGetBuckets';
 import { useCreateKick } from '../../hooks/useCreateKick';
 import axios from 'axios';
@@ -76,18 +71,11 @@ function CreateKicks() {
   if (!isLoaded) {
     return <SkeletonText />;
   }
-  const checkForMobile = () => {
-    if (isDesktop) {
-      return '40%';
-    } else {
-      return '100%';
-    }
-  };
 
   const handleFileInputChange = e => {
     setIsUploading(true);
     const imageData = new FormData();
-    imageData.append('picture', e.target.files[0]);
+    imageData.append('pictures', e.target.files[0]);
 
     axios
       .post(`${process.env.REACT_APP_URL}/api/upload`, imageData, {
@@ -114,8 +102,8 @@ function CreateKicks() {
       pictures,
       category,
       buckets: selectedBuckets,
-      location: {coordinates},
-      country: address
+      location: { coordinates },
+      country: address,
     };
     createNewKick(kickData);
 
@@ -123,13 +111,11 @@ function CreateKicks() {
     setDescription('');
     setCategory('');
     setSelectedBuckets('');
-    setPictures('');
+    setPictures(null);
     // setCenter({ lat: 27.9881, long: 86.925 });
     setLong('');
     setLat('');
   };
-
-  
 
   return (
     <>
@@ -146,7 +132,7 @@ function CreateKicks() {
           base: '6',
           md: '8',
         }}
-        // maxW={checkForMobile}
+        maxW={isDesktop ? '60%' : '100%'}
       >
         <Stack spacing="5">
           <Stack
@@ -293,13 +279,7 @@ function CreateKicks() {
                 </option>
               ))}
             </Select>
-            <RadioCardGroup
-              defaultValue="one"
-              onChange={e => {
-                setCategory(e.target.value);
-              }}
-              spacing="3"
-            >
+            <RadioCardGroup defaultValue="one" spacing="3">
               {['Travel', 'Chill', 'Activity'].map(option => (
                 <RadioCard
                   key={option}
@@ -346,7 +326,8 @@ function CreateKicks() {
                 >
                   <Input
                     required={true}
-                    id="picture"
+                    id="pictures"
+                    defaultValue={pictures}
                     type="file"
                     onChange={e => {
                       handleFileInputChange(e);
