@@ -60,6 +60,11 @@ function CreateKicks() {
   const [coordinates, setCoordinates] = useState({ lat: 27.9881, lng: 86.925 });
   const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
+  const isDesktop = useBreakpointValue({
+    base: false,
+    lg: true,
+  });
+
   const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: apiKey,
     libraries,
@@ -71,6 +76,13 @@ function CreateKicks() {
   if (!isLoaded) {
     return <SkeletonText />;
   }
+  const checkForMobile = () => {
+    if (isDesktop) {
+      return '40%';
+    } else {
+      return '100%';
+    }
+  };
 
   const handleFileInputChange = e => {
     setIsUploading(true);
@@ -115,8 +127,6 @@ function CreateKicks() {
     setLong('');
     setLat('');
   };
-
- 
 
   return (
     <>
