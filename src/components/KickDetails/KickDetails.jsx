@@ -9,16 +9,22 @@ import {
   Image,
   Text,
   Stack,
+  HStack,
+  VStack,
   Container,
   useColorModeValue as mode,
   SimpleGrid,
   FormControl,
   Select,
+  SkeletonText,
+  Flex,
+  useBreakpointValue,
 } from '@chakra-ui/react';
 import { AuthContext } from '../../context/auth.context';
 import { useGetBuckets } from '../../hooks/useGetBuckets';
 import { useAddKickToBucket } from '../../hooks/useAddKickToBucket';
 import { LikeButton } from './LikeButton';
+import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api';
 
 import Loading from '../Loading';
 import Error from '../Error';
@@ -29,10 +35,15 @@ export default function Kickdetails() {
   const [bucketId, setBucketId] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
+  const [map, setMap] = useState(/** @type google.maps.Map */ (null));
+  const [location, setLocation] = useState(undefined);
+  const [coordinates, setCoordinates] = useState({ lat: 27.9881, lng: 86.925 });
   const { kickId } = useParams();
   const { getToken, isLoggedIn } = useContext(AuthContext);
   const { buckets } = useGetBuckets();
   const { addKickToBucket } = useAddKickToBucket();
+  const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+  const libraries = ['places'];
 
   useEffect(() => {
     const storedToken = getToken();
@@ -44,6 +55,7 @@ export default function Kickdetails() {
       .then(response => {
         setLoading(false);
         setKick(response.data);
+        setCoordinates(response.data.location);
       })
       .catch(error => {
         const errorDescription = error.response.data.message;
@@ -52,6 +64,23 @@ export default function Kickdetails() {
         setError(false);
       });
   }, [getToken, kickId, isLoggedIn]);
+
+  const isDesktop = useBreakpointValue({
+    base: false,
+    lg: true,
+  })
+
+  const { isLoaded, loadError } = useJsApiLoader({
+    googleMapsApiKey: apiKey,
+    libraries,
+  });
+
+  if (loadError) {
+    return 'Error loading map';
+  }
+  if (!isLoaded) {
+    return <SkeletonText />;
+  }
 
   const handleLike = e => {};
 
@@ -65,6 +94,8 @@ export default function Kickdetails() {
     setBucketId('');
   };
 
+  console.log(coordinates);
+
   return (
     <>
       {loading ? (
@@ -74,10 +105,14 @@ export default function Kickdetails() {
       ) : kick ? (
         <>
           <Image src="/images/experience-kicks.png" alt="experience kicks" />
+
           <Box bg={'bg-surface'} color={mode('black')}>
             <Container
               justifyContent={'center'}
-              maxWidth={'70%'}
+              maxWidth={ isDesktop ?
+                '70%'
+                : '100%'
+                }
               py={{
                 base: '16',
                 md: '24',
@@ -118,17 +153,94 @@ export default function Kickdetails() {
                   >
                     <Stack spacing="8">
                       <Box overflow="hidden">
-                        <Image
-                          src={kick.pictures}
-                          alt={kick.name}
-                          width="full"
-                          height="25rem"
-                          objectFit="cover"
-                          transition="all 0.2s"
-                          _groupHover={{
-                            transform: 'scale(1.05)',
-                          }}
-                        />
+                      {isDesktop ?
+                        <HStack>
+                          <Image
+                            src={kick.pictures}
+                            alt={kick.name}
+                            width="full"
+                            height="25rem"
+                            objectFit="cover"
+                            transition="all 0.2s"
+                            _groupHover={{
+                              transform: 'scale(1.05)',
+                            }}
+                          />
+
+                          <Flex alignItems="center" h="30vh" w="100%">
+                            <Box h="100%" w="100%">
+                              <GoogleMap
+                                center={{
+                                  lat: parseFloat(coordinates.lat),
+                                  lng: parseFloat(coordinates.lng),
+                                }}
+                                zoom={10}
+                                mapContainerStyle={{
+                                  width: '100%',
+                                  height: '100%',
+                                }}
+                                options={{
+                                  zoomControl: true,
+                                  streetViewControl: false,
+                                  mapTypeControl: true,
+                                  fullscreenControl: false,
+                                }}
+                                onLoad={map => setMap(map)}
+                              >
+                                <Marker
+                                  position={{
+                                    lat: parseFloat(coordinates.lat),
+                                    lng: parseFloat(coordinates.lng),
+                                  }}
+                                />
+                              </GoogleMap>
+                            </Box>
+                          </Flex>
+                        </HStack>
+                        : 
+                        <VStack>
+                          <Image
+                            src={kick.pictures}
+                            alt={kick.name}
+                            width="full"
+                            height="25rem"
+                            objectFit="cover"
+                            transition="all 0.2s"
+                            _groupHover={{
+                              transform: 'scale(1.05)',
+                            }}
+                          />
+
+                          <Flex alignItems="center" h="30vh" w="50%">
+                            <Box h="100%" w="100%">
+                              <GoogleMap
+                                center={{
+                                  lat: parseFloat(coordinates.lat),
+                                  lng: parseFloat(coordinates.lng),
+                                }}
+                                zoom={10}
+                                mapContainerStyle={{
+                                  width: '100%',
+                                  height: '100%',
+                                }}
+                                options={{
+                                  zoomControl: true,
+                                  streetViewControl: false,
+                                  mapTypeControl: true,
+                                  fullscreenControl: false,
+                                }}
+                                onLoad={map => setMap(map)}
+                              >
+                                <Marker
+                                  position={{
+                                    lat: parseFloat(coordinates.lat),
+                                    lng: parseFloat(coordinates.lng),
+                                  }}
+                                />
+                              </GoogleMap>
+                            </Box>
+                          </Flex>
+                        </VStack> }
                       </Box>
 
                       <Stack
@@ -136,11 +248,17 @@ export default function Kickdetails() {
                         flexDirection={'row'}
                         spacing="3"
                       >
-                        <Stack spacing="3">
+                      
+                        <HStack spacing="35">
+                        <Box>
                           <Heading size="xs">{kick.name}</Heading>
                           <Text color="muted">{kick.country}</Text>
+                          </Box>
+                          <Box>
                           <Text color="muted">{kick.description}</Text>
-                        </Stack>
+                          </Box>
+                        </HStack>
+                        
                       </Stack>
 
                       <Stack
