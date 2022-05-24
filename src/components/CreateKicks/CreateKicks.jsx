@@ -277,24 +277,19 @@ function CreateKicks() {
                 </Box>
               </Flex>
             </FormControl>
-            <RadioCardGroup defaultValue="one" spacing="3">
+            <Select defaultValue="one" spacing="3">
               {buckets.map(option => (
-                <RadioCard
+                <option
                   key={option._id}
                   onClick={e => {
                     setSelectedBuckets(option._id);
                   }}
                   value={option._id}
                 >
-                  <Text color="emphasized" fontWeight="medium" fontSize="sm">
-                    Bucket: {option.name}
-                  </Text>
-                  <Text color="muted" fontSize="sm">
-                    Add Kick to this Bucket
-                  </Text>
-                </RadioCard>
+                  Bucket: {option.name}
+                </option>
               ))}
-            </RadioCardGroup>
+            </Select>
             <RadioCardGroup
               defaultValue="one"
               onChange={e => {
