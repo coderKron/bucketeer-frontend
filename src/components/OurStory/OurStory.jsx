@@ -8,6 +8,7 @@ import {
   Img,
   SimpleGrid,
   Text,
+  Image,
   Container,
   HStack,
   Divider,
@@ -49,6 +50,7 @@ const OurStory = () => {
   const { user } = React.useContext(AuthContext);
   return (
     <>
+      <Image src="/images/the-journey.png" alt="the journey" />
       <Box as="section" bg={mode('white', 'gray.800')} py="24">
         <Box bg="bg-surface">
           <Container
