@@ -102,7 +102,8 @@ function CreateKicks() {
       picture,
       category,
       buckets: selectedBuckets,
-      location: [lat, long],
+      location: {coordinates},
+      country: address
     };
     createNewKick(kickData);
 
@@ -116,7 +117,7 @@ function CreateKicks() {
     setLat('');
   };
 
- 
+  
 
   return (
     <>
@@ -133,7 +134,7 @@ function CreateKicks() {
           base: '6',
           md: '8',
         }}
-        maxW={checkForMobile}
+        // maxW={checkForMobile}
       >
         <Stack spacing="5">
           <Stack

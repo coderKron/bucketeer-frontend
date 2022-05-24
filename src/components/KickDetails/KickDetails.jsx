@@ -127,6 +127,7 @@ export default function Kickdetails() {
                       >
                         <Stack spacing="3">
                           <Heading size="xs">{kick.name}</Heading>
+                          <Text color="muted">{kick.country}</Text>
                           <Text color="muted">{kick.description}</Text>
                         </Stack>
                       </Stack>
