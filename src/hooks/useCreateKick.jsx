@@ -19,7 +19,7 @@ export const useCreateKick = () => {
       })
       .then(() => {
         setLoading(false);
-        navigate('/');
+        navigate('/kicks');
       })
       .catch(error => {
         const errorDescription = error.response.data.message;
