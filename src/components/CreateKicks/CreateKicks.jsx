@@ -224,6 +224,7 @@ function CreateKicks() {
 
                         {suggestions.map((suggestion, i) => {
                           const style = {
+                            color: 'black',
                             backgroundColor: suggestion.active
                               ? '#41b6e6'
                               : '#fff',
