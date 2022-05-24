@@ -108,11 +108,11 @@ const Buckets = () => {
                 buckets.map(post => (
                   <Box
                     minH="36"
-                    backgroundColor={mode('orange.200', 'white')}
+                    backgroundColor={mode('orange.200', 'teal.700')}
                     padding={'15px'}
                     boxShadow={mode('sm', 'sm-dark')}
                     borderRadius="lg"
-                    color={mode('black', 'black')}
+                    color={mode('black', 'white')}
                     key={post._id}
                   >
                     <Link

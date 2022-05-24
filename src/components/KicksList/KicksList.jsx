@@ -19,6 +19,7 @@ import {
 } from '@chakra-ui/react';
 import { AuthContext } from '../../context/auth.context';
 import * as React from 'react';
+
 import { useContext } from 'react';
 import { useGetKicks } from '../../hooks/useGetKicks';
 import Loading from '../Loading';
@@ -110,11 +111,12 @@ const KicksList = () => {
                 kicks.map(post => (
                   <Box
                     minH="36"
-                    backgroundColor={mode('orange.200', 'white')}
+                    backgroundColor={mode('orange.200', 'teal.700')}
                     padding={'15px'}
                     boxShadow={mode('sm', 'sm-dark')}
                     borderRadius="lg"
-                    color={mode('black', 'black')}
+                    position={'relative'}
+                    color={mode('black', 'white')}
                   >
                     <Link
                       as={NavLink}
@@ -127,7 +129,7 @@ const KicksList = () => {
                       <Stack key={post._id} spacing="8">
                         <Box overflow="hidden">
                           <Image
-                            src={post.picture}
+                            src={post.pictures}
                             alt={post.name}
                             width="full"
                             height="15rem"

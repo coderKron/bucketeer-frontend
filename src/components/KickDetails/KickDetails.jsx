@@ -18,6 +18,7 @@ import {
 import { AuthContext } from '../../context/auth.context';
 import { useGetBuckets } from '../../hooks/useGetBuckets';
 import { useAddKickToBucket } from '../../hooks/useAddKickToBucket';
+import { LikeButton } from './LikeButton';
 
 import Loading from '../Loading';
 import Error from '../Error';
@@ -51,6 +52,8 @@ export default function Kickdetails() {
         setError(false);
       });
   }, [getToken, kickId, isLoggedIn]);
+
+  const handleLike = e => {};
 
   const handleAddKick = e => {
     e.preventDefault();
@@ -97,7 +100,14 @@ export default function Kickdetails() {
                     Back to Kicks
                   </Button>
                 </Stack>
-                <SimpleGrid>
+                <SimpleGrid position={'relative'}>
+                  <LikeButton
+                    position="absolute"
+                    onClick={handleLike}
+                    top="4"
+                    right="4"
+                    aria-label={`Like this Kick.`}
+                  />
                   <Box
                     minH="36"
                     backgroundColor={mode('orange.200', 'white')}
@@ -120,6 +130,7 @@ export default function Kickdetails() {
                           }}
                         />
                       </Box>
+
                       <Stack
                         justifyContent={'space-around'}
                         flexDirection={'row'}
@@ -130,6 +141,7 @@ export default function Kickdetails() {
                           <Text color="muted">{kick.description}</Text>
                         </Stack>
                       </Stack>
+
                       <Stack
                         justifyContent={'center'}
                         alignItems="center"

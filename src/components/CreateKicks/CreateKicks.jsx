@@ -43,7 +43,7 @@ const mapContainerStyle = { width: '100%', height: '100%' };
 
 function CreateKicks() {
   const [isUploading, setIsUploading] = useState(false);
-  const [picture, setPicture] = useState('');
+  const [pictures, setPictures] = useState(null);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
@@ -94,7 +94,7 @@ function CreateKicks() {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then(res => {
-        setPicture(res.data.secure_url);
+        setPictures(res.data.secure_url);
         setIsUploading(false);
       })
       .catch(error => console.log(error));
@@ -111,7 +111,7 @@ function CreateKicks() {
     const kickData = {
       name: title,
       description,
-      picture,
+      pictures,
       category,
       buckets: selectedBuckets,
       location: [lat, long],
@@ -122,7 +122,7 @@ function CreateKicks() {
     setDescription('');
     setCategory('');
     setSelectedBuckets('');
-    setPicture('');
+    setPictures('');
     // setCenter({ lat: 27.9881, long: 86.925 });
     setLong('');
     setLat('');
@@ -345,7 +345,6 @@ function CreateKicks() {
                     required={true}
                     id="picture"
                     type="file"
-                    defaultValue={picture}
                     onChange={e => {
                       handleFileInputChange(e);
                     }}
