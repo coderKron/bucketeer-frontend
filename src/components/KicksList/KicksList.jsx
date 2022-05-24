@@ -163,7 +163,7 @@ const KicksList = () => {
                               as={NavLink}
                               to={`/kicks/${post._id}/edit`}
                             >
-                              Edit Kick
+                              Edit
                             </Button>
                           )}
                         </Stack>
