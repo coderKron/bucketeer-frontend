@@ -48,8 +48,6 @@ function CreateKicks() {
   const { error, errorMessage, loading, createNewKick } = useCreateKick();
   const { getToken } = useContext(AuthContext);
   const storedToken = getToken();
-  const [lat, setLat] = useState('');
-  const [long, setLong] = useState('');
   const [map, setMap] = useState(/** @type google.maps.Map */ (null));
   // const [center, setCenter] = useState({ lat: 48.8584, lng: 2.2945 });
   const [address, setAddress] = useState('');
@@ -104,7 +102,7 @@ function CreateKicks() {
       continent,
       category,
       buckets: selectedBuckets,
-      location: { coordinates },
+      location: coordinates,
       country: address,
     };
     console.log(kickData);
@@ -116,9 +114,7 @@ function CreateKicks() {
     setSelectedBuckets('');
     setPictures(null);
     setContinent('');
-    // setCenter({ lat: 27.9881, long: 86.925 });
-    setLong('');
-    setLat('');
+
   };
 
   return (
