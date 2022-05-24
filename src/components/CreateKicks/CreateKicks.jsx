@@ -60,6 +60,11 @@ function CreateKicks() {
   const [coordinates, setCoordinates] = useState({ lat: 27.9881, lng: 86.925 });
   const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
+  const isDesktop = useBreakpointValue({
+    base: false,
+    lg: true,
+  });
+
   const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: apiKey,
     libraries,
@@ -71,6 +76,13 @@ function CreateKicks() {
   if (!isLoaded) {
     return <SkeletonText />;
   }
+  const checkForMobile = () => {
+    if (isDesktop) {
+      return '40%';
+    } else {
+      return '100%';
+    }
+  };
 
   const handleFileInputChange = e => {
     setIsUploading(true);
@@ -215,6 +227,7 @@ function CreateKicks() {
 
                         {suggestions.map((suggestion, i) => {
                           const style = {
+                            color: 'black',
                             backgroundColor: suggestion.active
                               ? '#41b6e6'
                               : '#fff',
@@ -267,24 +280,19 @@ function CreateKicks() {
                 </Box>
               </Flex>
             </FormControl>
-            <RadioCardGroup defaultValue="one" spacing="3">
+            <Select defaultValue="one" spacing="3">
               {buckets.map(option => (
-                <RadioCard
+                <option
                   key={option._id}
                   onClick={e => {
                     setSelectedBuckets(option._id);
                   }}
                   value={option._id}
                 >
-                  <Text color="emphasized" fontWeight="medium" fontSize="sm">
-                    Bucket: {option.name}
-                  </Text>
-                  <Text color="muted" fontSize="sm">
-                    Add Kick to this Bucket
-                  </Text>
-                </RadioCard>
+                  Bucket: {option.name}
+                </option>
               ))}
-            </RadioCardGroup>
+            </Select>
             <RadioCardGroup
               defaultValue="one"
               onChange={e => {
