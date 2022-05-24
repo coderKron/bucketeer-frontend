@@ -107,6 +107,7 @@ function CreateKicks() {
       location: { coordinates },
       country: address,
     };
+    console.log(kickData);
     createNewKick(kickData);
 
     setTitle('');
@@ -114,6 +115,7 @@ function CreateKicks() {
     setCategory('');
     setSelectedBuckets('');
     setPictures(null);
+    setContinent('');
     // setCenter({ lat: 27.9881, long: 86.925 });
     setLong('');
     setLat('');
@@ -180,79 +182,35 @@ function CreateKicks() {
                 />
               </Stack>
             </FormControl>
-            <Select spacing="3">
+            <Select
+              onChange={e => {
+                setContinent(e.target.value);
+              }}
+              spacing="3"
+            >
               <option value={'select Bucket'}>Continent where Kick is</option>
-
-              <option
-                key={'Europe'}
-                onClick={e => {
-                  setContinent('Europe');
-                }}
-                value={'Europe'}
-              >
+              <option key={'Europe'} value={'Europe'}>
                 Europe
               </option>
-              <option
-                key={'Asia'}
-                onClick={e => {
-                  setContinent('Asia');
-                }}
-                value={'Asia'}
-              >
+              <option key={'Asia'} value={'Asia'}>
                 Asia
               </option>
-              <option
-                key={'North-America'}
-                onClick={e => {
-                  setContinent('North-America');
-                }}
-                value={'North-America'}
-              >
+              <option key={'North-America'} value={'North-America'}>
                 North-America
               </option>
-              <option
-                key={'South-America'}
-                onClick={e => {
-                  setContinent('South-America');
-                }}
-                value={'South-America'}
-              >
+              <option key={'South-America'} value={'South-America'}>
                 South-America
               </option>
-              <option
-                key={'Middle-East'}
-                onClick={e => {
-                  setContinent('Middle-East');
-                }}
-                value={'Middle-East'}
-              >
+              <option key={'Middle-East'} value={'Middle-East'}>
                 Middle-East
               </option>
-              <option
-                key={'Africa'}
-                onClick={e => {
-                  setContinent('Africa');
-                }}
-                value={'Africa'}
-              >
+              <option key={'Africa'} value={'Africa'}>
                 Africa
               </option>
-              <option
-                key={'Australia'}
-                onClick={e => {
-                  setContinent('Australia');
-                }}
-                value={'Australia'}
-              >
+              <option key={'Australia'} value={'Australia'}>
                 Australia
               </option>
-              <option
-                key={'Antarctica'}
-                onClick={e => {
-                  setContinent('Antarctica');
-                }}
-                value={'Antarctica'}
-              >
+              <option key={'Antarctica'} value={'Antarctica'}>
                 Antarctica
               </option>
             </Select>
@@ -344,7 +302,7 @@ function CreateKicks() {
                 </Box>
               </Flex>
             </FormControl>
-            <Select defaultValue="one" spacing="3">
+            <Select spacing="3">
               <option value={'select Bucket'}>Select your Bucket</option>
               {buckets.map(option => (
                 <option
@@ -358,7 +316,7 @@ function CreateKicks() {
                 </option>
               ))}
             </Select>
-            <RadioCardGroup defaultValue="one" spacing="3">
+            <RadioCardGroup spacing="3">
               {['Travel', 'Chill', 'Activity'].map(option => (
                 <RadioCard
                   key={option}
