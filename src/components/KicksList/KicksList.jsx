@@ -12,7 +12,11 @@ import {
   useColorModeValue as mode,
   Stack,
   Text,
+  VStack,
   Alert,
+  Select,
+  FormLabel,
+  Divider,
   AlertIcon,
   AlertDescription,
   AlertTitle,
@@ -27,11 +31,71 @@ import Error from '../Error';
 
 const KicksList = () => {
   const { kicks, loading, error, errorMessage } = useGetKicks();
+  const [filteredKicks, setFilteredKicks] = React.useState(kicks);
+  const [filterByContinent, setFilterByContinent] = React.useState(undefined);
+  const [filterByCategory, setFilterByCategory] = React.useState(undefined);
   const { user } = useContext(AuthContext);
   const isMobile = useBreakpointValue({
     base: true,
     md: false,
   });
+
+  React.useEffect(() => {
+    if (filterByContinent && filterByCategory) {
+      setFilteredKicks(
+        kicks.filter(kick => {
+          return (
+            kick.continent === filterByContinent &&
+            kick.category === filterByCategory
+          );
+        })
+      );
+    } else if (filterByContinent && !filterByCategory) {
+      setFilteredKicks(
+        kicks.filter(kick => {
+          return kick.continent === filterByContinent;
+        })
+      );
+    } else if (!filterByContinent && filterByCategory) {
+      setFilteredKicks(
+        kicks.filter(kick => {
+          return kick.category === filterByCategory;
+        })
+      );
+    }
+  }, [filterByContinent, filterByCategory, kicks]);
+
+  const handleFilterByContinent = e => {
+    let hasValue;
+    if (e === 'all') {
+      hasValue = false;
+    } else {
+      hasValue = e;
+    }
+    if (hasValue) {
+      setFilterByContinent(e);
+    } else {
+      setFilterByContinent(undefined);
+    }
+  };
+
+  const handleFilterByCategory = e => {
+    let hasValue;
+
+    if (e === 'all') {
+      hasValue = false;
+    } else {
+      hasValue = e;
+    }
+    if (hasValue) {
+      setFilterByCategory(e);
+    } else {
+      setFilterByCategory(undefined);
+    }
+  };
+
+  const isFiltered =
+    filterByContinent || filterByCategory ? filteredKicks : kicks;
 
   return (
     <>
@@ -62,8 +126,19 @@ const KicksList = () => {
               direction="column"
               justify="space-between"
             >
-              <Heading>All Kicks</Heading>
-              <Stack direction={'row'}>
+              <Box bg="bg-surface">
+                <Container py={{ base: '4', md: '8' }}>
+                  <HStack>
+                    <Divider />
+                    <Text fontSize="lg" fontWeight="medium" whiteSpace="nowrap">
+                      Kicks
+                    </Text>
+                    <Divider />
+                  </HStack>
+                </Container>
+              </Box>
+
+              <HStack>
                 <Button
                   as={NavLink}
                   to={'/kicks/create'}
@@ -72,6 +147,62 @@ const KicksList = () => {
                 >
                   Create new Kick
                 </Button>
+                <VStack>
+                  <Select
+                    onChange={e => {
+                      console.log(e.target.value);
+                      handleFilterByContinent(e.target.value);
+                    }}
+                    spacing="3"
+                  >
+                    <option value={'all'}>Continent of Kick</option>
+
+                    <option key={'Europe'} value={'Europe'}>
+                      Europe
+                    </option>
+                    <option key={'Asia'} value={'Asia'}>
+                      Asia
+                    </option>
+                    <option key={'North-America'} value={'North-America'}>
+                      North-America
+                    </option>
+                    <option key={'South-America'} value={'South-America'}>
+                      South-America
+                    </option>
+                    <option key={'Middle-East'} value={'Middle-East'}>
+                      Middle-East
+                    </option>
+                    <option key={'Africa'} value={'Africa'}>
+                      Africa
+                    </option>
+                    <option key={'Australia'} value={'Australia'}>
+                      Australia
+                    </option>
+                    <option key={'Antarctica'} value={'Antarctica'}>
+                      Antarctica
+                    </option>
+                  </Select>
+                </VStack>
+                <VStack>
+                  <Select
+                    onChange={e => {
+                      handleFilterByCategory(e.target.value);
+                    }}
+                    spacing="3"
+                  >
+                    <option value={'all'}>Category of Kick</option>
+
+                    <option key={'Chill'} value={'Chill'}>
+                      Chill
+                    </option>
+                    <option key={'Travel'} value={'Travel'}>
+                      Travel
+                    </option>
+                    <option key={'activities'} value={'Activity'}>
+                      Activities
+                    </option>
+                  </Select>
+                </VStack>
                 <Button
                   as={NavLink}
                   to={'/buckets'}
@@ -80,7 +211,7 @@ const KicksList = () => {
                 >
                   Go to Buckets
                 </Button>
-              </Stack>
+              </HStack>
             </Stack>
             <SimpleGrid
               padding={'5px'}
@@ -108,8 +239,9 @@ const KicksList = () => {
                   <AlertDescription>{errorMessage}</AlertDescription>
                 </Alert>
               ) : kicks.length ? (
-                kicks.map(post => (
+                isFiltered.map(post => (
                   <Box
+                    key={post._id}
                     minH="36"
                     backgroundColor={mode('orange.200', 'teal.700')}
                     padding={'15px'}

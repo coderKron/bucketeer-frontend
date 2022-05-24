@@ -12,6 +12,10 @@ import {
   Container,
   useColorModeValue as mode,
   SimpleGrid,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
 } from '@chakra-ui/react';
 import { AuthContext } from '../../context/auth.context';
 import { useGetBucketDetails } from '../../hooks/useGetBucketDetails';
@@ -32,7 +36,11 @@ export default function BucketSingular() {
       {loading ? (
         <Loading />
       ) : error ? (
-        <Error />
+        <Alert textAlign={'center'} justifyContent={'center'} status="error">
+          <AlertIcon />
+          <AlertTitle>Could not get Bucket:</AlertTitle>
+          <AlertDescription>{errorMessage}</AlertDescription>
+        </Alert>
       ) : bucket ? (
         <>
           <Image
