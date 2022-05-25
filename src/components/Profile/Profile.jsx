@@ -20,6 +20,9 @@ const HandleColor = () => {
 };
 
 const Profile = () => {
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const { isLoggedIn, getToken, isLoading } = React.useContext(AuthContext);
   const navigate = useNavigate();
   const [userName, setUserName] = React.useState(null);

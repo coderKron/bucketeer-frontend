@@ -37,6 +37,9 @@ const libraries = ['places'];
 const mapContainerStyle = { width: '100%', height: '100%' };
 
 function CreateKicks() {
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const [isUploading, setIsUploading] = useState(false);
   const [pictures, setPictures] = useState(null);
   const [title, setTitle] = useState('');
@@ -114,7 +117,6 @@ function CreateKicks() {
     setSelectedBuckets('');
     setPictures(null);
     setContinent('');
-
   };
 
   return (

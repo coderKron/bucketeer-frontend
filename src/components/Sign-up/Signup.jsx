@@ -33,6 +33,9 @@ import { useSignup } from '../../hooks/useSignup';
 import { RadioCard, RadioCardGroup } from './RadioCardGroup';
 
 const Signup = () => {
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const [showPassword, setShowPassword] = React.useState(false);
   const [userName, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');

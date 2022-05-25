@@ -16,7 +16,7 @@ export const CTAButton = props => {
       transition="all 0.2s"
       rounded="lg"
       outline={0}
-      bg={mode('#ff6767', 'red.800')}
+      bg={mode('orange.300', 'red.800')}
       _focus={{
         shadow: 'outline',
       }}

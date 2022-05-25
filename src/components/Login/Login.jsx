@@ -30,6 +30,9 @@ import { useLogin } from '../../hooks/useLogin';
 import { useColorMode } from '@chakra-ui/react';
 
 const Login = () => {
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const [showPassword, setShowPassword] = React.useState(false);
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');

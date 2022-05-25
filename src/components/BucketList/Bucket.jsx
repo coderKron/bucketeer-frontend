@@ -25,6 +25,9 @@ import Loading from '../Loading';
 import { NavLink } from 'react-router-dom';
 
 const Buckets = () => {
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const { buckets, loading, error, errorMessage } = useGetBuckets();
   const isMobile = useBreakpointValue({
     base: true,

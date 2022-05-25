@@ -27,6 +27,9 @@ import Loading from '../Loading';
 import Error from '../Error';
 
 export default function EditKick() {
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const [isUploading, setIsUploading] = useState(false);
   const { kickId } = useParams();
   const { getToken, isLoggedIn } = useContext(AuthContext);

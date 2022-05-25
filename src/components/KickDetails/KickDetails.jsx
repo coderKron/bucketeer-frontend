@@ -30,6 +30,9 @@ import Loading from '../Loading';
 import Error from '../Error';
 
 export default function Kickdetails() {
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const [kick, setKick] = useState({});
   const [error, setError] = useState(false);
   const [bucketId, setBucketId] = useState('');
@@ -68,7 +71,7 @@ export default function Kickdetails() {
   const isDesktop = useBreakpointValue({
     base: false,
     lg: true,
-  })
+  });
 
   const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: apiKey,
@@ -109,10 +112,7 @@ export default function Kickdetails() {
           <Box bg={'bg-surface'} color={mode('black')}>
             <Container
               justifyContent={'center'}
-              maxWidth={ isDesktop ?
-                '70%'
-                : '100%'
-                }
+              maxWidth={isDesktop ? '70%' : '100%'}
               py={{
                 base: '16',
                 md: '24',
@@ -153,94 +153,95 @@ export default function Kickdetails() {
                   >
                     <Stack spacing="8">
                       <Box overflow="hidden">
-                      {isDesktop ?
-                        <HStack>
-                          <Image
-                            src={kick.pictures}
-                            alt={kick.name}
-                            width="full"
-                            height="25rem"
-                            objectFit="cover"
-                            transition="all 0.2s"
-                            _groupHover={{
-                              transform: 'scale(1.05)',
-                            }}
-                          />
+                        {isDesktop ? (
+                          <HStack>
+                            <Image
+                              src={kick.pictures}
+                              alt={kick.name}
+                              width="full"
+                              height="25rem"
+                              objectFit="cover"
+                              transition="all 0.2s"
+                              _groupHover={{
+                                transform: 'scale(1.05)',
+                              }}
+                            />
 
-                          <Flex alignItems="center" h="30vh" w="100%">
-                            <Box h="100%" w="100%">
-                              <GoogleMap
-                                center={{
-                                  lat: parseFloat(coordinates.lat),
-                                  lng: parseFloat(coordinates.lng),
-                                }}
-                                zoom={10}
-                                mapContainerStyle={{
-                                  width: '100%',
-                                  height: '100%',
-                                }}
-                                options={{
-                                  zoomControl: true,
-                                  streetViewControl: false,
-                                  mapTypeControl: true,
-                                  fullscreenControl: false,
-                                }}
-                                onLoad={map => setMap(map)}
-                              >
-                                <Marker
-                                  position={{
+                            <Flex alignItems="center" h="30vh" w="100%">
+                              <Box h="100%" w="100%">
+                                <GoogleMap
+                                  center={{
                                     lat: parseFloat(coordinates.lat),
                                     lng: parseFloat(coordinates.lng),
                                   }}
-                                />
-                              </GoogleMap>
-                            </Box>
-                          </Flex>
-                        </HStack>
-                        : 
-                        <VStack>
-                          <Image
-                            src={kick.pictures}
-                            alt={kick.name}
-                            width="full"
-                            height="25rem"
-                            objectFit="cover"
-                            transition="all 0.2s"
-                            _groupHover={{
-                              transform: 'scale(1.05)',
-                            }}
-                          />
+                                  zoom={10}
+                                  mapContainerStyle={{
+                                    width: '100%',
+                                    height: '100%',
+                                  }}
+                                  options={{
+                                    zoomControl: true,
+                                    streetViewControl: false,
+                                    mapTypeControl: true,
+                                    fullscreenControl: false,
+                                  }}
+                                  onLoad={map => setMap(map)}
+                                >
+                                  <Marker
+                                    position={{
+                                      lat: parseFloat(coordinates.lat),
+                                      lng: parseFloat(coordinates.lng),
+                                    }}
+                                  />
+                                </GoogleMap>
+                              </Box>
+                            </Flex>
+                          </HStack>
+                        ) : (
+                          <VStack>
+                            <Image
+                              src={kick.pictures}
+                              alt={kick.name}
+                              width="full"
+                              height="25rem"
+                              objectFit="cover"
+                              transition="all 0.2s"
+                              _groupHover={{
+                                transform: 'scale(1.05)',
+                              }}
+                            />
 
-                          <Flex alignItems="center" h="30vh" w="50%">
-                            <Box h="100%" w="100%">
-                              <GoogleMap
-                                center={{
-                                  lat: parseFloat(coordinates.lat),
-                                  lng: parseFloat(coordinates.lng),
-                                }}
-                                zoom={10}
-                                mapContainerStyle={{
-                                  width: '100%',
-                                  height: '100%',
-                                }}
-                                options={{
-                                  zoomControl: true,
-                                  streetViewControl: false,
-                                  mapTypeControl: true,
-                                  fullscreenControl: false,
-                                }}
-                                onLoad={map => setMap(map)}
-                              >
-                                <Marker
-                                  position={{
+                            <Flex alignItems="center" h="30vh" w="50%">
+                              <Box h="100%" w="100%">
+                                <GoogleMap
+                                  center={{
                                     lat: parseFloat(coordinates.lat),
                                     lng: parseFloat(coordinates.lng),
                                   }}
-                                />
-                              </GoogleMap>
-                            </Box>
-                          </Flex>
-                        </VStack> }
+                                  zoom={10}
+                                  mapContainerStyle={{
+                                    width: '100%',
+                                    height: '100%',
+                                  }}
+                                  options={{
+                                    zoomControl: true,
+                                    streetViewControl: false,
+                                    mapTypeControl: true,
+                                    fullscreenControl: false,
+                                  }}
+                                  onLoad={map => setMap(map)}
+                                >
+                                  <Marker
+                                    position={{
+                                      lat: parseFloat(coordinates.lat),
+                                      lng: parseFloat(coordinates.lng),
+                                    }}
+                                  />
+                                </GoogleMap>
+                              </Box>
+                            </Flex>
+                          </VStack>
+                        )}
                       </Box>
 
                       <Stack
@@ -248,17 +249,15 @@ export default function Kickdetails() {
                         flexDirection={'row'}
                         spacing="3"
                       >
-                      
                         <HStack spacing="35">
-                        <Box>
-                          <Heading size="xs">{kick.name}</Heading>
-                          <Text color="muted">{kick.country}</Text>
+                          <Box>
+                            <Heading size="xs">{kick.name}</Heading>
+                            <Text color="muted">{kick.country}</Text>
                           </Box>
                           <Box>
-                          <Text color="muted">{kick.description}</Text>
+                            <Text color="muted">{kick.description}</Text>
                           </Box>
                         </HStack>
-                        
                       </Stack>
 
                       <Stack

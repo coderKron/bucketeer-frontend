@@ -19,8 +19,8 @@ import Kickdetails from './components/KickDetails/KickDetails';
 import EditBucket from './components/EditBucket/EditBucket';
 import EditKick from './components/EditKick/EditKick';
 import EditProfile from './components/EditProfile/EditProfile';
-import OurStory from './components/OurStory/OurStory';
-import TheJourney from './components/TheJourney/TheJourney';
+import OurStory from './components/OurStory';
+import TheJourney from './components/TheJourney';
 
 function App() {
   const { isLoggedIn, isLoading, user } = useContext(AuthContext);
@@ -112,14 +112,7 @@ function App() {
               </IsPrivate>
             }
           />
-          <Route
-            path="/story"
-            element={
-              <IsPrivate>
-                <TheJourney />
-              </IsPrivate>
-            }
-          />
+          <Route path="/journey" element={<TheJourney />} />
         </Routes>
         <Grid>
           <ColorModeSwitcher justifySelf="flex-end" />

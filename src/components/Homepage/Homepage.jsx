@@ -29,6 +29,9 @@ import { FiFileText } from 'react-icons/fi';
 import { posts } from './data';
 
 function Homepage() {
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const { isLoggedIn } = useContext(AuthContext);
   const { colorMode } = useColorMode();
   const isMobile = useBreakpointValue({
@@ -281,7 +284,8 @@ function Homepage() {
               </Stack>
               {!isMobile && (
                 <Button
-                  backgroundColor={mode('orange.700', 'blue.600')}
+                  backgroundColor={mode('yellow.800', 'blue.600')}
+                  color="white"
                   as={NavLink}
                   to="/kicks"
                   variant="primary"
@@ -356,6 +360,17 @@ function Homepage() {
             )}
           </Stack>
         </Container>
+        <Box backgroundColor={mode('white', 'gray.900')} bg="bg-surface">
+          <Container maxWidth={'100%'} py={{ base: '4', md: '8' }}>
+            <HStack>
+              <Divider />
+              <Text fontSize="lg" fontWeight="medium" whiteSpace="nowrap">
+                <i> "Ride on the waves of freedom"</i>
+              </Text>
+              <Divider />
+            </HStack>
+          </Container>
+        </Box>
       </Box>
     </>
   );

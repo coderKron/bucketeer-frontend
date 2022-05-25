@@ -13,7 +13,7 @@ export const Testimonial = props => {
     <Box
       as="blockquote"
       rounded="2xl"
-      bg={mode('orange.700', 'teal.800')}
+      bg={mode('orange.300', 'teal.800')}
       color={mode('white', 'white')}
       shadow="lg"
       px="10"

@@ -26,6 +26,9 @@ import Loading from '../Loading';
 import Error from '../Error';
 
 export default function EditBucket() {
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const [isUploading, setIsUploading] = useState(false);
   const { bucketId } = useParams();
   const { getToken, isLoggedIn } = useContext(AuthContext);

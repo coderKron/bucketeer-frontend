@@ -70,7 +70,9 @@ const Navbar = () => {
                 {isLoggedIn && !isLoading && (
                   <Flex justify={'space-between'} flex="1">
                     <ButtonGroup variant="link" spacing="8">
-                      <Button color="white">The Journey</Button>
+                      <Button as={NavLink} to="/journey" color="white">
+                        The Journey
+                      </Button>
                       <Button as={NavLink} to="/story" color="white">
                         Our story
                       </Button>
@@ -99,8 +101,12 @@ const Navbar = () => {
                 {!isLoggedIn && !isLoading && (
                   <HStack justify={'space-between'} spacing="8" flex="1">
                     <ButtonGroup variant="link" spacing="8">
-                      <Button color="white">The Journey</Button>
-                      <Button color="white">Our story</Button>
+                      <Button as={NavLink} to="/journey" color="white">
+                        The Journey
+                      </Button>
+                      <Button as={NavLink} to="/story" color="white">
+                        Our story
+                      </Button>
                     </ButtonGroup>
                     <ButtonGroup spacing="3">
                       <Button

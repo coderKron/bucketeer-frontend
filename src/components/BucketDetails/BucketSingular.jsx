@@ -26,6 +26,9 @@ import { KickCard } from './KickCard';
 import { KickGrid } from './KickGrid';
 
 export default function BucketSingular() {
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const { bucketId } = useParams();
   const { getToken, isLoggedIn } = useContext(AuthContext);
   const { bucket, error, errorMessage, loading, deleteBucket } =

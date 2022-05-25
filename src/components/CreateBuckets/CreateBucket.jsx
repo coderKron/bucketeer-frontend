@@ -26,6 +26,9 @@ import axios from 'axios';
 import { AuthContext } from '../../context/auth.context';
 
 function CreateBucket() {
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const [isUploading, setIsUploading] = useState(false);
 
   const [picture, setPicture] = useState(null);

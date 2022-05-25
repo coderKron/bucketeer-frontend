@@ -30,6 +30,9 @@ import Loading from '../Loading';
 import Error from '../Error';
 
 const KicksList = () => {
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const { kicks, loading, error, errorMessage } = useGetKicks();
   const [filteredKicks, setFilteredKicks] = React.useState(kicks);
   const [filterByContinent, setFilterByContinent] = React.useState(undefined);

@@ -29,6 +29,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { FiUploadCloud } from 'react-icons/fi';
 import { RadioCard, RadioCardGroup } from '../CreateKicks/RadioCardGroup';
 const EditProfile = () => {
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const [userName, setUserName] = React.useState('');
   const [isUploading, setIsUploading] = useState(false);
   const [loading, setLoading] = useState(false);
