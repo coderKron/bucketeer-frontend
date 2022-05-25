@@ -30,7 +30,7 @@ export const useUpdateKicksFromBucket = () => {
           status: 'success',
           isCloseable: 'true',
         });
-        navigate(`/bucket`);
+        navigate(`/buckets`);
       })
       .catch(() => {
         setLoading(false);

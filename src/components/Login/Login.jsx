@@ -185,7 +185,11 @@ const Login = () => {
                 </Button>
               </HStack>
               <Stack spacing="6">
-                <Button onClick={handleLogin} variant="primary">
+                <Button
+                  onClick={handleLogin}
+                  backgroundColor={useColorModeValue('orange.200', 'teal.400')}
+                  variant="ghost"
+                >
                   Sign in
                 </Button>
                 <HStack>

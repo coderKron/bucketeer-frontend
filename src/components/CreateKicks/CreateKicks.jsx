@@ -349,15 +349,16 @@ function CreateKicks() {
               </Flex>
             </FormControl>
             <Select spacing="3">
-              <option value={'select Bucket'}>Select your Bucket</option>
+              <option
+                onChange={e => {
+                  setSelectedBuckets(e.target.value);
+                }}
+                value={'select Bucket'}
+              >
+                Select your Bucket
+              </option>
               {buckets.map(option => (
-                <option
-                  key={option._id}
-                  onClick={e => {
-                    setSelectedBuckets(option._id);
-                  }}
-                  value={option._id}
-                >
+                <option key={option._id} value={option._id}>
                   Bucket: {option.name}
                 </option>
               ))}

@@ -6,6 +6,8 @@ import {
   Heading,
   Link,
   Button,
+  HStack,
+  VStack,
   Image,
   Text,
   Stack,
@@ -16,6 +18,7 @@ import {
   AlertIcon,
   AlertTitle,
   AlertDescription,
+  Divider,
 } from '@chakra-ui/react';
 import { AuthContext } from '../../context/auth.context';
 import { useGetBucketDetails } from '../../hooks/useGetBucketDetails';
@@ -60,6 +63,7 @@ export default function BucketSingular() {
               }}
             >
               <Stack
+                maxW={'100%'}
                 justifyContent={'center'}
                 spacing={{
                   base: '12',
@@ -67,16 +71,23 @@ export default function BucketSingular() {
                 }}
               >
                 <Stack
+                  maxW={'100%'}
                   justifyContent={'center'}
                   alignItems="center"
                   direction={'column'}
                   justify={'space-between'}
                 >
-                  <NavLink to={'/buckets'}>
-                    <Button variant={'solid'}>Back to Buckets</Button>
-                  </NavLink>
+                  <Button
+                    backgroundColor={mode('orange.300', 'teal.400')}
+                    color={'white'}
+                    as={NavLink}
+                    to="/buckets"
+                    variant={'solid'}
+                  >
+                    Back to Buckets
+                  </Button>
                 </Stack>
-                <SimpleGrid>
+                <SimpleGrid maxW={'100%'}>
                   <Box
                     minH="36"
                     backgroundColor={mode('orange.100', 'teal.800')}
@@ -85,7 +96,7 @@ export default function BucketSingular() {
                     borderRadius="lg"
                     color={mode('black', 'white')}
                   >
-                    <Stack spacing="8">
+                    <HStack maxW={'100%'} spacing="8">
                       <Box overflow="hidden">
                         <Image
                           src={bucket.picture}
@@ -101,36 +112,77 @@ export default function BucketSingular() {
                       </Box>
 
                       <Stack
-                        justifyContent={'space-around'}
+                        maxW={'100%'}
+                        justifyContent={'space-between'}
                         flexDirection={'row'}
                         spacing="3"
                       >
                         <Stack spacing="3">
-                          <Heading size="xs">{bucket.name}</Heading>
-                          <Text color="muted">{bucket.description}</Text>
+                          <Heading size="xs">Title: {bucket.name}</Heading>
+                          <Text color="muted">
+                            Description: {bucket.description}
+                          </Text>
                         </Stack>
                       </Stack>
-                      <Stack
-                        justifyContent={'center'}
-                        alignItems="center"
-                        direction={'column'}
-                        justify={'space-between'}
-                      >
-                        <NavLink to={'/kicks'}>
-                          <Button
-                            backgroundColor={mode('orange.700', 'gray.800')}
-                            color={mode('white', 'white')}
-                            variant={'solid'}
-                          >
-                            Add Kicks
-                          </Button>
-                        </NavLink>
-                      </Stack>
+
                       <Box
                         maxW="7xl"
                         mx="auto"
                         px={{ base: '4', md: '8', lg: '12' }}
                         py={{ base: '6', md: '8', lg: '12' }}
+                      >
+                        <VStack marginTop={'30px'} direction={'row'}>
+                          <Button
+                            onClick={deleteBucket}
+                            backgroundColor={mode('red.500', 'red.800')}
+                            color={mode('white', 'white')}
+                            variant={'solid'}
+                          >
+                            Delete Bucket
+                          </Button>
+                          <Button
+                            as={NavLink}
+                            to={`/buckets/${bucket._id}/edit`}
+                            backgroundColor={mode('green.500', 'green.600')}
+                            color={mode('white', 'white')}
+                            variant={'solid'}
+                          >
+                            Edit Bucket
+                          </Button>
+                        </VStack>
+                      </Box>
+                    </HStack>
+                    <Stack
+                      justifyContent={'center'}
+                      alignItems="center"
+                      direction={'column'}
+                      justify={'space-between'}
+                      marginBottom="10px"
+                    >
+                      <Button
+                        as={NavLink}
+                        to="/kicks"
+                        backgroundColor={mode('orange.300', 'teal.400')}
+                        color={'white'}
+                        variant={'solid'}
+                      >
+                        Add Kicks
+                      </Button>
+                    </Stack>
+                    <Divider />
+                    <Stack>
+                      <Box
+                        maxW="100%"
+                        px={{
+                          base: '4',
+                          md: '8',
+                          lg: '12',
+                        }}
+                        py={{
+                          base: '6',
+                          md: '8',
+                          lg: '12',
+                        }}
                       >
                         <KickGrid>
                           {bucket.kicks?.map(kick => {
@@ -143,25 +195,6 @@ export default function BucketSingular() {
                             );
                           })}
                         </KickGrid>
-                        <Stack marginTop={'30px'} direction={'row'}>
-                          <Button
-                            onClick={deleteBucket}
-                            backgroundColor={mode('red.500', 'gray.800')}
-                            color={mode('white', 'white')}
-                            variant={'solid'}
-                          >
-                            Delete Bucket
-                          </Button>
-                          <Button
-                            as={NavLink}
-                            to={`/buckets/${bucket._id}/edit`}
-                            backgroundColor={mode('red.500', 'gray.800')}
-                            color={mode('white', 'white')}
-                            variant={'solid'}
-                          >
-                            Edit Bucket
-                          </Button>
-                        </Stack>
                       </Box>
                     </Stack>
                   </Box>

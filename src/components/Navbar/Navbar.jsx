@@ -21,6 +21,8 @@ import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../../context/auth.context';
 import DarkLogo from '../Logos/DarkLogo';
 import LightLogo from '../Logos/LightLogo';
+import { ResourcesPopoverBuckets } from './RourcesPopoverBuckets';
+import { ResourcesPopoverKicks } from './RourcesPopoverKicks';
 
 const Navbar = () => {
   const isDesktop = useBreakpointValue({
@@ -76,7 +78,9 @@ const Navbar = () => {
                       <Button as={NavLink} to="/story" color="white">
                         Our story
                       </Button>
-                      <ResourcesPopover />
+
+                      <ResourcesPopoverBuckets />
+                      <ResourcesPopoverKicks />
                     </ButtonGroup>
                     <HStack spacing="3">
                       <Button

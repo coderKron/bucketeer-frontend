@@ -31,6 +31,7 @@ export const KickCard = props => {
   };
   return (
     <Stack
+      maxW={'20%'}
       spacing={useBreakpointValue({
         base: '4',
         md: '5',
@@ -82,8 +83,8 @@ export const KickCard = props => {
         <Button
           as={NavLink}
           to={`/kicks/${_id}`}
-          backgroundColor={useColorModeValue('orange.600', 'gray.800')}
-          color={useColorModeValue('white', 'white')}
+          backgroundColor={useColorModeValue('orange.300', 'teal.400')}
+          color={'white'}
         >
           Go to Kick
         </Button>

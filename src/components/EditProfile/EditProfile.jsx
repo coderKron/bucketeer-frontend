@@ -267,7 +267,6 @@ const EditProfile = () => {
             </Stack>
           </FormControl>
           <RadioCardGroup
-            defaultValue="one"
             onChange={e => {
               setWay(e.target.value);
             }}

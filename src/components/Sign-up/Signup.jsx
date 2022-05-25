@@ -169,7 +169,11 @@ const Signup = () => {
                 </FormControl>
               </Stack>
               <Stack spacing="4">
-                <Button onClick={handleSignup} variant="primary">
+                <Button
+                  onClick={handleSignup}
+                  backgroundColor={useColorModeValue('orange.200', 'teal.400')}
+                  variant="ghost"
+                >
                   Create account
                 </Button>
                 <Button

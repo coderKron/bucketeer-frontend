@@ -24,7 +24,7 @@ export const useUpdateBucket = () => {
       )
       .then(() => {
         setLoading(false);
-        navigate(`/bucket/${bucketId}`);
+        navigate(`/buckets/${bucketId}`);
       })
       .catch(() => {
         setLoading(false);

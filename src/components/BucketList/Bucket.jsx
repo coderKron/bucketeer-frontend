@@ -35,7 +35,6 @@ const Buckets = () => {
   });
   return (
     <>
-      <Image src="/images/Experience-Freedom.png" alt="experience freedom" />
       <Box
         backgroundColor={mode('white.100')}
         bg="bg-surface"
@@ -68,12 +67,14 @@ const Buckets = () => {
                   as={NavLink}
                   to="/buckets/create"
                   variant={'solid'}
-                  backgroundColor={mode('orange.400', 'blue.600')}
+                  backgroundColor={mode('orange.300', 'teal.400')}
+                  color={'white'}
                 >
                   Create new Bucket
                 </Button>
                 <Button
-                  backgroundColor={mode('orange.400', 'blue.600')}
+                  backgroundColor={mode('orange.300', 'teal.400')}
+                  color={'white'}
                   as={NavLink}
                   to="/kicks"
                   variant="solid"

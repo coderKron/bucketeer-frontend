@@ -6,6 +6,7 @@ import {
   Container,
   Heading,
   HStack,
+  FormControl,
   Image,
   Link,
   SimpleGrid,
@@ -26,6 +27,8 @@ import { AuthContext } from '../../context/auth.context';
 import { useContext } from 'react';
 import { useGetKicks } from '../../hooks/useGetKicks';
 import { NavLink } from 'react-router-dom';
+import { useGetBuckets } from '../../hooks/useGetBuckets';
+import { useAddKickToBucket } from '../../hooks/useAddKickToBucket';
 import Loading from '../Loading';
 import Error from '../Error';
 
@@ -35,9 +38,13 @@ const KicksList = () => {
   }, []);
   const { kicks, loading, error, errorMessage } = useGetKicks();
   const [filteredKicks, setFilteredKicks] = React.useState(kicks);
+  const [bucketId, setBucketId] = React.useState('');
   const [filterByContinent, setFilterByContinent] = React.useState(undefined);
   const [filterByCategory, setFilterByCategory] = React.useState(undefined);
   const { user } = useContext(AuthContext);
+  const { addKickToBucket } = useAddKickToBucket();
+
+  const { buckets } = useGetBuckets();
   const isMobile = useBreakpointValue({
     base: true,
     md: false,
@@ -100,6 +107,15 @@ const KicksList = () => {
   const isFiltered =
     filterByContinent || filterByCategory ? filteredKicks : kicks;
 
+  const handleAddKick = (kickId, e) => {
+    e.preventDefault();
+
+    addKickToBucket({
+      bucketId: bucketId,
+      kickId: kickId,
+    });
+    setBucketId('');
+  };
   return (
     <>
       <Image src="/images/experience-kicks.png" alt="experience kicks" />
@@ -222,7 +238,7 @@ const KicksList = () => {
               columns={{
                 base: 1,
                 md: 3,
-                lg: 4,
+                lg: 3,
               }}
               gap={{
                 base: '12',
@@ -253,15 +269,15 @@ const KicksList = () => {
                     position={'relative'}
                     color={mode('black', 'white')}
                   >
-                    <Link
-                      as={NavLink}
-                      to={`/kicks/${post._id}`}
-                      _hover={{
-                        textDecor: 'none',
-                      }}
-                      role="group"
-                    >
-                      <Stack key={post._id} spacing="8">
+                    <Stack key={post._id} spacing="8">
+                      <Link
+                        as={NavLink}
+                        to={`/kicks/${post._id}`}
+                        _hover={{
+                          textDecor: 'none',
+                        }}
+                        role="group"
+                      >
                         <Box overflow="hidden">
                           <Image
                             src={post.pictures}
@@ -275,35 +291,84 @@ const KicksList = () => {
                             }}
                           />
                         </Box>
+                      </Link>
+                      <Stack
+                        justifyContent={'space-around'}
+                        flexDirection={'row'}
+                        spacing="3"
+                      >
+                        <Stack spacing="3">
+                          <Text
+                            fontSize="sm"
+                            fontWeight="semibold"
+                            color="accent"
+                          >
+                            {post.category}
+                          </Text>
+                          <Heading size="xs">{post.name}</Heading>
+                          <Text color="muted">{post.description}</Text>
+                        </Stack>
+                        {`${user._id}` === `${post.createdBy}` && (
+                          <Button
+                            backgroundColor={mode('orange.700', 'blue.600')}
+                            px={'15px'}
+                            as={NavLink}
+                            to={`/kicks/${post._id}/edit`}
+                          >
+                            Edit
+                          </Button>
+                        )}
                         <Stack
-                          justifyContent={'space-around'}
+                          justifyContent={'center'}
+                          alignItems="center"
+                          justify={'space-between'}
                           flexDirection={'row'}
-                          spacing="3"
+                          spacing="9"
                         >
-                          <Stack spacing="3">
-                            <Text
-                              fontSize="sm"
-                              fontWeight="semibold"
-                              color="accent"
-                            >
-                              {post.category}
-                            </Text>
-                            <Heading size="xs">{post.name}</Heading>
-                            <Text color="muted">{post.description}</Text>
-                          </Stack>
-                          {`${user._id}` === `${post.createdBy}` && (
-                            <Button
-                              backgroundColor={mode('orange.700', 'blue.600')}
-                              px={'15px'}
-                              as={NavLink}
-                              to={`/kicks/${post._id}/edit`}
-                            >
-                              Edit
-                            </Button>
-                          )}
+                          <Box
+                            flexDirection={'row'}
+                            justifyContent="space-around"
+                            alignItems={'center'}
+                            display="flex"
+                            spacing="8"
+                          >
+                            {buckets.length && (
+                              <>
+                                <FormControl>
+                                  <Select
+                                    onChange={e => {
+                                      setBucketId(e.target.value);
+                                    }}
+                                    placeholder="Select Bucket"
+                                  >
+                                    {buckets.length &&
+                                      buckets.map(singleBucket => {
+                                        return (
+                                          <option value={singleBucket._id}>
+                                            {singleBucket.name}
+                                          </option>
+                                        );
+                                      })}
+                                  </Select>
+                                </FormControl>
+                                <Button
+                                  backgroundColor={mode(
+                                    'gray.700',
+                                    'orange.600'
+                                  )}
+                                  color={mode('white', 'white')}
+                                  variant={'solid'}
+                                  type="submit"
+                                  onClick={e => handleAddKick(post._id, e)}
+                                >
+                                  Add
+                                </Button>
+                              </>
+                            )}
+                          </Box>
                         </Stack>
                       </Stack>
-                    </Link>
+                    </Stack>
                   </Box>
                 ))
               ) : (
