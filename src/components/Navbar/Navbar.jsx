@@ -81,7 +81,7 @@ const Navbar = () => {
                     <HStack spacing="3">
                       <Button
                         as={NavLink}
-                        to={`/profile/${user?._id}`}
+                        to={`/user/${user._id}`}
                         color="white"
                         variant="ghost"
                       >
@@ -146,7 +146,7 @@ const Navbar = () => {
                     <MenuItem as={NavLink} to="/kicks">
                       Kicks
                     </MenuItem>
-                    <MenuItem as={NavLink} to={`/profile/${user._id}`}>
+                    <MenuItem as={NavLink} to={`/user/${user._id}`}>
                       Profile
                     </MenuItem>
                     <MenuItem onClick={logOutUser}>Log out</MenuItem>

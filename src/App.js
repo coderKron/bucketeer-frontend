@@ -33,7 +33,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route
-            path="/profile/:userId"
+            path="/user/:userId"
             element={
               <IsPrivate>
                 <Profile />
