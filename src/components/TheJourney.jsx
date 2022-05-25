@@ -253,7 +253,7 @@ const TheJourney = () => {
                   objectFit="cover"
                   w="full"
                   h="full"
-                  src="https://images.unsplash.com/photo-1609921205586-7e8a57516512?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTl8fGRlc2lnbmVyfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
+                  src="/images/enjoy-life.jpeg"
                   alt="Holding phone with app installed"
                 />
               </Center>
