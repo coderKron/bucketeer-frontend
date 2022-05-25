@@ -20,6 +20,7 @@ import EditBucket from './components/EditBucket/EditBucket';
 import EditKick from './components/EditKick/EditKick';
 import EditProfile from './components/EditProfile/EditProfile';
 import OurStory from './components/OurStory/OurStory';
+import TheJourney from './components/TheJourney/TheJourney';
 
 function App() {
   const { isLoggedIn, isLoading, user } = useContext(AuthContext);
@@ -115,7 +116,7 @@ function App() {
             path="/story"
             element={
               <IsPrivate>
-                <OurStory />
+                <TheJourney />
               </IsPrivate>
             }
           />
