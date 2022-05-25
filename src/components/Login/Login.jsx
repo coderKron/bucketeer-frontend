@@ -34,11 +34,21 @@ const Login = () => {
     window.scrollTo(0, 0);
   }, []);
   const [showPassword, setShowPassword] = React.useState(false);
+  const [rememberMe, setRememberMe] = React.useState(true);
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const icon = useColorModeValue('gray.600', 'gray.600');
   const { error, errorMessage, loading, login } = useLogin();
   const { colorMode, toggleColorMode } = useColorMode();
+
+  const handleRememberMe = () => {
+    if (rememberMe) {
+      setRememberMe(false);
+    } else if (!rememberMe) {
+      setRememberMe(true);
+    }
+  };
+
   const handleEmail = e => {
     setEmail(e.target.value);
   };
@@ -52,6 +62,7 @@ const Login = () => {
     const userDetails = {
       email,
       password,
+      rememberMe,
     };
     login(userDetails);
   };
@@ -179,7 +190,9 @@ const Login = () => {
                 </FormControl>
               </Stack>
               <HStack justify="space-between">
-                <Checkbox defaultChecked>Remember me</Checkbox>
+                <Checkbox onClick={handleRememberMe} defaultChecked>
+                  Remember me
+                </Checkbox>
                 <Button variant="link" colorScheme="blue" size="sm">
                   Forgot password?
                 </Button>
