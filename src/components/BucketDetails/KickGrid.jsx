@@ -1,7 +1,7 @@
 import { SimpleGrid } from '@chakra-ui/react';
 import * as React from 'react';
 
-export const KickGrid = props => {
+export const KickGridBucket = props => {
   const columns = React.useMemo(() => {
     const count = React.Children.toArray(props.children).filter(
       React.isValidElement

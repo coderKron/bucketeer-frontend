@@ -19,7 +19,7 @@ import { useUpdateKicksFromBucket } from '../../hooks/useUpdateKicksFromBucket';
 
 import { FavouriteButton } from './FavouriteButton';
 
-export const KickCard = props => {
+export const KickCardBucket = props => {
   const { kick, bucketId, rootProps } = props;
   const { name, _id, pictures, category, description, createdBy } = kick;
   const { updateKicksFromBucket } = useUpdateKicksFromBucket();
@@ -31,7 +31,7 @@ export const KickCard = props => {
   };
   return (
     <Stack
-      maxW={'20%'}
+      maxW={'100%%'}
       spacing={useBreakpointValue({
         base: '4',
         md: '5',
@@ -39,7 +39,7 @@ export const KickCard = props => {
       {...rootProps}
     >
       <Box position="relative">
-        <AspectRatio ratio={4 / 3}>
+        <AspectRatio ratio={5 / 3}>
           <Image
             src={pictures}
             alt={name}

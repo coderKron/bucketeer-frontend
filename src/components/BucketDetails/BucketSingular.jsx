@@ -25,8 +25,8 @@ import { useGetBucketDetails } from '../../hooks/useGetBucketDetails';
 
 import Loading from '../Loading';
 import Error from '../Error';
-import { KickCard } from './KickCard';
-import { KickGrid } from './KickGrid';
+import { KickCardBucket } from './KickCard';
+import { KickGridBucket } from './KickGrid';
 
 export default function BucketSingular() {
   React.useEffect(() => {
@@ -172,7 +172,7 @@ export default function BucketSingular() {
                     <Divider />
                     <Stack>
                       <Box
-                        maxW="100%"
+                        maxWidth={bucket.kicks?.length > 1 ? '100%' : '25%'}
                         px={{
                           base: '4',
                           md: '8',
@@ -184,17 +184,17 @@ export default function BucketSingular() {
                           lg: '12',
                         }}
                       >
-                        <KickGrid>
+                        <KickGridBucket>
                           {bucket.kicks?.map(kick => {
                             return (
-                              <KickCard
+                              <KickCardBucket
                                 key={kick._id}
                                 kick={kick}
                                 bucketId={bucketId}
                               />
                             );
                           })}
-                        </KickGrid>
+                        </KickGridBucket>
                       </Box>
                     </Stack>
                   </Box>

@@ -11,6 +11,7 @@ import {
   Input,
   Stack,
   StackDivider,
+  useColorModeValue as mode,
   Text,
   Textarea,
   Image,
@@ -455,7 +456,13 @@ function CreateKicks() {
             </FormControl>
 
             <Flex direction="row-reverse">
-              <Button onClick={handleSubmit} type="submit" variant="primary">
+              <Button
+                onClick={handleSubmit}
+                backgroundColor={mode('orange.200', 'teal.400')}
+                color="white"
+                type="submit"
+                variant="primary"
+              >
                 Save
               </Button>
             </Flex>

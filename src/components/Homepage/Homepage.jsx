@@ -99,6 +99,8 @@ function Homepage() {
               </Heading>
               {!isLoggedIn ? (
                 <CTAButton
+                  backgroundColor={mode('orange.200', 'teal.400')}
+                  color="white"
                   as={NavLink}
                   to={'/signup'}
                   w={{
@@ -110,6 +112,8 @@ function Homepage() {
                 </CTAButton>
               ) : (
                 <CTAButton
+                  backgroundColor={mode('orange.200', 'teal.400')}
+                  color="white"
                   as={NavLink}
                   to={'/buckets'}
                   w={{
@@ -284,11 +288,11 @@ function Homepage() {
               </Stack>
               {!isMobile && (
                 <Button
-                  backgroundColor={mode('yellow.800', 'blue.600')}
+                  backgroundColor={mode('orange.200', 'teal.400')}
                   color="white"
                   as={NavLink}
                   to="/kicks"
-                  variant="primary"
+                  variant="ghost"
                   size="lg"
                 >
                   Show all
