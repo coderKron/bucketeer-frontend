@@ -187,28 +187,76 @@ function CreateKicks() {
               spacing="3"
             >
               <option value={'select Bucket'}>Continent where Kick is</option>
-              <option key={'Europe'} value={'Europe'}>
+              <option
+                key={'Europe'}
+                onClick={e => {
+                  setContinent(e.target.value);
+                }}
+                value={'Europe'}
+              >
                 Europe
               </option>
-              <option key={'Asia'} value={'Asia'}>
+              <option
+                key={'Asia'}
+                onClick={e => {
+                  setContinent(e.target.value);
+                }}
+                value={'Asia'}
+              >
                 Asia
               </option>
-              <option key={'North-America'} value={'North-America'}>
+              <option
+                key={'North-America'}
+                onClick={e => {
+                  setContinent(e.target.value);
+                }}
+                value={'North-America'}
+              >
                 North-America
               </option>
-              <option key={'South-America'} value={'South-America'}>
+              <option
+                key={'South-America'}
+                onClick={e => {
+                  setContinent(e.target.value);
+                }}
+                value={'South-America'}
+              >
                 South-America
               </option>
-              <option key={'Middle-East'} value={'Middle-East'}>
+              <option
+                key={'Middle-East'}
+                onClick={e => {
+                  setContinent(e.target.value);
+                }}
+                value={'Middle-East'}
+              >
                 Middle-East
               </option>
-              <option key={'Africa'} value={'Africa'}>
+              <option
+                key={'Africa'}
+                onClick={e => {
+                  setContinent(e.target.value);
+                }}
+                value={'Africa'}
+              >
                 Africa
               </option>
-              <option key={'Australia'} value={'Australia'}>
+              <option
+                key={'Australia'}
+                onClick={e => {
+                  setContinent(e.target.value);
+                }}
+                value={'Australia'}
+              >
                 Australia
               </option>
-              <option key={'Antarctica'} value={'Antarctica'}>
+              <option
+                key={'Antarctica'}
+                onClick={e => {
+                  setContinent(e.target.value);
+                }}
+                value={'Antarctica'}
+              >
                 Antarctica
               </option>
             </Select>
