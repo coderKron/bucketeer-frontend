@@ -217,7 +217,7 @@ const Buckets = () => {
                           colorScheme={mode('white', 'black')}
                           variant={'solid'}
                         >
-                          <NavLink to="/bucket/create">Details</NavLink>
+                          <NavLink to="/buckets/create">Details</NavLink>
                         </Button>
                       </Stack>
                     </Stack>
@@ -267,7 +267,7 @@ const Buckets = () => {
                           colorScheme={mode('white', 'black')}
                           variant={'solid'}
                         >
-                          <NavLink to="/bucket/create">Details</NavLink>
+                          <NavLink to="/buckets/create">Details</NavLink>
                         </Button>
                       </Stack>
                     </Stack>
