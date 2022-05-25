@@ -112,6 +112,7 @@ function App() {
               </IsPrivate>
             }
           />
+          <Route path="/story" element={<OurStory />} />
           <Route path="/journey" element={<TheJourney />} />
         </Routes>
         <Grid>
