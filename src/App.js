@@ -24,6 +24,7 @@ import TheJourney from './components/TheJourney';
 import JournalSingular from './components/Journal/JournalSingular'
 import CreateJournal from './components/CreateJournal/CreateJournal';
 import CreateStory from './components/CreateStory/CreateStory'
+import JournalAll from './components/Journal/JournalAll'
 
 function App() {
   const { isLoggedIn, isLoading, user } = useContext(AuthContext);
@@ -137,6 +138,13 @@ function App() {
               <IsPrivate>
                 <CreateStory/>
               </IsPrivate>
+            }
+          />
+            <Route
+            path="/journal/"
+            element={
+              <JournalAll/>
+             
             }
           />
           <Route path="/story" element={<OurStory />} />
