@@ -21,6 +21,9 @@ import EditKick from './components/EditKick/EditKick';
 import EditProfile from './components/EditProfile/EditProfile';
 import OurStory from './components/OurStory';
 import TheJourney from './components/TheJourney';
+import JournalSingular from './components/Journal/JournalSingular'
+import CreateJournal from './components/CreateJournal/CreateJournal';
+import CreateStory from './components/CreateStory/CreateStory'
 
 function App() {
   const { isLoggedIn, isLoading, user } = useContext(AuthContext);
@@ -109,6 +112,30 @@ function App() {
             element={
               <IsPrivate>
                 <EditProfile />
+              </IsPrivate>
+            }
+          />
+            <Route
+            path="/journal/:journalId"
+            element={
+              <IsPrivate>
+                <JournalSingular/>
+              </IsPrivate>
+            }
+          />
+          <Route
+            path="/journal/create"
+            element={
+              <IsPrivate>
+                <CreateJournal/>
+              </IsPrivate>
+            }
+          />
+              <Route
+            path="/journal/story/:journalId"
+            element={
+              <IsPrivate>
+                <CreateStory/>
               </IsPrivate>
             }
           />
