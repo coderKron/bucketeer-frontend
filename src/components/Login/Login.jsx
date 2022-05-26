@@ -25,7 +25,7 @@ import {
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
-import { OAuthButtonGroup } from './OauthButtonGroup';
+
 import { useLogin } from '../../hooks/useLogin';
 import { useColorMode } from '@chakra-ui/react';
 
@@ -205,14 +205,6 @@ const Login = () => {
                 >
                   Sign in
                 </Button>
-                <HStack>
-                  <Divider />
-                  <Text fontSize="sm" whiteSpace="nowrap" color="muted">
-                    or continue with
-                  </Text>
-                  <Divider />
-                </HStack>
-                <OAuthButtonGroup />
               </Stack>
             </Stack>
           </Box>

@@ -22,8 +22,6 @@ import {
   AlertDescription,
 } from '@chakra-ui/react';
 import * as React from 'react';
-import { GoogleIcon } from './ProviderIcons';
-import { GitHubIcon } from './ProviderIcons';
 import { FaPlaneDeparture } from 'react-icons/fa';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { Link } from 'react-router-dom';
@@ -175,20 +173,6 @@ const Signup = () => {
                   variant="ghost"
                 >
                   Create account
-                </Button>
-                <Button
-                  variant="secondary"
-                  leftIcon={<GoogleIcon boxSize="5" />}
-                  iconSpacing="3"
-                >
-                  Sign up with Google
-                </Button>
-                <Button
-                  variant="secondary"
-                  leftIcon={<GitHubIcon boxSize="5" />}
-                  iconSpacing="3"
-                >
-                  Sign up with Github
                 </Button>
               </Stack>
             </Box>

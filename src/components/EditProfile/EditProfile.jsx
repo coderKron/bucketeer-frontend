@@ -101,7 +101,7 @@ const EditProfile = () => {
       })
       .then(() => {
         setLoading(false);
-        navigate(`/profile/${userId}`);
+        navigate(`/user/${userId}`);
       })
       .catch(() => {
         setLoading(false);
@@ -213,21 +213,14 @@ const EditProfile = () => {
                           required
                           id="picture"
                           type="file"
-                          hidden
                           defaultValue={profilePicture}
                           onChange={e => {
                             handleFileInputChange(e);
                           }}
                         />
-                        <Button variant="link" colorScheme="blue" size="sm">
-                          Click to upload
-                        </Button>
-                        <Text fontSize="sm" color="muted">
-                          or drag and drop
-                        </Text>
                       </HStack>
                       <Text fontSize="xs" color="muted">
-                        PNG, JPG or GIF up to 2MB
+                        PNG and JPG up to 2MB
                       </Text>
                     </VStack>
                   </VStack>

@@ -23,6 +23,7 @@ import DarkLogo from '../Logos/DarkLogo';
 import LightLogo from '../Logos/LightLogo';
 import { ResourcesPopoverBuckets } from './RourcesPopoverBuckets';
 import { ResourcesPopoverKicks } from './RourcesPopoverKicks';
+import { ResourcesPopoverJournals } from './RourcesPopoverJournals';
 
 const Navbar = () => {
   const isDesktop = useBreakpointValue({
@@ -81,6 +82,7 @@ const Navbar = () => {
 
                       <ResourcesPopoverBuckets />
                       <ResourcesPopoverKicks />
+                      <ResourcesPopoverJournals />
                     </ButtonGroup>
                     <HStack spacing="3">
                       <Button
@@ -139,16 +141,20 @@ const Navbar = () => {
                 <MenuButton as={IconButton} icon={<FiMenu />} />
                 {isLoggedIn && !isLoading && (
                   <MenuList>
-                    <MenuItem as={NavLink} to="/">
-                      Home
+                    <MenuItem as={NavLink} to="/journey">
+                      The Journey
                     </MenuItem>
-                    <MenuItem>The Journey</MenuItem>
-                    <MenuItem>Our story</MenuItem>
+                    <MenuItem as={NavLink} to={'/story'}>
+                      Our story
+                    </MenuItem>
                     <MenuItem as={NavLink} to="/buckets">
                       Buckets
                     </MenuItem>
                     <MenuItem as={NavLink} to="/kicks">
                       Kicks
+                    </MenuItem>
+                    <MenuItem as={NavLink} to="/journal">
+                      Journals
                     </MenuItem>
                     <MenuItem as={NavLink} to={`/user/${user._id}`}>
                       Profile

@@ -46,14 +46,19 @@ function Homepage() {
   };
   return (
     <>
-      <Box p={'0'} minH={'auto'} as="section" width={'100%'}>
-        <Container p={'0'} className="App" maxWidth={'100%'}>
-          <video autoPlay loop muted>
-            <source src={videoBucketeer} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </Container>
-      </Box>
+      {isMobile ? (
+        <></>
+      ) : (
+        <Box p={'0'} minH={'auto'} as="section" width={'100%'}>
+          <Container p={'0'} className="App" maxWidth={'100%'}>
+            <video autoPlay loop muted>
+              <source src={videoBucketeer} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </Container>
+        </Box>
+      )}
+
       <Box as="section" pb="24">
         <Box
           bg={backgroundColorBig}

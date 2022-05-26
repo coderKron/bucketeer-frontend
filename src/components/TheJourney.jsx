@@ -143,10 +143,11 @@ const TheJourney = () => {
                 }}
               >
                 <Feature
-                  title="Order fulfillment"
+                  title="Create Your Bucket"
                   icon={<HiBadgeCheck color={mode('orange', 'teal')} />}
                 >
-                  You will feel more fulfillment when you enjoy of the now.
+                  Create your Bucket. Think about what you wanna achieve or
+                  visit
                 </Feature>
                 <Feature
                   title="Return Investment"
