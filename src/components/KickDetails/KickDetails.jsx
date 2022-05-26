@@ -159,6 +159,7 @@ export default function Kickdetails() {
                               src={kick.pictures}
                               alt={kick.name}
                               width="full"
+                              maxW={'600px'}
                               height="25rem"
                               objectFit="cover"
                               transition="all 0.2s"
