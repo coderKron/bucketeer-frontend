@@ -21,73 +21,68 @@ import {
   useBreakpointValue,
   Select,
 } from '@chakra-ui/react';
-import { useCreateStory} from '../../hooks/useCreateStory';
+import { useCreateStory } from '../../hooks/useCreateStory';
 import axios from 'axios';
-import {AuthContext} from '../../context/auth.context'
+import { AuthContext } from '../../context/auth.context';
 import { useGetSelectKicks } from '../../hooks/useGetSelectKicks';
-import {useParams} from 'react-router-dom'
-import {Navigate} from 'react-router'
+import { useParams } from 'react-router-dom';
+import { Navigate } from 'react-router';
 
 function CreateStory() {
-    const [title, setTitle] = useState("")
-    const [kickId, setKickId] = useState("")
-    const [content, setContent] = useState("")
-    const [pictures, setPictures] = useState(null)
-    const [isUploading, setIsUploading] = useState(false);
-    const {error, errorMessage, loading, createNewStory} = useCreateStory();
-    const {getToken} = useContext(AuthContext);
-    const {kicks} = useGetSelectKicks();
-    const storedToken = getToken();
-    const {journalId} = useParams()
-   
+  const [title, setTitle] = useState('');
+  const [kickId, setKickId] = useState('');
+  const [content, setContent] = useState('');
+  const [pictures, setPictures] = useState(null);
+  const [isUploading, setIsUploading] = useState(false);
+  const { error, errorMessage, loading, createNewStory } = useCreateStory();
+  const { getToken, user } = useContext(AuthContext);
+  const { kicks } = useGetSelectKicks();
+  const storedToken = getToken();
+  const { journalId } = useParams();
 
-    const isDesktop = useBreakpointValue({
-        base: false,
-        lg: true,
-      });
-    
-      console.log(kicks)
+  const isDesktop = useBreakpointValue({
+    base: false,
+    lg: true,
+  });
 
-    const handleSubmit = e => {
-        const storyData = {
-          title,
-          kickId,
-          content,
-          pictures,
-          journalId,
-        };
-        console.log(storyData);
-        createNewStory(storyData);
-    
-        setTitle('');
-        setKickId('');
-        setContent('');
-        setPictures(null);
-        
-      };
-       
+  console.log(kicks);
 
-    const handleFileInputChange = e => {
-        setIsUploading(true);
-        const imageData = new FormData();
-        imageData.append('pictures', e.target.files[0]);
-    
-        axios
-          .post(`${process.env.REACT_APP_URL}/api/upload`, imageData, {
-            headers: { Authorization: `Bearer ${storedToken}` },
-          })
-          .then(res => {
-            setPictures(res.data.secure_url);
-            setIsUploading(false);
-          })
-          .catch(error => console.log(error));
-      };
-    
+  const handleSubmit = e => {
+    const storyData = {
+      title,
+      kickId,
+      content,
+      pictures,
+      journalId,
+    };
+    console.log(storyData);
+    createNewStory(storyData);
 
+    setTitle('');
+    setKickId('');
+    setContent('');
+    setPictures(null);
+  };
 
-    return (
-        <>
-            {error && (
+  const handleFileInputChange = e => {
+    setIsUploading(true);
+    const imageData = new FormData();
+    imageData.append('pictures', e.target.files[0]);
+
+    axios
+      .post(`${process.env.REACT_APP_URL}/api/upload`, imageData, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
+      .then(res => {
+        setPictures(res.data.secure_url);
+        setIsUploading(false);
+      })
+      .catch(error => console.log(error));
+  };
+
+  return (
+    <>
+      {error && (
         <Alert textAlign={'center'} justifyContent={'center'} status="error">
           <AlertIcon />
           <AlertTitle>Could not Create Story:</AlertTitle>
@@ -147,7 +142,6 @@ function CreateStory() {
               </Stack>
             </FormControl>
 
-
             {/* <Select spacing="3">
               <option
                 onChange={e => {
@@ -166,7 +160,7 @@ function CreateStory() {
                 )}
                */}
             {/* </Select> */}
-           <FormControl id="picture">
+            <FormControl id="picture">
               <Stack
                 direction={{
                   base: 'column',
@@ -220,7 +214,7 @@ function CreateStory() {
                 <Box>
                   <FormLabel variant="inline">Story</FormLabel>
                   <FormHelperText mt="0" color="muted">
-                    Write what you did, share your experiences. 
+                    Write what you did, share your experiences.
                   </FormHelperText>
                 </Box>
                 <Textarea
@@ -245,9 +239,7 @@ function CreateStory() {
           </Stack>
         </Stack>
       </Container>
-
-        </>
-    )
-
+    </>
+  );
 }
 export default CreateStory;

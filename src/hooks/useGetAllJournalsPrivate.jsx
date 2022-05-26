@@ -1,24 +1,25 @@
 import axios from 'axios';
 import { useState, useEffect, useContext } from 'react';
-import { useParams } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
 
-export function useGetJournalDetails() {
+export function useGetAllJournalsPrivate() {
   const [loading, setLoading] = useState(false);
-  const [journal, setJournal] = useState({});
+  const [journal, setJournal] = useState([{}]);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const { getToken, isLoggedIn } = useContext(AuthContext);
-  const { journalId } = useParams();
+  const { getToken } = useContext(AuthContext);
 
   useEffect(() => {
-    const storedToken = getToken();
     setLoading(true);
+    const storedToken = getToken();
     axios
-      .get(`${process.env.REACT_APP_URL}/api/journal/${journalId}`)
+      .get(`${process.env.REACT_APP_URL}/api/journal/private`, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
       .then(response => {
         setLoading(false);
         setJournal(response.data);
+        console.log(response.data);
       })
       .catch(error => {
         const errorDescription = error.response.data.message;
@@ -26,7 +27,7 @@ export function useGetJournalDetails() {
         setLoading(false);
         setError(false);
       });
-  }, [getToken, journalId, isLoggedIn]);
+  }, []);
 
   return { journal, error, errorMessage, loading };
 }

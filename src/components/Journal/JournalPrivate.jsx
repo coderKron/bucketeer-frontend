@@ -1,7 +1,6 @@
 import Loading from '../Loading';
 import Error from '../Error';
 import { useParams, NavLink } from 'react-router-dom';
-import { AuthContext } from '../../context/auth.context';
 import {
   Box,
   Heading,
@@ -14,27 +13,25 @@ import {
   Link,
   Header,
   UnorderedList,
-  ListItem,
   Alert,
   AlertIcon,
+  ListItem,
   AlertTitle,
   HStack,
   VStack,
   AlertDescription,
   Skeleton,
-  Avatar,
   SimpleGrid,
   useBreakpointValue,
   Divider,
 } from '@chakra-ui/react';
-import { useGetAllJournals } from '../../hooks/useGetAllJournals';
+import { useGetAllJournalsPrivate } from '../../hooks/useGetAllJournalsPrivate';
 import { JournalCard } from './JournalCard';
-import { useContext } from 'react';
 
-function JournalAll() {
-  const { journal, error, errorMessage, loading } = useGetAllJournals();
+function JournalListPrivate() {
+  const { journal, error, errorMessage, loading } = useGetAllJournalsPrivate();
   const { title, journalId } = journal;
-  const { isLoggedIn } = useContext(AuthContext);
+
   return (
     <>
       {loading ? (
@@ -91,9 +88,9 @@ function JournalAll() {
                       lg: 8,
                     }}
                   >
-                    <Stack alignItems="center">
-                      <Heading marginTop="10">{title}</Heading>
-                    </Stack>
+                    {/* <Stack alignItems="center">
+                  <Heading marginTop="10">{title}</Heading>
+                </Stack> */}
 
                     {journal.map(e => {
                       return (
@@ -103,25 +100,8 @@ function JournalAll() {
                             borderRadius="lg"
                             minH={'30'}
                             backgroundColor={mode('orange.100', 'teal.700')}
-                            alignItems="center"
                           >
-                            <VStack marginBottom={'5px'}>
-                              <HStack>
-                                <Avatar
-                                  src={e.createdBy?.profilePicture}
-                                  alt="profile picture"
-                                />
-                                <Text>Created By: {e.createdBy?.userName}</Text>
-                              </HStack>
-                              <Divider />
-                              <Stack justifyContent={'center'}>
-                                <Heading fontWeight="bold">{e.title}</Heading>
-                              </Stack>
-                            </VStack>
-                            <HStack
-                              marginBottom={'5px'}
-                              justifyContent={'center'}
-                            >
+                            <HStack justifyContent={'center'}>
                               {e.story?.slice(0, 3).map(element => {
                                 return (
                                   <Stack spacing="5px">
@@ -138,13 +118,11 @@ function JournalAll() {
                               })}
                             </HStack>
                             <Stack
-                              spacing="1"
+                              spacing="10"
                               alignItems="center"
                               marginBottom="10"
                             >
-                              <Text fontWeight={'semibold'}>
-                                This Journal contains the following stories
-                              </Text>
+                              <Heading fontWeight="bold">{e.title}</Heading>
                               <UnorderedList>
                                 {e.story?.map((y, i) => {
                                   return (
@@ -180,32 +158,15 @@ function JournalAll() {
                     alignItems={'center'}
                     direction="column"
                   >
-                    {isLoggedIn ? (
-                      <Button
-                        as={NavLink}
-                        to={'/journal/create'}
-                        backgroundColor={mode('orange.300', 'teal.400')}
-                        color={mode('white', 'white')}
-                        variant={'solid'}
-                      >
-                        Add Journal
-                      </Button>
-                    ) : (
-                      <>
-                        <Text>
-                          You need to be logged in to create a Journal
-                        </Text>
-                        <Button
-                          as={NavLink}
-                          to={'/login'}
-                          backgroundColor={mode('orange.300', 'teal.400')}
-                          color={mode('white', 'white')}
-                          variant={'solid'}
-                        >
-                          Login
-                        </Button>
-                      </>
-                    )}
+                    <Button
+                      as={NavLink}
+                      to={'/journal/create'}
+                      backgroundColor={mode('orange.300', 'teal.400')}
+                      color={mode('white', 'white')}
+                      variant={'solid'}
+                    >
+                      Add Journal
+                    </Button>
                   </Stack>
                 </Stack>
               </Stack>
@@ -219,4 +180,4 @@ function JournalAll() {
   );
 }
 
-export default JournalAll;
+export default JournalListPrivate;

@@ -1,6 +1,7 @@
 import Loading from '../Loading';
 import Error from '../Error';
 import { useParams, NavLink } from 'react-router-dom';
+import { AuthContext } from '../../context/auth.context';
 import {
   Box,
   Heading,
@@ -14,16 +15,19 @@ import {
   AlertIcon,
   AlertTitle,
   HStack,
+  Text,
   AlertDescription,
   useBreakpointValue,
 } from '@chakra-ui/react';
 import { useGetJournalDetails } from '../../hooks/useGetJournalDetails';
 import { StoryBox } from './StoryBox';
+import { useContext } from 'react';
 
 function BlogSingular() {
   const { journalId } = useParams();
   const { journal, error, errorMessage, loading } = useGetJournalDetails();
   const { title } = journal;
+  const { isLoggedIn } = useContext(AuthContext);
 
   const isMobile = useBreakpointValue({
     base: true,
@@ -66,14 +70,9 @@ function BlogSingular() {
                 borderRadius="lg"
                 color={mode('black', 'white')}
               >
-              <Stack alignItems="center" >
-                
-                <Heading marginTop="1" >
-                     
-                    {title}
-                  
-                </Heading>
-              </Stack>
+                <Stack alignItems="center">
+                  <Heading marginTop="1">{title}</Heading>
+                </Stack>
                 <HStack justifyContent={'center'}>
                   <Stack spacing="8">
                     <Stack
@@ -92,15 +91,32 @@ function BlogSingular() {
                         );
                       })}
 
-                      <Button
-                        as={NavLink}
-                        to={`/journal/story/${journalId}`}
-                        backgroundColor={mode('orange.700', 'gray.800')}
-                        color={mode('white', 'white')}
-                        variant={'solid'}
-                      >
-                        Add Story
-                      </Button>
+                      {isLoggedIn ? (
+                        <Button
+                          as={NavLink}
+                          to={`/journal/story/${journalId}`}
+                          backgroundColor={mode('orange.700', 'gray.800')}
+                          color={mode('white', 'white')}
+                          variant={'solid'}
+                        >
+                          Add Story
+                        </Button>
+                      ) : (
+                        <>
+                          <Text>
+                            You need to be logged in to create a Journal
+                          </Text>
+                          <Button
+                            as={NavLink}
+                            to={'/login'}
+                            backgroundColor={mode('orange.300', 'teal.400')}
+                            color={mode('white', 'white')}
+                            variant={'solid'}
+                          >
+                            Login
+                          </Button>
+                        </>
+                      )}
                     </Stack>
                   </Stack>
                 </HStack>

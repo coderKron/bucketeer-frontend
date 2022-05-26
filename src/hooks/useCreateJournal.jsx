@@ -16,12 +16,9 @@ export const useCreateJournal = () => {
     const storedToken = getToken();
     setLoading(true);
     axios
-      .post(
-        `${process.env.REACT_APP_URL}/api/journal`, journalInformation,
-        {
-          headers: { Authorization: `Bearer ${storedToken}` },
-        }
-      )
+      .post(`${process.env.REACT_APP_URL}/api/journal`, journalInformation, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
       .then(() => {
         setLoading(false);
         toast({
@@ -29,7 +26,7 @@ export const useCreateJournal = () => {
           status: 'success',
           isCloseable: 'true',
         });
-        navigate('/');
+        navigate('/journal/private');
       })
       .catch(() => {
         const errorDescription = error.response.data.message;
