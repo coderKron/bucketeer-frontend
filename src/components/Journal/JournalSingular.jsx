@@ -15,16 +15,20 @@ import {
   AlertTitle,
   HStack,
   AlertDescription,
+  useBreakpointValue,
 } from '@chakra-ui/react';
 import { useGetJournalDetails } from '../../hooks/useGetJournalDetails';
-import { KickGrid } from '../BucketDetails/KickGrid';
-import { StoryCard } from './StoryCard';
 import { StoryBox } from './StoryBox';
 
 function BlogSingular() {
   const { journalId } = useParams();
   const { journal, error, errorMessage, loading } = useGetJournalDetails();
   const { title } = journal;
+
+  const isMobile = useBreakpointValue({
+    base: true,
+    md: false,
+  });
 
   return (
     <>
@@ -90,7 +94,7 @@ function BlogSingular() {
 
                       <Button
                         as={NavLink}
-                        to={'/journal/add'}
+                        to={`/journal/story/${journalId}`}
                         backgroundColor={mode('orange.700', 'gray.800')}
                         color={mode('white', 'white')}
                         variant={'solid'}

@@ -20,7 +20,7 @@ const createNewStory = storyInformation => {
       })
       .then(() => {
         setLoading(false);
-        navigate('/');
+        navigate(`/journal/${storyInformation.journalId}`);
       })
       .catch(error => {
         const errorDescription = error.response.data.message;
