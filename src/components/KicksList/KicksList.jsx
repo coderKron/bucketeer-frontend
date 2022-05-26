@@ -157,80 +157,161 @@ const KicksList = () => {
                 </Container>
               </Box>
 
-              <HStack>
-                <Button
-                  as={NavLink}
-                  to={'/kicks/create'}
-                  variant={'solid'}
-                  backgroundColor={mode('orange.500', 'blue.600')}
-                >
-                  Create new Kick
-                </Button>
-                <VStack>
-                  <Select
-                    onChange={e => {
-                      console.log(e.target.value);
-                      handleFilterByContinent(e.target.value);
-                    }}
-                    spacing="3"
+              {!isMobile ? (
+                <HStack>
+                  <Button
+                    as={NavLink}
+                    to={'/kicks/create'}
+                    variant={'solid'}
+                    backgroundColor={mode('orange.300', 'teal.400')}
+                    color={'white'}
                   >
-                    <option value={'all'}>Continent of Kick</option>
+                    Create new Kick
+                  </Button>
+                  <VStack>
+                    <Select
+                      onChange={e => {
+                        console.log(e.target.value);
+                        handleFilterByContinent(e.target.value);
+                      }}
+                      spacing="3"
+                    >
+                      <option value={'all'}>Continent of Kick</option>
 
-                    <option key={'Europe'} value={'Europe'}>
-                      Europe
-                    </option>
-                    <option key={'Asia'} value={'Asia'}>
-                      Asia
-                    </option>
-                    <option key={'North-America'} value={'North-America'}>
-                      North-America
-                    </option>
-                    <option key={'South-America'} value={'South-America'}>
-                      South-America
-                    </option>
-                    <option key={'Middle-East'} value={'Middle-East'}>
-                      Middle-East
-                    </option>
-                    <option key={'Africa'} value={'Africa'}>
-                      Africa
-                    </option>
-                    <option key={'Australia'} value={'Australia'}>
-                      Australia
-                    </option>
-                    <option key={'Antarctica'} value={'Antarctica'}>
-                      Antarctica
-                    </option>
-                  </Select>
-                </VStack>
-                <VStack>
-                  <Select
-                    onChange={e => {
-                      handleFilterByCategory(e.target.value);
-                    }}
-                    spacing="3"
+                      <option key={'Europe'} value={'Europe'}>
+                        Europe
+                      </option>
+                      <option key={'Asia'} value={'Asia'}>
+                        Asia
+                      </option>
+                      <option key={'North-America'} value={'North-America'}>
+                        North-America
+                      </option>
+                      <option key={'South-America'} value={'South-America'}>
+                        South-America
+                      </option>
+                      <option key={'Middle-East'} value={'Middle-East'}>
+                        Middle-East
+                      </option>
+                      <option key={'Africa'} value={'Africa'}>
+                        Africa
+                      </option>
+                      <option key={'Australia'} value={'Australia'}>
+                        Australia
+                      </option>
+                      <option key={'Antarctica'} value={'Antarctica'}>
+                        Antarctica
+                      </option>
+                    </Select>
+                  </VStack>
+                  <VStack>
+                    <Select
+                      onChange={e => {
+                        handleFilterByCategory(e.target.value);
+                      }}
+                      spacing="3"
+                    >
+                      <option value={'all'}>Category of Kick</option>
+
+                      <option key={'Chill'} value={'Chill'}>
+                        Chill
+                      </option>
+                      <option key={'Travel'} value={'Travel'}>
+                        Travel
+                      </option>
+                      <option key={'activities'} value={'Activity'}>
+                        Activities
+                      </option>
+                    </Select>
+                  </VStack>
+                  <Button
+                    as={NavLink}
+                    to={'/buckets'}
+                    variant={'solid'}
+                    backgroundColor={mode('orange.300', 'teal.400')}
+                    color={'white'}
                   >
-                    <option value={'all'}>Category of Kick</option>
+                    Go to Buckets
+                  </Button>
+                </HStack>
+              ) : (
+                <VStack>
+                  <Button
+                    as={NavLink}
+                    to={'/kicks/create'}
+                    variant={'solid'}
+                    backgroundColor={mode('orange.300', 'teal.400')}
+                    color={'white'}
+                  >
+                    Create new Kick
+                  </Button>
+                  <VStack>
+                    <Select
+                      onChange={e => {
+                        console.log(e.target.value);
+                        handleFilterByContinent(e.target.value);
+                      }}
+                      spacing="3"
+                    >
+                      <option value={'all'}>Continent of Kick</option>
 
-                    <option key={'Chill'} value={'Chill'}>
-                      Chill
-                    </option>
-                    <option key={'Travel'} value={'Travel'}>
-                      Travel
-                    </option>
-                    <option key={'activities'} value={'Activity'}>
-                      Activities
-                    </option>
-                  </Select>
+                      <option key={'Europe'} value={'Europe'}>
+                        Europe
+                      </option>
+                      <option key={'Asia'} value={'Asia'}>
+                        Asia
+                      </option>
+                      <option key={'North-America'} value={'North-America'}>
+                        North-America
+                      </option>
+                      <option key={'South-America'} value={'South-America'}>
+                        South-America
+                      </option>
+                      <option key={'Middle-East'} value={'Middle-East'}>
+                        Middle-East
+                      </option>
+                      <option key={'Africa'} value={'Africa'}>
+                        Africa
+                      </option>
+                      <option key={'Australia'} value={'Australia'}>
+                        Australia
+                      </option>
+                      <option key={'Antarctica'} value={'Antarctica'}>
+                        Antarctica
+                      </option>
+                    </Select>
+                  </VStack>
+                  <VStack>
+                    <Select
+                      onChange={e => {
+                        handleFilterByCategory(e.target.value);
+                      }}
+                      spacing="3"
+                    >
+                      <option value={'all'}>Category of Kick</option>
+
+                      <option key={'Chill'} value={'Chill'}>
+                        Chill
+                      </option>
+                      <option key={'Travel'} value={'Travel'}>
+                        Travel
+                      </option>
+                      <option key={'activities'} value={'Activity'}>
+                        Activities
+                      </option>
+                    </Select>
+                  </VStack>
+                  <Button
+                    as={NavLink}
+                    to={'/buckets'}
+                    variant={'solid'}
+                    backgroundColor={mode('orange.300', 'teal.400')}
+                    color={'white'}
+                  >
+                    Go to Buckets
+                  </Button>
                 </VStack>
-                <Button
-                  as={NavLink}
-                  to={'/buckets'}
-                  variant={'solid'}
-                  backgroundColor={mode('orange.500', 'blue.600')}
-                >
-                  Go to Buckets
-                </Button>
-              </HStack>
+              )}
             </Stack>
             <SimpleGrid
               padding={'5px'}
