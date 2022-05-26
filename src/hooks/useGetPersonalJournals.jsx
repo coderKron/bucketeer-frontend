@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useState, useEffect, useContext} from 'react';
 import { AuthContext } from '../context/auth.context';
 
-export function useGetJournalDetails() {
+export function useGetPersonalJournals() {
   const [loading, setLoading] = useState(false);
   const [journal, setJournal] = useState({});
   const [error, setError] = useState(false);

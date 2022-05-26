@@ -26,6 +26,7 @@ import axios from 'axios';
 import {AuthContext} from '../../context/auth.context'
 import { useGetSelectKicks } from '../../hooks/useGetSelectKicks';
 import {useParams} from 'react-router-dom'
+import {Navigate} from 'react-router'
 
 function CreateStory() {
     const [title, setTitle] = useState("")
@@ -38,6 +39,7 @@ function CreateStory() {
     const {kicks} = useGetSelectKicks();
     const storedToken = getToken();
     const {journalId} = useParams()
+   
 
     const isDesktop = useBreakpointValue({
         base: false,
@@ -61,6 +63,7 @@ function CreateStory() {
         setKickId('');
         setContent('');
         setPictures(null);
+        
       };
        
 
@@ -139,7 +142,7 @@ function CreateStory() {
                   maxW={{
                     md: '3xl',
                   }}
-                  placeholder={'Walking in the Amazones'}
+                  placeholder={'Yours story title'}
                 />
               </Stack>
             </FormControl>

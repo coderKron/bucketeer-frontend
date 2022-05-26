@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
-export function useGetJournalDetails() {
+export function useGetAllJournals() {
   const [loading, setLoading] = useState(false);
-  const [journal, setJournal] = useState({});
+  const [journal, setJournal] = useState([{}]);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -16,6 +16,7 @@ export function useGetJournalDetails() {
       .then(response => {
         setLoading(false);
         setJournal(response.data);
+        console.log(response.data);
       })
       .catch(error => {
         const errorDescription = error.response.data.message;
