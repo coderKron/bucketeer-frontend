@@ -10,11 +10,6 @@ export const links = [
         label: 'Our story',
         href: '/story',
       },
-
-      {
-        label: 'The Journey',
-        href: '/journey',
-      },
     ],
   },
   {
