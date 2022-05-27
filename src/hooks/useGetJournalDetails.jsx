@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useState, useEffect, useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
 
 export function useGetJournalDetails() {
@@ -10,9 +10,9 @@ export function useGetJournalDetails() {
   const [errorMessage, setErrorMessage] = useState('');
   const { getToken, isLoggedIn } = useContext(AuthContext);
   const { journalId } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const storedToken = getToken();
     setLoading(true);
     axios
       .get(`${process.env.REACT_APP_URL}/api/journal/${journalId}`)
@@ -28,5 +28,20 @@ export function useGetJournalDetails() {
       });
   }, [getToken, journalId, isLoggedIn]);
 
-  return { journal, error, errorMessage, loading };
+  const deleteJournal = () => {
+    const storedToken = getToken();
+    axios
+    .delete(`${process.env.REACT_APP_URL}/api/journal/${journalId}`, {
+      headers: { Authorization: `Bearer ${storedToken}` }
+    })
+    .then(response => {
+      navigate(`/journal/private`)
+    })
+    .catch(error => {
+      const errorDescription = error.response.data.message;
+      setErrorMessage(errorDescription);
+    });
+  }
+
+  return { journal, error, errorMessage, loading, deleteJournal };
 }
