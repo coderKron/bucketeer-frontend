@@ -2,12 +2,14 @@ import axios from 'axios';
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../context/auth.context';
 
+
 export function useGetAllJournalsPrivate() {
   const [loading, setLoading] = useState(false);
   const [journal, setJournal] = useState([{}]);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const { getToken } = useContext(AuthContext);
+
 
   useEffect(() => {
     setLoading(true);
@@ -29,5 +31,8 @@ export function useGetAllJournalsPrivate() {
       });
   }, []);
 
+
+
   return { journal, error, errorMessage, loading };
-}
+
+  }

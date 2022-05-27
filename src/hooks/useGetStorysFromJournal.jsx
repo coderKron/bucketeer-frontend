@@ -3,6 +3,8 @@ import { AuthContext } from '../context/auth.context';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
+
+
 function useGetStorysFromJournal() {
   const [loading, setLoading] = useState(false);
   const [story, setStory] = useState([]);
@@ -10,6 +12,8 @@ function useGetStorysFromJournal() {
   const [error, setError] = useState(false);
   const { getToken, isLoggedIn } = useContext(AuthContext);
   const journalId = useParams();
+
+ 
 
   const findJournalStory = () => {
     if (isLoggedIn) {
@@ -31,7 +35,7 @@ function useGetStorysFromJournal() {
         });
     }
   };
+
   return { findJournalStory, story, error, errorMessage, loading };
 }
-
 export default useGetStorysFromJournal;

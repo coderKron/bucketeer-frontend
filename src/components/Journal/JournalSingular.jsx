@@ -25,9 +25,9 @@ import { useContext } from 'react';
 
 function BlogSingular() {
   const { journalId } = useParams();
-  const { journal, error, errorMessage, loading } = useGetJournalDetails();
+  const { journal, error, errorMessage, loading, deleteJournal} = useGetJournalDetails();
   const { title } = journal;
-  const { isLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn, user } = useContext(AuthContext);
 
   const isMobile = useBreakpointValue({
     base: true,
@@ -92,7 +92,13 @@ function BlogSingular() {
                       })}
 
                       {isLoggedIn ? (
-                        <Button
+                        <HStack>
+                       
+                        {journal.createdBy === user._id ?  
+                        
+                        (
+                          <>
+                          <Button
                           as={NavLink}
                           to={`/journal/story/${journalId}`}
                           backgroundColor={mode('orange.700', 'gray.800')}
@@ -101,6 +107,23 @@ function BlogSingular() {
                         >
                           Add Story
                         </Button>
+                        <Button
+                      onClick={deleteJournal}
+                      to={'/journal/private'}
+                      backgroundColor={mode('orange.300', 'teal.400')}
+                      color={mode('white', 'white')}
+                      variant={'solid'}
+                    >
+                      Delete Journal
+                    </Button>
+                    </>
+                    ) 
+                    : (
+                      <>
+
+                    </>)
+                    }
+                        </HStack>
                       ) : (
                         <>
                           <Text>
@@ -117,6 +140,18 @@ function BlogSingular() {
                           </Button>
                         </>
                       )}
+                      <Stack>
+                      <Button
+                            as={NavLink}
+                            to={'/journal/public'}
+                            backgroundColor={mode('orange.300', 'teal.400')}
+                            color={mode('white', 'white')}
+                            variant={'solid'}
+                          >
+                            Back
+                          </Button>
+                      </Stack>
+
                     </Stack>
                   </Stack>
                 </HStack>

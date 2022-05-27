@@ -1,36 +1,30 @@
 import Loading from '../Loading';
 import Error from '../Error';
-import { useParams, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import {
   Box,
   Heading,
   Button,
   Image,
-  Text,
   Stack,
   Container,
   useColorModeValue as mode,
-  Link,
-  Header,
   UnorderedList,
   Alert,
   AlertIcon,
   ListItem,
   AlertTitle,
   HStack,
-  VStack,
   AlertDescription,
   Skeleton,
   SimpleGrid,
-  useBreakpointValue,
-  Divider,
 } from '@chakra-ui/react';
 import { useGetAllJournalsPrivate } from '../../hooks/useGetAllJournalsPrivate';
-import { JournalCard } from './JournalCard';
+
 
 function JournalListPrivate() {
   const { journal, error, errorMessage, loading } = useGetAllJournalsPrivate();
-  const { title, journalId } = journal;
+  
 
   return (
     <>
