@@ -54,3 +54,9 @@ Back-end
 ## URL
 
 The URL of the website is [Bucketeer](https://bucketeer.netlify.app).
+
+## Credits
+
+Created by:
+Louise Gabrielle - [LinkedIn](https://www.linkedin.com/in/louise-gabrielle/) - [Github](https://github.com/LouiseGabrielle0/)
+Ruben Poelen - [LinkedIn](https://www.linkedin.com/in/ruben-poelen-10171414a/) - [Github](https://github.com/coderKron/)
