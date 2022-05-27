@@ -170,12 +170,15 @@ const Navbar = () => {
                 )}
                 {!isLoggedIn && !isLoading && (
                   <MenuList>
-                    <MenuItem as={NavLink} to="/">
-                      Home
+                    <MenuItem as={NavLink} to="/journey">
+                      The Journey
                     </MenuItem>
-                    <MenuItem>The Journey</MenuItem>
-                    <MenuItem>Our story</MenuItem>
-
+                    <MenuItem as={NavLink} to={'/story'}>
+                      Our story
+                    </MenuItem>
+                    <MenuItem as={NavLink} to="/journal/public">
+                      Public: Journals
+                    </MenuItem>
                     <MenuItem as={NavLink} to="/login">
                       Login
                     </MenuItem>
