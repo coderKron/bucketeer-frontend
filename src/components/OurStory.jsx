@@ -17,12 +17,16 @@ import {
 } from '@chakra-ui/react';
 import * as React from 'react';
 import { NavLink } from 'react-router-dom';
+import { useEffect } from 'react';
 import { HiArrowRight } from 'react-icons/hi';
 import { AuthContext } from '../context/auth.context';
 import { members } from './OurStoryComponents/data';
 import { SquareImage } from './OurStoryComponents/Squarelmage';
 
 const OurStory = () => {
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const { user } = React.useContext(AuthContext);
   return (
     <>

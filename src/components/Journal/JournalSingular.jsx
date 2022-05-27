@@ -2,6 +2,7 @@ import Loading from '../Loading';
 import Error from '../Error';
 import { useParams, NavLink } from 'react-router-dom';
 import { AuthContext } from '../../context/auth.context';
+import { useEffect } from 'react';
 import {
   Box,
   Heading,
@@ -24,6 +25,9 @@ import { StoryBox } from './StoryBox';
 import { useContext } from 'react';
 
 function BlogSingular() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const { journalId } = useParams();
   const { journal, error, errorMessage, loading, deleteJournal } =
     useGetJournalDetails();

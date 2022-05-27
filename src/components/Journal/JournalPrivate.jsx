@@ -1,6 +1,7 @@
 import Loading from '../Loading';
 import Error from '../Error';
 import { NavLink } from 'react-router-dom';
+import { useEffect } from 'react';
 import {
   Box,
   Heading,
@@ -21,10 +22,11 @@ import {
 } from '@chakra-ui/react';
 import { useGetAllJournalsPrivate } from '../../hooks/useGetAllJournalsPrivate';
 
-
 function JournalListPrivate() {
   const { journal, error, errorMessage, loading } = useGetAllJournalsPrivate();
-  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>

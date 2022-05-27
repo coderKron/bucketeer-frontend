@@ -10,13 +10,11 @@ import {
   useBreakpointValue,
   useColorModeValue,
 } from '@chakra-ui/react';
-import {StoryCard} from './StoryCard'
-
+import { StoryCard } from './StoryCard';
 
 export function JournalCard(props) {
-  const { journal, rootProps} = props;
-  const { title, visibility, story} = journal;
-  
+  const { journal, rootProps } = props;
+  const { title, visibility, story } = journal;
 
   return (
     <>
@@ -59,7 +57,7 @@ export function JournalCard(props) {
               fontWeight={'medium'}
               color={useColorModeValue('black', 'white')}
             >
-            {visibility}
+              {visibility}
             </Text>
           </Stack>
         </Stack>
@@ -68,5 +66,3 @@ export function JournalCard(props) {
     </>
   );
 }
-
-

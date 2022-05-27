@@ -27,6 +27,9 @@ import Loading from '../Loading';
 import { useGetAllJournalsPrivate } from '../../hooks/useGetAllJournalsPrivate';
 
 const Profile = () => {
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const { isLoggedIn, getToken, user, isLoading } =
     React.useContext(AuthContext);
   const { buckets, loading, error, errorMessage } = useGetBuckets();

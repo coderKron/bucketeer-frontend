@@ -1,4 +1,5 @@
 import Loading from '../Loading';
+import { useEffect } from 'react';
 import Error from '../Error';
 import { useParams, NavLink } from 'react-router-dom';
 import { AuthContext } from '../../context/auth.context';
@@ -32,6 +33,9 @@ import { JournalCard } from './JournalCard';
 import { useContext } from 'react';
 
 function JournalAll() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const { journal, error, errorMessage, loading } = useGetAllJournals();
   const { title, journalId } = journal;
   const { isLoggedIn } = useContext(AuthContext);

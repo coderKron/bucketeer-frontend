@@ -30,6 +30,9 @@ import { useParams } from 'react-router-dom';
 import { Navigate } from 'react-router';
 
 function CreateStory() {
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const [title, setTitle] = useState('');
   const [kickId, setKickId] = useState('');
   const [content, setContent] = useState('');
