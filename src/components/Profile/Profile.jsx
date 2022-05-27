@@ -220,15 +220,17 @@ const Profile = () => {
                             objectFit="cover"
                           />
                         </Box>
-                        <Stack spacing="3">
-                          <Text
-                            fontSize="sm"
-                            fontWeight="semibold"
-                            color="accent"
+                        <Stack alignItems={'center'}>
+                          <Button
+                            as={NavLink}
+                            to={`/buckets/${post._id}`}
+                            backgroundColor={mode('orange.300', 'teal.400')}
                           >
-                            {post.user?.userName}
-                          </Text>
-                          <Heading size="xs">{post.title}</Heading>
+                            Go to Bucket
+                          </Button>
+                        </Stack>
+                        <Stack spacing="3">
+                          <Heading size="xs">Title: {post.name}</Heading>
                           <Text color="muted">{post.description}</Text>
                         </Stack>
                       </Stack>
@@ -363,6 +365,15 @@ const Profile = () => {
                           );
                         })}
                       </HStack>
+                      <Stack alignItems={'center'}>
+                        <Button
+                          as={NavLink}
+                          to={`/journal/${post._id}`}
+                          backgroundColor={mode('orange.300', 'teal.400')}
+                        >
+                          Go to Journal
+                        </Button>
+                      </Stack>
                       <Stack spacing="3">
                         <Heading size="xs">Title: {post.title}</Heading>
                         <Text color="muted">{post.description}</Text>
