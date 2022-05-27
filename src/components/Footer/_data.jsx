@@ -30,8 +30,8 @@ export const links = [
       },
 
       {
-        label: 'Users',
-        href: '/',
+        label: 'Journals',
+        href: '/journal/public',
       },
     ],
   },
