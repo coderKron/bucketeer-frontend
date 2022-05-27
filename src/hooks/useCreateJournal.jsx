@@ -29,7 +29,7 @@ export const useCreateJournal = () => {
           status: 'success',
           isCloseable: 'true',
         });
-        navigate('/');
+        navigate('/journal/private');
       })
       .catch(() => {
         const errorDescription = error.response.data.message;
