@@ -69,7 +69,7 @@ function JournalAll() {
                   alignItems={'center'}
                   direction="column"
                 >
-                  <Heading>Bucketeer Journals</Heading>
+                  <Heading>Bucketeer Journals: Public</Heading>
                 </Stack>
                 <Stack
                   justifyContent={'center'}
@@ -154,7 +154,7 @@ function JournalAll() {
                                   as={NavLink}
                                   to={`/journal/${e._id}`}
                                   backgroundColor={mode(
-                                    'orange.700',
+                                    'orange.300',
                                     'gray.800'
                                   )}
                                   color={mode('white', 'white')}
