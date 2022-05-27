@@ -174,62 +174,63 @@ export default function BucketSingular() {
                         </Box>
                       </VStack>
                     ) : (
-                      <HStack maxW={'100%'} spacing="8">
-                        <Box overflow="hidden">
-                          <Image
-                            src={bucket.picture}
-                            alt={bucket.name}
-                            width="full"
-                            height="25rem"
-                            objectFit="cover"
-                            transition="all 0.2s"
-                            _groupHover={{
-                              transform: 'scale(1.05)',
-                            }}
-                          />
-                        </Box>
+                      <VStack>
+                        <HStack maxW={'100%'} spacing="8">
+                          <Box overflow="hidden">
+                            <Image
+                              src={bucket.picture}
+                              alt={bucket.name}
+                              width="full"
+                              height="25rem"
+                              objectFit="cover"
+                              transition="all 0.2s"
+                              _groupHover={{
+                                transform: 'scale(1.05)',
+                              }}
+                            />
+                          </Box>
 
-                        <Stack
-                          maxW={'100%'}
-                          justifyContent={'space-between'}
-                          flexDirection={'row'}
-                          spacing="3"
-                        >
-                          <Stack spacing="3">
-                            <Heading size="xs">Title: {bucket.name}</Heading>
-                            <Text color="muted">
-                              Description: {bucket.description}
-                            </Text>
+                          <Stack
+                            maxW={'100%'}
+                            justifyContent={'space-between'}
+                            flexDirection={'row'}
+                            spacing="3"
+                          >
+                            <Stack spacing="3">
+                              <Heading size="xs">Title: {bucket.name}</Heading>
+                              <Text color="muted">
+                                Description: {bucket.description}
+                              </Text>
+                            </Stack>
                           </Stack>
-                        </Stack>
 
-                        <Box
-                          maxW="7xl"
-                          mx="auto"
-                          px={{ base: '4', md: '8', lg: '12' }}
-                          py={{ base: '6', md: '8', lg: '12' }}
-                        >
-                          <VStack marginTop={'30px'} direction={'row'}>
-                            <Button
-                              onClick={deleteBucket}
-                              backgroundColor={mode('red.500', 'red.800')}
-                              color={mode('white', 'white')}
-                              variant={'solid'}
-                            >
-                              Delete Bucket
-                            </Button>
-                            <Button
-                              as={NavLink}
-                              to={`/buckets/${bucket._id}/edit`}
-                              backgroundColor={mode('green.500', 'green.600')}
-                              color={mode('white', 'white')}
-                              variant={'solid'}
-                            >
-                              Edit Bucket
-                            </Button>
-                          </VStack>
-                        </Box>
-                      </HStack>
+                          <Box
+                            maxW="7xl"
+                            mx="auto"
+                            px={{ base: '4', md: '8', lg: '12' }}
+                            py={{ base: '6', md: '8', lg: '12' }}
+                          ></Box>
+                        </HStack>
+                        <HStack>
+                          <Button
+                            onClick={deleteBucket}
+                            backgroundColor={mode('red.500', 'red.800')}
+                            color={mode('white', 'white')}
+                            variant={'solid'}
+                          >
+                            Delete Bucket
+                          </Button>
+                          <Button
+                            as={NavLink}
+                            to={`/buckets/${bucket._id}/edit`}
+                            backgroundColor={mode('green.500', 'green.600')}
+                            color={mode('white', 'white')}
+                            variant={'solid'}
+                          >
+                            Edit Bucket
+                          </Button>
+                        </HStack>
+                      </VStack>
                     )}
                     <Box bg="bg-surface">
                       <Container maxWidth={'100%'} py={{ base: '4', md: '8' }}>

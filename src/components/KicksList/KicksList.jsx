@@ -351,6 +351,15 @@ const KicksList = () => {
                     color={mode('black', 'white')}
                   >
                     <Stack key={post._id} spacing="8">
+                      <VStack marginBottom={'5px'}>
+                        <VStack>
+                          <Avatar
+                            src={post.createdBy?.profilePicture}
+                            alt="profile picture"
+                          />
+                          <Text>Created By: {post.createdBy?.userName}</Text>
+                        </VStack>
+                      </VStack>
                       <Link
                         as={NavLink}
                         to={`/kicks/${post._id}`}

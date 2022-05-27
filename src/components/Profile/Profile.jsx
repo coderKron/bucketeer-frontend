@@ -24,13 +24,13 @@ import { AuthContext } from '../../context/auth.context';
 import { Link, useNavigate, NavLink, useParams } from 'react-router-dom';
 import { useGetBuckets } from '../../hooks/useGetBuckets';
 import Loading from '../Loading';
-import { useGetAllJournals } from '../../hooks/useGetAllJournals';
+import { useGetAllJournalsPrivate } from '../../hooks/useGetAllJournalsPrivate';
 
 const Profile = () => {
   const { isLoggedIn, getToken, user, isLoading } =
     React.useContext(AuthContext);
   const { buckets, loading, error, errorMessage } = useGetBuckets();
-  const { journal } = useGetAllJournals();
+  const { journal } = useGetAllJournalsPrivate();
   const navigate = useNavigate();
   const [userName, setUserName] = React.useState(null);
 
