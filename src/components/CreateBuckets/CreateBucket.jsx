@@ -9,6 +9,7 @@ import {
   FormHelperText,
   useColorModeValue as mode,
   FormLabel,
+  FormErrorMessage,
   Input,
   Stack,
   StackDivider,
@@ -37,6 +38,7 @@ function CreateBucket() {
   const { error, errorMessage, loading, createNewBucket } = useCreateBucket();
   const { getToken } = useContext(AuthContext);
   const storedToken = getToken();
+  const isError = picture === null
 
   const handleFileInputChange = e => {
     setIsUploading(true);
@@ -128,7 +130,9 @@ function CreateBucket() {
               </Stack>
             </FormControl>
 
-            <FormControl id="picture">
+            <FormControl id="picture"
+            isInvalid={isError}
+            >
               <Stack
                 direction={{
                   base: 'column',
@@ -164,6 +168,14 @@ function CreateBucket() {
                       handleFileInputChange(e);
                     }}
                   />
+                  {!isError ? (
+                     <FormHelperText>
+                      
+                    </FormHelperText> 
+                  ) : (
+                    <FormErrorMessage> Required </FormErrorMessage>
+                  )}
+                  )
                 </Stack>
               </Stack>
             </FormControl>
