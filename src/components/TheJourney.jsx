@@ -146,28 +146,31 @@ const TheJourney = () => {
                   title="Create Your Bucket"
                   icon={<HiBadgeCheck color={mode('orange', 'teal')} />}
                 >
-                  Create your Bucket. Think about what you wanna achieve or
-                  visit
+                  Step 1: Create your Bucket. Think about what you wanna achieve
+                  or visit and start writing!
                 </Feature>
                 <Feature
-                  title="Return Investment"
+                  title="Bring in those Kicks"
                   icon={<HiCurrencyDollar color={mode('orange', 'teal')} />}
                 >
-                  Investing not in items or objects but in Experiences and
-                  stories will pay more dividend.
+                  Step 2: Create a new Kick or add already existing Kicks to
+                  your Bucket. So you can keep track of what is on your list.
                 </Feature>
                 <Feature
-                  title="Happiness Comes"
+                  title="Journaling it out"
                   icon={<HiChartSquareBar color={mode('orange', 'teal')} />}
                 >
-                  With every Experience you will grow as a person.
+                  Step 3: After completing all those Kicks and thus your Bucket
+                  has been achieved. Create a Journal for some housekeeping of
+                  memories.
                 </Feature>
                 <Feature
-                  title="Enlighten"
+                  title="Story time!"
                   icon={<HiTemplate color={mode('orange', 'teal')} />}
                 >
-                  When the 'dust' has settled and you have realised the meaning
-                  of life. You can help other achieve happiness and fulfillment.
+                  Step 4: The Journal has been created. The Kicks have been
+                  done. The Bucket is not a Bucket anymore. It is time to write
+                  stories about what you have achieved and experienced.
                 </Feature>
               </SimpleGrid>
             </Box>

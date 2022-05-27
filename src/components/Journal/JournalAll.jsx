@@ -69,7 +69,7 @@ function JournalAll() {
                   alignItems={'center'}
                   direction="column"
                 >
-                  <Heading>Bucketeer Journals</Heading>
+                  <Heading>Bucketeer Journals: Public</Heading>
                 </Stack>
                 <Stack
                   justifyContent={'center'}
@@ -91,10 +91,6 @@ function JournalAll() {
                       lg: 8,
                     }}
                   >
-                    <Stack alignItems="center">
-                      <Heading marginTop="10">{title}</Heading>
-                    </Stack>
-
                     {journal.map(e => {
                       return (
                         <>
@@ -103,7 +99,6 @@ function JournalAll() {
                             borderRadius="lg"
                             minH={'30'}
                             backgroundColor={mode('orange.100', 'teal.700')}
-                            alignItems="center"
                           >
                             <VStack marginBottom={'5px'}>
                               <HStack>
@@ -159,7 +154,7 @@ function JournalAll() {
                                   as={NavLink}
                                   to={`/journal/${e._id}`}
                                   backgroundColor={mode(
-                                    'orange.700',
+                                    'orange.300',
                                     'gray.800'
                                   )}
                                   color={mode('white', 'white')}
