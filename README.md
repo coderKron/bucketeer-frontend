@@ -1,68 +1,56 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Bucketeer
 
-In the project directory, you can run:
+Bucketeer is a self-hosted insert your buckets app.
+It is made suited for travelers or people who wanna enhance their list of done activities/travels.
 
-### `npm start`
+## About
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Bucketeer was made by Louise Gabrielle and Ruben Poelen with the idea in mind that you don't want to have any pending Buckets on your deatbed. Life is short... might as well enjoy living it!
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Features
 
-### `npm test`
+This Web application lets you:
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Sign up/ Login into your account
+- Create, edit, delete and get all of your Buckets
+- Create, edit, delete and get all of your Kicks
+- Create, edit, delete and get all of your Journals
+- Add Kicks from other people and your own created kicks to your Buckets
+- Store locations inside of your kicks so that you can exactly see where the kick is.
+- You can have a look at all public Journals created. Read other peoples stories of the amazing kicks they have experienced.
+- Switch between darkmode and light mode.
 
-### `npm run build`
+## Tools used
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Front-end
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+- React.JS
+- JavaScript
+- Chakra UI
+- axios
+- Google maps api
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Back-end
 
-### `npm run eject`
+- NodeJS
+- Express
+- REST-API
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Database
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Testing with Postman
+- Storing with Mongodb
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Front-end
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- Is live with Netlify
 
-## Learn More
+Back-end
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Is live with Heroku
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## URL
 
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+The URL of the website is [Bucketeer](https://bucketeer.netlify.app).
