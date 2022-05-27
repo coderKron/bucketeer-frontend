@@ -8,6 +8,7 @@ import {
   FormControl,
   FormHelperText,
   FormLabel,
+  FormErrorMessage,
   Input,
   Stack,
   StackDivider,
@@ -39,6 +40,7 @@ function CreateStory() {
   const { kicks } = useGetSelectKicks();
   const storedToken = getToken();
   const { journalId } = useParams();
+  const isError = pictures === null
 
   const isDesktop = useBreakpointValue({
     base: false,
@@ -160,7 +162,8 @@ function CreateStory() {
                 )}
                */}
             {/* </Select> */}
-            <FormControl id="picture">
+            <FormControl id="picture"
+            isInvalid={isError}>
               <Stack
                 direction={{
                   base: 'column',
@@ -196,6 +199,13 @@ function CreateStory() {
                       handleFileInputChange(e);
                     }}
                   />
+                       {!isError ? (
+                     <FormHelperText>
+                      
+                    </FormHelperText> 
+                  ) : (
+                    <FormErrorMessage> Required </FormErrorMessage>
+                  )}
                 </Stack>
               </Stack>
             </FormControl>

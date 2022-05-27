@@ -11,6 +11,7 @@ import {
   Input,
   Stack,
   StackDivider,
+  FormErrorMessage,
   useColorModeValue as mode,
   Text,
   Textarea,
@@ -37,6 +38,7 @@ import PlacesAutocomplete, {
 const libraries = ['places'];
 const mapContainerStyle = { width: '100%', height: '100%' };
 
+
 function CreateKicks() {
   React.useEffect(() => {
     window.scrollTo(0, 0);
@@ -57,6 +59,7 @@ function CreateKicks() {
   const [address, setAddress] = useState('');
   const [coordinates, setCoordinates] = useState({ lat: 27.9881, lng: 86.925 });
   const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+  const isError = pictures === null
 
   const isDesktop = useBreakpointValue({
     base: false,
@@ -382,7 +385,8 @@ function CreateKicks() {
                 </RadioCard>
               ))}
             </RadioCardGroup>
-            <FormControl id="picture">
+            <FormControl id="picture"
+            isInvalid={isError}>
               <Stack
                 direction={{
                   base: 'column',
@@ -418,6 +422,13 @@ function CreateKicks() {
                       handleFileInputChange(e);
                     }}
                   />
+                  {!isError ? (
+                     <FormHelperText>
+                      
+                    </FormHelperText> 
+                  ) : (
+                    <FormErrorMessage> Required </FormErrorMessage>
+                  )}
                 </Stack>
               </Stack>
             </FormControl>
