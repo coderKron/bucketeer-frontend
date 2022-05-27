@@ -101,13 +101,12 @@ function JournalAll() {
                             backgroundColor={mode('orange.100', 'teal.700')}
                           >
                             <VStack marginBottom={'5px'}>
-                              <HStack>
-                                <Avatar
-                                  src={e.createdBy?.profilePicture}
-                                  alt="profile picture"
-                                />
-                                <Text>Created By: {e.createdBy?.userName}</Text>
-                              </HStack>
+                              <Avatar
+                                src={e.createdBy?.profilePicture}
+                                alt="profile picture"
+                              />
+                              <Text>Created By: {e.createdBy?.userName}</Text>
+
                               <Divider />
                               <Stack justifyContent={'center'}>
                                 <Heading fontWeight="bold">{e.title}</Heading>
