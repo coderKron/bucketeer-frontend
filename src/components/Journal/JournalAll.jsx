@@ -91,10 +91,6 @@ function JournalAll() {
                       lg: 8,
                     }}
                   >
-                    <Stack alignItems="center">
-                      <Heading marginTop="10">{title}</Heading>
-                    </Stack>
-
                     {journal.map(e => {
                       return (
                         <>
@@ -103,7 +99,6 @@ function JournalAll() {
                             borderRadius="lg"
                             minH={'30'}
                             backgroundColor={mode('orange.100', 'teal.700')}
-                            alignItems="center"
                           >
                             <VStack marginBottom={'5px'}>
                               <HStack>
