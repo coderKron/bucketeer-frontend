@@ -150,7 +150,7 @@ export default function Kickdetails() {
                   />
                   <Box
                     minH="36"
-                    backgroundColor={mode('orange.200', 'white')}
+                    backgroundColor={mode('orange.200', 'teal.700')}
                     padding={'15px'}
                     boxShadow={mode('sm', 'sm-dark')}
                     borderRadius="lg"
