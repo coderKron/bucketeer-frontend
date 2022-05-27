@@ -398,16 +398,7 @@ const KicksList = () => {
                           <Heading size="xs">{post.name}</Heading>
                           <Text color="muted">{post.description}</Text>
                         </Stack>
-                        {`${user._id}` === `${post.createdBy}` && (
-                          <Button
-                            backgroundColor={mode('orange.700', 'blue.600')}
-                            px={'15px'}
-                            as={NavLink}
-                            to={`/kicks/${post._id}/edit`}
-                          >
-                            Edit
-                          </Button>
-                        )}
+
                         <Stack
                           justifyContent={'center'}
                           alignItems="center"
@@ -457,6 +448,18 @@ const KicksList = () => {
                             )}
                           </Box>
                         </Stack>
+                      </Stack>
+                      <Stack alignItems={'center'}>
+                        {`${user?._id}` === `${post.createdBy._id}` && (
+                          <Button
+                            backgroundColor={mode('orange.300', 'teal.400')}
+                            px={'15px'}
+                            as={NavLink}
+                            to={`/kicks/${post._id}/edit`}
+                          >
+                            Edit
+                          </Button>
+                        )}
                       </Stack>
                     </Stack>
                   </Box>
