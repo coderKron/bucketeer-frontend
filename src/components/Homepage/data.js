@@ -3,8 +3,8 @@ export const posts = [
     id: '1',
     title: 'Rock climbing in Peru',
     excerpt:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.',
-    image: '/images/peru-rockclimbing.jpeg',
+      'Climbing a mountain anywhere is a thrilling experience but this mountain gave me goosebumps!',
+    image: '/images/na1.jpeg',
     category: 'Traveling',
     publishedAt: 'December 29, 2022',
     author: {
@@ -29,7 +29,7 @@ export const posts = [
     id: '3',
     title: 'Diving in Australia',
     excerpt:
-      'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id.',
+      'Diving in The great barrier reef is life altering. Seeing an entire eco system that is closely linked with each other and works together to survive.. A ... ma ... zing!',
     image: '/images/diving.jpeg',
     category: 'Experience',
     publishedAt: 'October 31, 2022',
