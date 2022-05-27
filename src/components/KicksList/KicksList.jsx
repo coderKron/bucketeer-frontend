@@ -387,67 +387,69 @@ const KicksList = () => {
                         flexDirection={'row'}
                         spacing="3"
                       >
-                        <Stack spacing="3">
-                          <Text
-                            fontSize="sm"
-                            fontWeight="semibold"
-                            color="accent"
-                          >
-                            {post.category}
-                          </Text>
-                          <Heading size="xs">{post.name}</Heading>
-                          <Text color="muted">{post.description}</Text>
-                        </Stack>
+                        <VStack>
+                          <Stack spacing="3">
+                            <Text
+                              fontSize="sm"
+                              fontWeight="semibold"
+                              color="accent"
+                            >
+                              {post.category}
+                            </Text>
+                            <Heading size="xs">{post.name}</Heading>
+                            <Text color="muted">{post.description}</Text>
+                          </Stack>
 
-                        <Stack
-                          justifyContent={'center'}
-                          alignItems="center"
-                          justify={'space-between'}
-                          flexDirection={'row'}
-                          spacing="9"
-                        >
-                          <Box
+                          <Stack
+                            justifyContent={'center'}
+                            alignItems="center"
+                            justify={'space-between'}
                             flexDirection={'row'}
-                            justifyContent="space-around"
-                            alignItems={'center'}
-                            display="flex"
-                            spacing="8"
+                            spacing="9"
                           >
-                            {buckets.length && (
-                              <>
-                                <FormControl>
-                                  <Select
-                                    onChange={e => {
-                                      setBucketId(e.target.value);
-                                    }}
-                                    placeholder="Select Bucket"
+                            <Box
+                              flexDirection={'row'}
+                              justifyContent="space-around"
+                              alignItems={'center'}
+                              display="flex"
+                              spacing="8"
+                            >
+                              {buckets.length && (
+                                <>
+                                  <FormControl>
+                                    <Select
+                                      onChange={e => {
+                                        setBucketId(e.target.value);
+                                      }}
+                                      placeholder="Select Bucket"
+                                    >
+                                      {buckets.length &&
+                                        buckets.map(singleBucket => {
+                                          return (
+                                            <option value={singleBucket._id}>
+                                              {singleBucket.name}
+                                            </option>
+                                          );
+                                        })}
+                                    </Select>
+                                  </FormControl>
+                                  <Button
+                                    backgroundColor={mode(
+                                      'gray.700',
+                                      'orange.600'
+                                    )}
+                                    color={mode('white', 'white')}
+                                    variant={'solid'}
+                                    type="submit"
+                                    onClick={e => handleAddKick(post._id, e)}
                                   >
-                                    {buckets.length &&
-                                      buckets.map(singleBucket => {
-                                        return (
-                                          <option value={singleBucket._id}>
-                                            {singleBucket.name}
-                                          </option>
-                                        );
-                                      })}
-                                  </Select>
-                                </FormControl>
-                                <Button
-                                  backgroundColor={mode(
-                                    'gray.700',
-                                    'orange.600'
-                                  )}
-                                  color={mode('white', 'white')}
-                                  variant={'solid'}
-                                  type="submit"
-                                  onClick={e => handleAddKick(post._id, e)}
-                                >
-                                  Add
-                                </Button>
-                              </>
-                            )}
-                          </Box>
-                        </Stack>
+                                    Add
+                                  </Button>
+                                </>
+                              )}
+                            </Box>
+                          </Stack>
+                        </VStack>
                       </Stack>
                       <Stack alignItems={'center'}>
                         {`${user?._id}` === `${post.createdBy._id}` && (
