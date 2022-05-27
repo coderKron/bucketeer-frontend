@@ -113,6 +113,9 @@ const Navbar = () => {
                       <Button as={NavLink} to="/story" color="white">
                         Our story
                       </Button>
+                      <Button as={NavLink} to="/journal/public" color="white">
+                        Public Journals
+                      </Button>
                     </ButtonGroup>
                     <ButtonGroup spacing="3">
                       <Button

@@ -16,12 +16,9 @@ export const useCreateJournal = () => {
     const storedToken = getToken();
     setLoading(true);
     axios
-      .post(
-        `${process.env.REACT_APP_URL}/api/journal`, journalInformation,
-        {
-          headers: { Authorization: `Bearer ${storedToken}` },
-        }
-      )
+      .post(`${process.env.REACT_APP_URL}/api/journal`, journalInformation, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
       .then(() => {
         setLoading(false);
         toast({

@@ -21,10 +21,11 @@ import EditKick from './components/EditKick/EditKick';
 import EditProfile from './components/EditProfile/EditProfile';
 import OurStory from './components/OurStory';
 import TheJourney from './components/TheJourney';
-import JournalSingular from './components/Journal/JournalSingular'
+import JournalSingular from './components/Journal/JournalSingular';
 import CreateJournal from './components/CreateJournal/CreateJournal';
-import CreateStory from './components/CreateStory/CreateStory'
-import JournalAll from './components/Journal/JournalAll'
+import CreateStory from './components/CreateStory/CreateStory';
+import JournalAll from './components/Journal/JournalAll';
+import JournalListPrivate from './components/Journal/JournalPrivate';
 
 function App() {
   const { isLoggedIn, isLoading, user } = useContext(AuthContext);
@@ -116,37 +117,32 @@ function App() {
               </IsPrivate>
             }
           />
-            <Route
-            path="/journal/:journalId"
-            element={
-              <IsPrivate>
-                <JournalSingular/>
-              </IsPrivate>
-            }
-          />
+          <Route path="/journal/:journalId" element={<JournalSingular />} />
           <Route
             path="/journal/create"
             element={
               <IsPrivate>
-                <CreateJournal/>
+                <CreateJournal />
               </IsPrivate>
             }
           />
-              <Route
+          <Route
             path="/journal/story/:journalId"
             element={
               <IsPrivate>
-                <CreateStory/>
+                <CreateStory />
               </IsPrivate>
             }
           />
-            <Route
-            path="/journal/"
+          <Route
+            path="/journal/private"
             element={
-              <JournalAll/>
-             
+              <IsPrivate>
+                <JournalListPrivate />
+              </IsPrivate>
             }
           />
+          <Route path="/journal/public" element={<JournalAll />} />
           <Route path="/story" element={<OurStory />} />
           <Route path="/journey" element={<TheJourney />} />
         </Routes>

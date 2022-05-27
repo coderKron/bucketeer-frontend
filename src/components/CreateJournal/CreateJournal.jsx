@@ -41,6 +41,7 @@ function CreateJournal() {
     const journalData = {
       title,
       bucketId,
+      description,
       visibility,
     };
     createNewJournal(journalData);
@@ -144,15 +145,15 @@ function CreateJournal() {
                 />
               </Stack>
             </FormControl>
-            <Select onChange={e => {
-                setBucketId(e.target.value)
-            }}spacing="3">
+            <Select
+              onChange={e => {
+                setBucketId(e.target.value);
+              }}
+              spacing="3"
+            >
               <option value={'select Bucket'}>Select your Bucket</option>
               {buckets.map(option => (
-                <option
-                  key={option._id}           
-                  value={option._id}
-                >
+                <option key={option._id} value={option._id}>
                   Bucket: {option.name}
                 </option>
               ))}
