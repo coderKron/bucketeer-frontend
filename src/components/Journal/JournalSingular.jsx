@@ -25,7 +25,8 @@ import { useContext } from 'react';
 
 function BlogSingular() {
   const { journalId } = useParams();
-  const { journal, error, errorMessage, loading, deleteJournal} = useGetJournalDetails();
+  const { journal, error, errorMessage, loading, deleteJournal } =
+    useGetJournalDetails();
   const { title } = journal;
   const { isLoggedIn, user } = useContext(AuthContext);
 
@@ -93,36 +94,30 @@ function BlogSingular() {
 
                       {isLoggedIn ? (
                         <HStack>
-                       
-                        {journal.createdBy === user._id ?  
-                        
-                        (
-                          <>
-                          <Button
-                          as={NavLink}
-                          to={`/journal/story/${journalId}`}
-                          backgroundColor={mode('orange.700', 'gray.800')}
-                          color={mode('white', 'white')}
-                          variant={'solid'}
-                        >
-                          Add Story
-                        </Button>
-                        <Button
-                      onClick={deleteJournal}
-                      to={'/journal/private'}
-                      backgroundColor={mode('orange.300', 'teal.400')}
-                      color={mode('white', 'white')}
-                      variant={'solid'}
-                    >
-                      Delete Journal
-                    </Button>
-                    </>
-                    ) 
-                    : (
-                      <>
-
-                    </>)
-                    }
+                          {journal.createdBy === user._id ? (
+                            <>
+                              <Button
+                                as={NavLink}
+                                to={`/journal/story/${journalId}`}
+                                backgroundColor={mode('orange.700', 'gray.800')}
+                                color={mode('white', 'white')}
+                                variant={'solid'}
+                              >
+                                Add Story
+                              </Button>
+                              <Button
+                                onClick={deleteJournal}
+                                to={'/journal/private'}
+                                backgroundColor={mode('orange.300', 'red.500')}
+                                color={mode('white', 'white')}
+                                variant={'solid'}
+                              >
+                                Delete Journal
+                              </Button>
+                            </>
+                          ) : (
+                            <></>
+                          )}
                         </HStack>
                       ) : (
                         <>
@@ -140,18 +135,26 @@ function BlogSingular() {
                           </Button>
                         </>
                       )}
-                      <Stack>
-                      <Button
-                            as={NavLink}
-                            to={'/journal/public'}
-                            backgroundColor={mode('orange.300', 'teal.400')}
-                            color={mode('white', 'white')}
-                            variant={'solid'}
-                          >
-                            Back
-                          </Button>
-                      </Stack>
-
+                      <HStack>
+                        <Button
+                          as={NavLink}
+                          to={'/journal/public'}
+                          backgroundColor={mode('orange.300', 'blue.300')}
+                          color={mode('white', 'white')}
+                          variant={'ghost'}
+                        >
+                          Back to Public
+                        </Button>
+                        <Button
+                          as={NavLink}
+                          to={'/journal/public'}
+                          backgroundColor={mode('orange.300', 'teal.500')}
+                          color={mode('white', 'white')}
+                          variant={'solid'}
+                        >
+                          Back to Private
+                        </Button>
+                      </HStack>
                     </Stack>
                   </Stack>
                 </HStack>

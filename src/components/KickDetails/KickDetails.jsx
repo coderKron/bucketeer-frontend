@@ -131,7 +131,12 @@ export default function Kickdetails() {
                   direction={'column'}
                   justify={'space-between'}
                 >
-                  <Button as={NavLink} to={'/kicks'} variant={'solid'}>
+                  <Button
+                    as={NavLink}
+                    to={'/kicks'}
+                    backgroundColor={mode('orange.300', 'teal.400')}
+                    variant={'solid'}
+                  >
                     Back to Kicks
                   </Button>
                 </Stack>
