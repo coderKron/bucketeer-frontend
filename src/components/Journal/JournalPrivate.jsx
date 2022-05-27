@@ -174,7 +174,20 @@ function JournalListPrivate() {
           </Box>
         </>
       ) : (
-        <Error />
+        <>
+          <Image src="/images/start-writing.png" alt="start writing" />
+          <Stack alignItems={'center'}>
+            <Heading>It seems that you do not have any Journals yet.</Heading>
+            <Button
+              as={NavLink}
+              to="/journal/create"
+              backgroundColor={mode('orange.300', 'teal.400')}
+              color={mode('white', 'white')}
+            >
+              Create a Journal
+            </Button>
+          </Stack>
+        </>
       )}
     </>
   );
