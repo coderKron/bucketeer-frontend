@@ -176,7 +176,7 @@ const KicksList = () => {
                       }}
                       spacing="3"
                     >
-                      <option value={'all'}>Continent of Kick</option>
+                      <option value={'all'}>Search by Continent</option>
 
                       <option key={'Europe'} value={'Europe'}>
                         Europe
@@ -211,7 +211,7 @@ const KicksList = () => {
                       }}
                       spacing="3"
                     >
-                      <option value={'all'}>Category of Kick</option>
+                      <option value={'all'}>Search by Category</option>
 
                       <option key={'Chill'} value={'Chill'}>
                         Chill
