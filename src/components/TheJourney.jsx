@@ -337,7 +337,7 @@ const TheJourney = () => {
               </Heading>
               <Text fontSize="lg" mt="6" color={mode('gray.600', 'gray.400')}>
                 Achieving is a very misunderstood word. Nowadays achieving is
-                linked to obtaining either power of money. But the real
+                linked to obtaining either power or money. But the real
                 achievement in life is having a fulfilled life. Gaining
                 experiences and when you're ready, pointing people in the right
                 direction.
