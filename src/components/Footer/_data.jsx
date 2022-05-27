@@ -4,7 +4,7 @@ export const links = [
     links: [
       {
         label: 'Why Bucketeer',
-        href: '#',
+        href: '/journey',
       },
       {
         label: 'Our story',
