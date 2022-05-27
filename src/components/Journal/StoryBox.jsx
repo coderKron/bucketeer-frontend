@@ -1,29 +1,35 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   Box,
   Heading,
   Link,
   Image,
   Text,
-  Divider,
-  HStack,
-  Tag,
-  Wrap,
-  WrapItem,
-  useColorModeValue,
+  Button,
+  useColorModeValue as mode,
   Container,
-  VStack,
+  Stack,
   useBreakpointValue,
 } from '@chakra-ui/react';
+import { useUpdateStorysFromJournal } from '../../hooks/useUpdateStorysFromJournal';
+import { AuthContext } from '../../context/auth.context';
+
 
 export function StoryBox(props) {
   const { story, journalId, rootProps } = props;
-  const { title, kick, content, pictures, timestamps } = story;
+  const { title, kick, content, pictures, _id, createdBy } = story;
+  const { updateStorysFromJournal } = useUpdateStorysFromJournal();
+  const {isLoggedIn, user} = useContext(AuthContext);
 
   const isMobile = useBreakpointValue({
     base: true,
     md: false,
   });
+
+  const handleDeleteStory = e => {
+    e.preventDefault();
+    updateStorysFromJournal({ journalId, storyId: _id });
+  };
 
   return (
     <Container maxW={'7xl'} p="12">
@@ -90,10 +96,33 @@ export function StoryBox(props) {
           <Text
             as="p"
             marginTop="2"
-            color={useColorModeValue('gray.700', 'gray.200')}
+            color={mode('gray.700', 'gray.200')}
           >
             {content}
           </Text>
+          {isLoggedIn ? (
+            <>
+            {createdBy === user._id ? 
+            (
+            <Stack
+            alignItems={"center"}>
+            <Button
+              onClick={handleDeleteStory}
+              backgroundColor={mode('red.500', 'red.800')}
+              color={mode('white', 'white')}
+              variant={'solid'}
+            >
+              Delete Story
+            </Button>
+          </Stack>
+
+            ) : 
+            <></>}
+            </>
+          )
+          : <></>
+          }
+         
         </Box>
       </Box>
     </Container>
