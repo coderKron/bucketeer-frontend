@@ -267,7 +267,13 @@ export default function BucketSingular() {
                     <Divider />
                     <Stack>
                       <Box
-                        maxWidth={bucket.kicks?.length > 1 ? '100%' : '25%'}
+                        maxWidth={
+                          bucket.kicks?.length === 1 && !isMobile
+                            ? '25%'
+                            : bucket.kicks?.legnth === 1 && isMobile
+                            ? '100%'
+                            : '100%'
+                        }
                         px={{
                           base: '4',
                           md: '8',
