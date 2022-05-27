@@ -40,7 +40,7 @@ function CreateStory() {
   const { kicks } = useGetSelectKicks();
   const storedToken = getToken();
   const { journalId } = useParams();
-  const isError = pictures === null
+  const isError = pictures === null;
 
   const isDesktop = useBreakpointValue({
     base: false,
@@ -162,8 +162,7 @@ function CreateStory() {
                 )}
                */}
             {/* </Select> */}
-            <FormControl id="picture"
-            isInvalid={isError}>
+            <FormControl id="picture" isInvalid={isError}>
               <Stack
                 direction={{
                   base: 'column',
@@ -175,7 +174,12 @@ function CreateStory() {
                 }}
                 justify="space-between"
               >
-                <FormLabel variant="inline">Your best pic</FormLabel>
+                <Box>
+                  <FormLabel variant="inline">Your best pic</FormLabel>
+                  <FormHelperText mt={'0'} color="muted">
+                    Only .jpeg and .png are accepted
+                  </FormHelperText>
+                </Box>
                 <Stack
                   spacing={{
                     base: '3',
@@ -192,6 +196,7 @@ function CreateStory() {
                 >
                   <Input
                     required={true}
+                    accept="image/png, image/jpeg"
                     id="pictures"
                     defaultValue={pictures}
                     type="file"
@@ -199,10 +204,10 @@ function CreateStory() {
                       handleFileInputChange(e);
                     }}
                   />
-                       {!isError ? (
-                     <FormHelperText>
-                      
-                    </FormHelperText> 
+                  {!isError ? (
+                    <FormHelperText>
+                      Only .jpeg and .png are accepted
+                    </FormHelperText>
                   ) : (
                     <FormErrorMessage> Required </FormErrorMessage>
                   )}

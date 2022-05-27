@@ -156,8 +156,11 @@ const Navbar = () => {
                     <MenuItem as={NavLink} to="/kicks">
                       Kicks
                     </MenuItem>
-                    <MenuItem as={NavLink} to="/journal">
-                      Journals
+                    <MenuItem as={NavLink} to="/journal/private">
+                      Private: Journals
+                    </MenuItem>
+                    <MenuItem as={NavLink} to="/journal/public">
+                      Public: Journals
                     </MenuItem>
                     <MenuItem as={NavLink} to={`/user/${user._id}`}>
                       Profile
