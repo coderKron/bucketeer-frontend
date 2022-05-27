@@ -147,7 +147,7 @@ function BlogSingular() {
                         </Button>
                         <Button
                           as={NavLink}
-                          to={'/journal/public'}
+                          to={'/journal/private'}
                           backgroundColor={mode('orange.300', 'teal.500')}
                           color={mode('white', 'white')}
                           variant={'solid'}
