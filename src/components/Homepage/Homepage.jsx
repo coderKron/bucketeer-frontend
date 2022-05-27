@@ -173,7 +173,7 @@ function Homepage() {
                 title="Blog your Experiences"
               >
                 After completing your Buckets, write your experiences down. Was
-                it as amazing you had anticpated? Or came it short.
+                it as amazing you had anticipated? Or came it short.
               </Feature>
             </SimpleGrid>
           </Box>
