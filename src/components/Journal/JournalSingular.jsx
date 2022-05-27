@@ -86,7 +86,7 @@ function BlogSingular() {
                           <StoryBox
                             key={story._id}
                             story={story}
-                            JounalId={journalId}
+                            journalId={journalId}
                           />
                         );
                       })}
