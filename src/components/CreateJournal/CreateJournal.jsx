@@ -183,7 +183,7 @@ function CreateJournal() {
               <Button
                 backgroundColor={mode('orange.500')}
                 as={NavLink}
-                to="/buckets"
+                to="/journal"
                 variant="solid"
               >
                 Go Back
