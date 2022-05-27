@@ -204,7 +204,7 @@ function Homepage() {
               >
                 The greatest feat anyone can achieve is total, independent
                 freedom. No strings except for your loved ones. Going into this
-                amazing project I felt that a lot of people had forgetten the
+                amazing project I felt that a lot of people had forgotten the
                 beauties of the world and were merely focussed on achieving
                 their "work goals". So with my friend Louise we made a platform
                 where people can share their amazing journeys and experiences,
